@@ -1,0 +1,15 @@
+﻿<Window x:Class="MMC_Software.VentanaImpresionDocumentos"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:MMC_Software"
+        mc:Ignorable="d" Background="#2C3E50"
+        Title="VentanaImpresionDocumentos" Height="450" Width="800"
+        xmlns:wfi="clr-namespace:System.Windows.Forms.Integration;assembly=WindowsFormsIntegration">
+    <Grid>
+        <Grid>
+            <wfi:WindowsFormsHost x:Name="VenatanaImpresion"/>
+        </Grid>
+    </Grid>
+</Window>

@@ -1,0 +1,268 @@
+﻿<Window x:Class="MMC_Software.VentanaActualizarCostosCompra"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Actualizar Precios de Venta"
+        WindowStartupLocation="CenterScreen"
+        ResizeMode="NoResize"
+        Width="460" Height="400"
+        Background="Transparent"
+        WindowStyle="None"
+        AllowsTransparency="True">
+
+    <Border Background="White"
+            CornerRadius="12"
+            BorderBrush="#D0D7E2"
+            BorderThickness="1"
+            SnapsToDevicePixels="True"
+            Effect="{DynamicResource DropShadow}">
+        <Grid>
+
+            <!-- Fondo general con gradiente suave -->
+            <Grid.Background>
+                <LinearGradientBrush StartPoint="0,0" EndPoint="0,1">
+                    <GradientStop Color="#F5F8FC" Offset="0"/>
+                    <GradientStop Color="#EAF1FA" Offset="1"/>
+                </LinearGradientBrush>
+            </Grid.Background>
+
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+
+            <!-- ENCABEZADO -->
+            <Border Grid.Row="0" Background="#4A90E2" CornerRadius="8,8,0,0" Padding="10">
+                <DockPanel>
+                    <TextBlock Text="Actualizar Precio de Venta"
+                               FontSize="16"
+                               FontWeight="SemiBold"
+                               Foreground="White"
+                               DockPanel.Dock="Left"
+                               VerticalAlignment="Center"/>
+            
+                </DockPanel>
+            </Border>
+
+            <!-- CONTENIDO -->
+            <Grid Grid.Row="1" Margin="20 15 20 10">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="180"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+
+                <!-- Costo actual -->
+                <TextBlock Text="Costo actual:" 
+                           Grid.Row="0" Grid.Column="0"
+                           Margin="0 6"
+                           Foreground="#2C3E50"/>
+                <TextBox x:Name="txtCostoAnterior"
+                         Grid.Row="0" Grid.Column="1"
+                         Margin="5 4"
+                         Height="28"
+                         IsReadOnly="True"
+                         HorizontalContentAlignment="Right"
+                         Background="#F5F7FA"
+                         BorderBrush="#CCD1D9"
+                         BorderThickness="1"/>
+
+                <!-- Costo actualizado -->
+                <TextBlock Text="Costo actualizado:" 
+                           Grid.Row="1" Grid.Column="0"
+                           Margin="0 6"
+                           Foreground="#2C3E50"/>
+                <TextBox x:Name="txtNuevoCosto"
+                         Grid.Row="1" Grid.Column="1"
+                         Margin="5 4"
+                         Height="28"
+                         HorizontalContentAlignment="Right"
+                         BorderBrush="#BDC3C7"/>
+
+                <!-- Ajuste (%) -->
+                <TextBlock Text="Incremento (%):" 
+                           Grid.Row="2" Grid.Column="0"
+                           Margin="0 6"
+                           Foreground="#2C3E50"/>
+                <TextBox x:Name="txtPorcentaje"
+                         Grid.Row="2" Grid.Column="1"
+                         Margin="5 4"
+                         Height="28"
+                         HorizontalContentAlignment="Right"
+                         BorderBrush="#BDC3C7"
+                         Width="40"
+                         HorizontalAlignment="Left"
+                         TextChanged="txtPorcentaje_TextChanged"/>
+
+                <!-- Margen (%) -->
+                <TextBlock Text="Margen (%):" 
+                           Grid.Row="3" Grid.Column="0"
+                           Margin="0 6"
+                           Foreground="#2C3E50"/>
+                <TextBox x:Name="txtMargen"
+                         Grid.Row="3" Grid.Column="1"
+                         Margin="5 4"
+                         Height="28"
+                         HorizontalContentAlignment="Right"
+                         BorderBrush="#BDC3C7"
+                         HorizontalAlignment="Left"
+                         Width="40"
+                         TextChanged="txtMargen_TextChanged"/>
+
+                <!-- Impuesto -->
+                <TextBlock Text="Impuesto (IVA %):" 
+                           Grid.Row="4" Grid.Column="0"
+                           Margin="0 6"
+                           Foreground="#2C3E50"/>
+                <TextBox x:Name="txtIva"
+                         Grid.Row="4" Grid.Column="1"
+                         Margin="5 4"
+                         Height="28"
+                         HorizontalContentAlignment="Right"
+                         BorderBrush="#BDC3C7"
+                         HorizontalAlignment="Left"
+                         Width="40" IsReadOnly="True"/>
+
+                <!-- Precio anterior -->
+                <TextBlock Text="Precio anterior:" 
+                           Grid.Row="5" Grid.Column="0"
+                           Margin="0 6"
+                           Foreground="#2C3E50"/>
+                <TextBox x:Name="txtValorAnterior"
+                         Grid.Row="5" Grid.Column="1"
+                         Margin="5 4"
+                         Height="28"
+                         IsReadOnly="True"
+                         HorizontalContentAlignment="Right"
+                         Background="#F5F7FA"
+                         BorderBrush="#CCD1D9"/>
+
+                <!-- Nuevo precio sugerido -->
+                <TextBlock Text="Nuevo precio sugerido:" 
+                           Grid.Row="6" Grid.Column="0"
+                           Margin="0 6"
+                           FontWeight="Bold"
+                           Foreground="#2C3E50"/>
+                <TextBox x:Name="txtNuevoValor"
+                         Grid.Row="6" Grid.Column="1"
+                         Margin="5 4"
+                         Height="30"
+                         FontWeight="Bold"
+                         HorizontalContentAlignment="Right"
+                         BorderBrush="#4A90E2"
+                         Background="#EAF2FE"/>
+                
+                <CheckBox x:Name="chkRedondearVenta" Grid.Row="7"
+                          Content="Redondear precio Venta"
+                          VerticalAlignment="Center"
+                          Margin="0 0 10 0" Grid.Column="2"
+                          Foreground="#34495E"
+                          Checked="chkRedondearVenta_Checked"
+                          Unchecked="chkRedondearVenta_Unchecked"
+                          HorizontalAlignment="Right"/>
+            </Grid>
+
+
+            <!-- PIE -->
+            <StackPanel Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Right" Margin="0 10 20 15">
+
+                <Button x:Name="btnCancelar"
+                        Content="Cancelar"
+                        Width="110"
+                        Height="34"
+                        FontWeight="SemiBold"
+                        Foreground="White"
+                        Cursor="Hand"
+                        BorderThickness="0"
+                        BorderBrush="#27AE60"
+                        Background="Red"
+                        HorizontalAlignment="Right"
+                        VerticalAlignment="Center"
+                        Click="btnCancelar_Click"
+                        Margin="0,0,10,0">
+                    <Button.Style>
+                        <Style TargetType="Button">
+                            <Setter Property="Background" Value="#2ECC71"/>
+                            <Setter Property="Foreground" Value="White"/>
+                            <Setter Property="Cursor" Value="Hand"/>
+                            <Setter Property="FontWeight" Value="SemiBold"/>
+                            <Style.Triggers>
+                                <Trigger Property="IsMouseOver" Value="True">
+                                    <Setter Property="Background" Value="#27AE60"/>
+                                </Trigger>
+                                <Trigger Property="IsPressed" Value="True">
+                                    <Setter Property="Opacity" Value="0.8"/>
+                                </Trigger>
+                            </Style.Triggers>
+                        </Style>
+                    </Button.Style>
+                </Button>
+
+                <Button x:Name="btnAceptar"
+                        Content="Aceptar"
+                        Width="110"
+                        Height="34"
+                        FontWeight="SemiBold"
+                        Foreground="White"
+                        Cursor="Hand"
+                        BorderThickness="0"
+                        BorderBrush="#27AE60"
+                        Background="#2ECC71"
+                        HorizontalAlignment="Right"
+                        VerticalAlignment="Center"
+                        Click="btnAceptar_Click">
+
+                    <Button.Style>
+                            <Style TargetType="Button">
+                                <Setter Property="Background" Value="#2ECC71"/>
+                                <Setter Property="Foreground" Value="White"/>
+                                <Setter Property="Cursor" Value="Hand"/>
+                                <Setter Property="FontWeight" Value="SemiBold"/>
+                                <Style.Triggers>
+                                    <Trigger Property="IsMouseOver" Value="True">
+                                        <Setter Property="Background" Value="#27AE60"/>
+                                    </Trigger>
+                                    <Trigger Property="IsPressed" Value="True">
+                                        <Setter Property="Opacity" Value="0.8"/>
+                                    </Trigger>
+                                </Style.Triggers>
+                            </Style>
+                        </Button.Style>
+                    </Button>
+            </StackPanel>
+        </Grid>
+    </Border>
+
+    <!-- Recursos -->
+    <Window.Resources>
+        <DropShadowEffect x:Key="DropShadow"
+                          Color="#000000"
+                          Direction="270"
+                          ShadowDepth="4"
+                          Opacity="0.25"
+                          BlurRadius="10"/>
+    </Window.Resources>
+
+    <!-- Animación de entrada (fade in) -->
+    <Window.Triggers>
+        <EventTrigger RoutedEvent="Window.Loaded">
+            <BeginStoryboard>
+                <Storyboard>
+                    <DoubleAnimation Storyboard.TargetProperty="Opacity"
+                                     From="0" To="1"
+                                     Duration="0:0:0.4"/>
+                </Storyboard>
+            </BeginStoryboard>
+        </EventTrigger>
+    </Window.Triggers>
+</Window>

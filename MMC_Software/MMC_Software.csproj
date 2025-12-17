@@ -1,0 +1,727 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{9797054D-0205-4EEF-86CF-3F33D9B84F62}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <RootNamespace>MMC_Software</RootNamespace>
+    <AssemblyName>MMC_Software</AssemblyName>
+    <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <ProjectTypeGuids>{60dc8134-eba5-43b8-bcc9-bb4bc16c2548};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
+    <WarningLevel>4</WarningLevel>
+    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+    <Deterministic>true</Deterministic>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>MMC.ico</ApplicationIcon>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x64'">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\x64\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <DebugType>full</DebugType>
+    <PlatformTarget>x64</PlatformTarget>
+    <LangVersion>7.3</LangVersion>
+    <ErrorReport>prompt</ErrorReport>
+    <Prefer32Bit>true</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x64'">
+    <OutputPath>bin\x64\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <Optimize>true</Optimize>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>x64</PlatformTarget>
+    <LangVersion>7.3</LangVersion>
+    <ErrorReport>prompt</ErrorReport>
+    <Prefer32Bit>true</Prefer32Bit>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="BCrypt.Net-Next, Version=4.0.3.0, Culture=neutral, PublicKeyToken=1e11be04b6288443, processorArchitecture=MSIL">
+      <HintPath>..\packages\BCrypt.Net-Next.4.0.3\lib\net472\BCrypt.Net-Next.dll</HintPath>
+    </Reference>
+    <Reference Include="CrystalDecisions.CrystalReports.Engine, Version=13.0.4000.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL" />
+    <Reference Include="CrystalDecisions.ReportSource, Version=13.0.4000.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL" />
+    <Reference Include="CrystalDecisions.Shared, Version=13.0.4000.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL" />
+    <Reference Include="CrystalDecisions.Windows.Forms, Version=13.0.4000.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL" />
+    <Reference Include="Microsoft.Xaml.Behaviors, Version=1.1.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Xaml.Behaviors.Wpf.1.1.135\lib\net462\Microsoft.Xaml.Behaviors.dll</HintPath>
+    </Reference>
+    <Reference Include="ReachFramework" />
+    <Reference Include="sapbusinessobjects.wpf.viewer, Version=13.0.4000.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL" />
+    <Reference Include="SAPBusinessObjects.WPF.ViewerShared, Version=13.0.4000.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL" />
+    <Reference Include="System" />
+    <Reference Include="System.Buffers, Version=4.0.3.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Buffers.4.5.1\lib\net461\System.Buffers.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Memory, Version=4.0.1.1, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Memory.4.5.4\lib\net461\System.Memory.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Numerics" />
+    <Reference Include="System.Numerics.Vectors, Version=4.1.4.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Numerics.Vectors.4.5.0\lib\net46\System.Numerics.Vectors.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Printing" />
+    <Reference Include="System.Runtime.CompilerServices.Unsafe, Version=4.0.4.1, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Runtime.CompilerServices.Unsafe.4.5.3\lib\net461\System.Runtime.CompilerServices.Unsafe.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Windows.Forms.DataVisualization" />
+    <Reference Include="System.Windows.Forms.DataVisualization.Design" />
+    <Reference Include="System.Xml" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xaml">
+      <RequiredTargetFramework>4.0</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="WindowsBase" />
+    <Reference Include="PresentationCore" />
+    <Reference Include="PresentationFramework" />
+    <Reference Include="WindowsFormsIntegration" />
+  </ItemGroup>
+  <ItemGroup>
+    <ApplicationDefinition Include="App.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </ApplicationDefinition>
+    <Compile Include="BuscadorDocumentos.xaml.cs">
+      <DependentUpon>BuscadorDocumentos.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="CacheAplicacion.cs" />
+    <Compile Include="DS_CierreCaja.cs">
+      <DependentUpon>DS_CierreCaja.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="DS_CierreCaja.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DS_CierreCaja.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="Services\CultureInfoHelper.cs" />
+    <Compile Include="ViewModel\HelperCommandsViewModel.cs" />
+    <Compile Include="ImpresionDocumentos.xaml.cs">
+      <DependentUpon>ImpresionDocumentos.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Notas.cs" />
+    <Compile Include="Reportes\Inventarios\RepComprobanteCompras.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>RepComprobanteCompras.rpt</DependentUpon>
+      <SubType>Component</SubType>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Compile>
+    <Compile Include="Reportes\Inventarios\RepImpCierreCaja.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>RepImpCierreCaja.rpt</DependentUpon>
+      <SubType>Component</SubType>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Compile>
+    <Compile Include="Repositorys\RepositorioBarras.cs" />
+    <Compile Include="Repositorys\RepositorioBCryp.cs" />
+    <Compile Include="Repositorys\RepositorioBuscadorDocumentos.cs" />
+    <Compile Include="Repositorys\RepositorioBuscarTerceros.cs" />
+    <Compile Include="Repositorys\RepositorioCierreCaja.cs" />
+    <Compile Include="Repositorys\RepositorioClavesAcceso.cs" />
+    <Compile Include="Repositorys\RepositorioCompra.cs" />
+    <Compile Include="Repositorys\RepositorioGuardaPagos.cs" />
+    <Compile Include="Repositorys\RepositorioOpcionesVendedores.cs" />
+    <Compile Include="Repositorys\RepositorioOperacionesMatematicas.cs" />
+    <Compile Include="Repositorys\RepositoryAlmacenes.cs" />
+    <Compile Include="ConfiguracionConexion.cs" />
+    <Compile Include="Services\CrystalHelper.cs" />
+    <Compile Include="Repositorys\RepositoryDocumentosVenta.cs" />
+    <Compile Include="Repositorys\RepositorioIngresoApp.cs" />
+    <Compile Include="Repositorys\RepositoryInventoryControl.cs" />
+    <Compile Include="Repositorys\RepositorySale.cs" />
+    <Compile Include="Repositorys\RepositoryTarifas.cs" />
+    <Compile Include="Repositorys\RespositoryInsertBD.cs" />
+    <Compile Include="Repositorys\RepositoryListadoUsuario.cs" />
+    <Compile Include="ModuloInventario.xaml.cs">
+      <DependentUpon>ModuloInventario.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="ModuloPuntoVenta.xaml.cs">
+      <DependentUpon>ModuloPuntoVenta.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="ModuloTaller.xaml.cs">
+      <DependentUpon>ModuloTaller.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Reportes\Inventarios\RepImpTQ.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>RepImpTQ.rpt</DependentUpon>
+      <SubType>Component</SubType>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Compile>
+    <Compile Include="SeleccionEmpresa.xaml.cs">
+      <DependentUpon>SeleccionEmpresa.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Repositorys\RepositoryVendedores.cs" />
+    <Compile Include="Services\ServicesShowDialog.cs" />
+    <Compile Include="Services\ServicesTransactionSale.cs" />
+    <Compile Include="VenatanaClavesAcceso.xaml.cs">
+      <DependentUpon>VenatanaClavesAcceso.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="VentanaAbrePos.xaml.cs">
+      <DependentUpon>VentanaAbrePos.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="VentanaActualizarCostosCompra.xaml.cs">
+      <DependentUpon>VentanaActualizarCostosCompra.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="VentanaArticulos.xaml.cs">
+      <DependentUpon>VentanaArticulos.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="VentanaBuscadorDocumentos.xaml.cs">
+      <DependentUpon>VentanaBuscadorDocumentos.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="VentanaBuscarArticulos.xaml.cs">
+      <DependentUpon>VentanaBuscarArticulos.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="VentanaBuscarCuentas.xaml.cs">
+      <DependentUpon>VentanaBuscarCuentas.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="VentanaBuscarDocumentos.xaml.cs">
+      <DependentUpon>VentanaBuscarDocumentos.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="VentanaBuscarTerceros.xaml.cs">
+      <DependentUpon>VentanaBuscarTerceros.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="VentanaCategoriasProductos.xaml.cs">
+      <DependentUpon>VentanaCategoriasProductos.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="VentanaCentros&amp;SubCentro.xaml.cs">
+      <DependentUpon>VentanaCentros&amp;SubCentro.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="VentanaClave.xaml.cs">
+      <DependentUpon>VentanaClave.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="VentanaCodigosBarraArticulos.xaml.cs">
+      <DependentUpon>VentanaCodigosBarraArticulos.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="VentanaConfigurarConsumidorFinal.xaml.cs">
+      <DependentUpon>VentanaConfigurarConsumidorFinal.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="VentanaConteoDinero.xaml.cs">
+      <DependentUpon>VentanaConteoDinero.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="VentanaCreacionAlmacen.xaml.cs">
+      <DependentUpon>VentanaCreacionAlmacen.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="VentanaCrearArticulos.xaml.cs">
+      <DependentUpon>VentanaCrearArticulos.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="VentanaCrearDocumentos.xaml.cs">
+      <DependentUpon>VentanaCrearDocumentos.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="VentanaCrearFormasPago.xaml.cs">
+      <DependentUpon>VentanaCrearFormasPago.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="VentanaCrearTecnicos.xaml.cs">
+      <DependentUpon>VentanaCrearTecnicos.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="VentanaCrearTerceros.xaml.cs">
+      <DependentUpon>VentanaCrearTerceros.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="VentanaCrearTipoVehiculos.xaml.cs">
+      <DependentUpon>VentanaCrearTipoVehiculos.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="VentanaCrearUsuarios.xaml.cs">
+      <DependentUpon>VentanaCrearUsuarios.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="VentanaCrearVehiculos.xaml.cs">
+      <DependentUpon>VentanaCrearVehiculos.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="VentanaCrearVendedores.xaml.cs">
+      <DependentUpon>VentanaCrearVendedores.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="VentanaCuentasCategorias.xaml.cs">
+      <DependentUpon>VentanaCuentasCategorias.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="VentanaCuentasPuc.xaml.cs">
+      <DependentUpon>VentanaCuentasPuc.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="VentanaDevueltasVentas.xaml.cs">
+      <DependentUpon>VentanaDevueltasVentas.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="VentanaEliminaArticulos.xaml.cs">
+      <DependentUpon>VentanaEliminaArticulos.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="VentanaEmpresa.xaml.cs">
+      <DependentUpon>VentanaEmpresa.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="VentanaImpresion.xaml.cs">
+      <DependentUpon>VentanaImpresion.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="VentanaImpresionDocumentos.xaml.cs">
+      <DependentUpon>VentanaImpresionDocumentos.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="VentanaInfoCierre.xaml.cs">
+      <DependentUpon>VentanaInfoCierre.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="VentanaListaPrecios.xaml.cs">
+      <DependentUpon>VentanaListaPrecios.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="VentanaMarcas.xaml.cs">
+      <DependentUpon>VentanaMarcas.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="VentanaOpcionesPos.xaml.cs">
+      <DependentUpon>VentanaOpcionesPos.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="VentanaPaisDepCiu.xaml.cs">
+      <DependentUpon>VentanaPaisDepCiu.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="VentanaRegistroCompras.xaml.cs">
+      <DependentUpon>VentanaRegistroCompras.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="VentanaRegistroVentas.xaml.cs">
+      <DependentUpon>VentanaRegistroVentas.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="ViewModel\VentanaRegistroVentasViewModel.cs" />
+    <Compile Include="VentanaRetirosCaja.xaml.cs">
+      <DependentUpon>VentanaRetirosCaja.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="VentanaSeleccionarAlmacen.xaml.cs">
+      <DependentUpon>VentanaSeleccionarAlmacen.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="VentanaSeleccionarTarfia.xaml.cs">
+      <DependentUpon>VentanaSeleccionarTarfia.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="VentanaSelecionarFormaPago.xaml.cs">
+      <DependentUpon>VentanaSelecionarFormaPago.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="VentanaSubCategorias.xaml.cs">
+      <DependentUpon>VentanaSubCategorias.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="VentanaTerceros.xaml.cs">
+      <DependentUpon>VentanaTerceros.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="VentanaTestigoDeVentas.xaml.cs">
+      <DependentUpon>VentanaTestigoDeVentas.xaml</DependentUpon>
+    </Compile>
+    <Page Include="BuscadorDocumentos.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Dashboard .xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="ImpresionDocumentos.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="MainWindow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Compile Include="App.xaml.cs">
+      <DependentUpon>App.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Dashboard .xaml.cs">
+      <DependentUpon>Dashboard .xaml</DependentUpon>
+    </Compile>
+    <Compile Include="MainWindow.xaml.cs">
+      <DependentUpon>MainWindow.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Page Include="ModuloAdministracion.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="ModuloInventario.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="ModuloPuntoVenta.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="ModuloTaller.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="SeleccionEmpresa.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Style\Button.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="VenatanaClavesAcceso.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="VentanaAbrePos.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="VentanaActualizarCostosCompra.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="VentanaArticulos.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="VentanaBuscadorDocumentos.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="VentanaBuscarArticulos.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="VentanaBuscarCuentas.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="VentanaBuscarDocumentos.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="VentanaBuscarTerceros.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="VentanaCategoriasProductos.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="VentanaCentros&amp;SubCentro.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="VentanaClave.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="VentanaCodigosBarraArticulos.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="VentanaConfigurarConsumidorFinal.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="VentanaConteoDinero.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="VentanaCreacionAlmacen.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="VentanaCrearArticulos.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="VentanaCrearDocumentos.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="VentanaCrearFormasPago.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="VentanaCrearTecnicos.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="VentanaCrearTerceros.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="VentanaCrearTipoVehiculos.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="VentanaCrearUsuarios.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="VentanaCrearVehiculos.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="VentanaCrearVendedores.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="VentanaCuentasCategorias.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="VentanaCuentasPuc.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="VentanaDevueltasVentas.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="VentanaEliminaArticulos.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="VentanaEmpresa.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="VentanaImpresion.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="VentanaImpresionDocumentos.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="VentanaInfoCierre.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="VentanaListaPrecios.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="VentanaMarcas.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="VentanaOpcionesPos.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="VentanaPaisDepCiu.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="VentanaRegistroCompras.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="VentanaRegistroVentas.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="VentanaRetirosCaja.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="VentanaSeleccionarAlmacen.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="VentanaSeleccionarTarfia.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="VentanaSelecionarFormaPago.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="VentanaSubCategorias.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="VentanaTerceros.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="VentanaTestigoDeVentas.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="MMCDataSet.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>MMCDataSet.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="ModuloAdministracion.xaml.cs">
+      <DependentUpon>ModuloAdministracion.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\AssemblyInfo.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reportes\Inventarios\RepComprobanteCompras.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>RepComprobanteCompras.cs</LastGenOutput>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reportes\Inventarios\RepImpCierreCaja.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>RepImpCierreCaja.cs</LastGenOutput>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reportes\Inventarios\RepImpTQ.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>RepImpTQ.cs</LastGenOutput>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <None Include="Reportes\Inventarios\.editorconfig" />
+    <Resource Include="Fuentes\Roboto-Light.ttf" />
+    <None Include="DS_CierreCaja.xsc">
+      <DependentUpon>DS_CierreCaja.xsd</DependentUpon>
+    </None>
+    <None Include="DS_CierreCaja.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>DS_CierreCaja.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="DS_CierreCaja.xss">
+      <DependentUpon>DS_CierreCaja.xsd</DependentUpon>
+    </None>
+    <None Include="MMCDataSet.xsc">
+      <DependentUpon>MMCDataSet.xsd</DependentUpon>
+    </None>
+    <None Include="MMCDataSet.xsd">
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>MMCDataSet.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="MMCDataSet.xss">
+      <DependentUpon>MMCDataSet.xsd</DependentUpon>
+    </None>
+    <None Include="packages.config" />
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Icons\Casa.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Icons\Barra.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Icons\Barra1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Icons\Ajustes.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Icons\Movimientos.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Icons\Informes.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Icons\Adicionales.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Icons\Salir.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Background\MMC.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Background\ImagenFondo.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Configuracion.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="MMC.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Icons\Buscar.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Icons\BILLETE 2000.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{C0C07587-41A7-46C8-8FBD-3F9C8EBE2DDC}" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Loggin.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\2000.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\5000.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\10000.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\20000.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\100000.png" />
+    <Resource Include="Images\50000.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\1k.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\100.png" />
+    <Resource Include="Images\200.png" />
+    <Resource Include="Images\50.png" />
+    <Resource Include="Images\500.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\refresh.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Aceptar.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Background\LogoEmpresa.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\FondoLoggin.JPG" />
+  </ItemGroup>
+  <ItemGroup />
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>

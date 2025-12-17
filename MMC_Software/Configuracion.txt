@@ -1,0 +1,9 @@
+<Servidor>
+  <Campo>.</Campo>
+  <Campo>C:\MMC\Reportes</Campo>
+  <Campo>C:\MMC\Foto\</Campo>
+  <Campo>C:\MMC\Temporales\</Campo>
+  <Campo>local</Campo>
+  <Campo>0</Campo>
+  <Campo>sa</Campo>
+ </Servidor>

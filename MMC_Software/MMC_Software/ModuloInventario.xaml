@@ -1,0 +1,167 @@
+﻿<Window x:Class="MMC_Software.ModuloInventario"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        mc:Ignorable="d"
+        Title="Módulo de Inventarios"
+        WindowStartupLocation="CenterScreen"
+        WindowState="Maximized"
+        Background="#f7f9fc">
+
+    <Window.Resources>
+        <!-- Sombra general -->
+        <DropShadowEffect x:Key="CardShadow"
+                          BlurRadius="10"
+                          ShadowDepth="2"
+                          Opacity="0.15"
+                          Color="Black"/>
+
+        <!-- Estilo para botones del panel lateral -->
+        <Style x:Key="SideMenuButton" TargetType="Button">
+            <Setter Property="Background" Value="Transparent"/>
+            <Setter Property="Foreground" Value="#2b3e5c"/>
+            <Setter Property="FontWeight" Value="SemiBold"/>
+            <Setter Property="Padding" Value="10,5"/>
+            <Setter Property="HorizontalContentAlignment" Value="Left"/>
+            <Setter Property="Cursor" Value="Hand"/>
+            <Setter Property="BorderThickness" Value="0"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border Background="{TemplateBinding Background}">
+                            <ContentPresenter VerticalAlignment="Center" Margin="10,0"/>
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+            <Style.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="Background" Value="#dbe4f0"/>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+    </Window.Resources>
+
+    <DockPanel>
+        <!-- Encabezado superior -->
+        <Border DockPanel.Dock="Top" Background="#1e3a5f" Padding="15">
+            <TextBlock Text="MÓDULO DE INVENTARIOS   📦"
+                       Foreground="White"
+                       FontSize="20"
+                       FontWeight="Bold"
+                       VerticalAlignment="Center"/>
+        </Border>
+
+        <!-- Panel lateral -->
+        <StackPanel x:Name="ExpanderContainer"
+                    DockPanel.Dock="Left"
+                    Width="250"
+                    Background="#f0f3f7"
+                    Margin="10"
+                    Effect="{StaticResource CardShadow}">
+
+            <!-- 📦 Parámetros -->
+            <Expander Header="📦 Parámetros Básicos"
+                      IsExpanded="True"
+                      Background="#e8eef7"
+                      FontWeight="Bold"
+                      Margin="0,0,0,10"
+                      Expanded="Expander_Expanded"
+                      FontFamily="Tahoma">
+                <StackPanel>
+                    <Button Style="{StaticResource SideMenuButton}" 
+                            Content="Creación de Artículos"
+                            Click="MenuItemCrearArticulos_Click"/>
+                    <Button Style="{StaticResource SideMenuButton}" 
+                            Content="Creación de Terceros"
+                            Click="MenuItemCrearTerceros_Click"/>
+                </StackPanel>
+            </Expander>
+
+            <!-- 📋 Movimientos de Inventario -->
+            <Expander Header="📋 Movimientos de Inventario"
+                      Background="#e8eef7"
+                      FontWeight="Bold"
+                      Margin="0,0,0,5"
+                      Expanded="Expander_Expanded">
+                <StackPanel>
+                    
+                    <!-- 📦 Compras-->
+                    <StackPanel>
+                        <Expander Header="📦 Compras"
+                                  Background="#f2f5fa"
+                                  FontWeight="Normal"
+                                  Margin="0,1,0,5">
+                            
+                            <StackPanel Margin="2">
+                                <Button Style="{StaticResource SideMenuButton}" 
+                                        Content="Registro de Compras" 
+                                        Click="ButtonRegistroCompras_Click"/>
+                                <Button Style="{StaticResource SideMenuButton}" 
+                                        Content="Devoluciones a Proveedor"/>
+                                <Button Style="{StaticResource SideMenuButton}" 
+                                        Content="Órdenes de Compra"/>
+                                <Button Style="{StaticResource SideMenuButton}" 
+                                        Content="Ajustes de Inventario"/>
+                            </StackPanel>
+                        </Expander>
+                    </StackPanel>
+
+                    <!-- 🛒 Ventas-->
+                    <StackPanel>
+                        <Expander Header="🛒 Ventas"
+                                  Background="#f2f5fa"
+                                  FontWeight="Normal"
+                                  Margin="5">
+                            <StackPanel>
+                                <Button Style="{StaticResource SideMenuButton}" 
+                                        Content="Facturación De Ventas"/>
+                                <Button Style="{StaticResource SideMenuButton}" 
+                                        Content="Devoluciones De Ventas"/>
+                            </StackPanel>
+                        </Expander>
+                    </StackPanel>
+                                        
+                </StackPanel>
+            </Expander>
+
+            <!-- 📊 Informes -->
+            <Expander Header="📊 Informes"
+                      Background="#e8eef7"
+                      FontWeight="Bold"
+                      Margin="0,0,0,10"
+                      Expanded="Expander_Expanded">
+                <StackPanel>
+                    <Button Style="{StaticResource SideMenuButton}" 
+                            Content="Kardex"/>
+                    <Button Style="{StaticResource SideMenuButton}" 
+                            Content="Stock"/>
+                </StackPanel>
+            </Expander>
+
+            <!-- ⚙️ Utilitarios -->
+            <Expander Header="⚙️ Utilitarios"
+                      Background="#e8eef7"
+                      FontWeight="Bold"
+                      Expanded="Expander_Expanded">
+                <StackPanel>
+                    <Button Style="{StaticResource SideMenuButton}" 
+                            Content="Ajuste Consumidor Final"
+                            Click="MenuItemAjusteConsumidor_Click"/>
+                </StackPanel>
+            </Expander>
+        </StackPanel>
+
+        <!-- Área principal de trabajo -->
+        <Grid Background="#f7f9fc">
+            <TabControl x:Name="tabInventarios"
+                        Margin="15"
+                        Padding="10"
+                        Background="White"
+                        BorderBrush="#ddd"
+                        BorderThickness="1"
+                        Effect="{StaticResource CardShadow}"/>
+        </Grid>
+    </DockPanel>
+</Window>

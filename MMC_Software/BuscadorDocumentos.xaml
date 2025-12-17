@@ -1,0 +1,164 @@
+﻿<Window x:Class="MMC_Software.BuscadorDocumentos"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        mc:Ignorable="d"
+        Title="Buscador de Documentos"
+        Height="550" Width="950"
+        xmlns:sys="clr-namespace:System;assembly=mscorlib"
+        Background="#E9EEF4" WindowStartupLocation="CenterScreen">
+
+    <Border CornerRadius="12" Background="White" Margin="15" Padding="10" BorderBrush="#D0D6DD" BorderThickness="1">
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="330"/>
+                <ColumnDefinition Width="10"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+
+            <!-- PANEL IZQUIERDO -->
+            <Border Background="#F6F8FA" CornerRadius="10" Padding="15" BorderBrush="#D0D6DD" BorderThickness="1">
+                <StackPanel>
+                    <TextBlock Text="🔍 Buscador de Documentos"
+                               FontSize="16" FontWeight="Bold"
+                               Foreground="#34495E"
+                               Margin="0 0 0 15"/>
+
+                    <!-- Tipo Documento + Criterio -->
+                    <Grid Margin="0 0 0 10">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="10"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+
+                        <StackPanel Grid.Column="0">
+                            <TextBlock Text="Tipo de Documento:"
+                                       FontWeight="SemiBold" Foreground="#34495E" Margin="0 5 0 3"/>
+                            <ComboBox x:Name="cmbTipoDocumento" Height="25" Padding="5"/>
+                        </StackPanel>
+
+                        <StackPanel Grid.Column="2">
+                            <TextBlock Text="Criterio de Búsqueda:"
+                                       FontWeight="SemiBold" Foreground="#34495E" Margin="0 5 0 3"/>
+                            <ComboBox x:Name="cmbCriterioBusqueda" Height="25" Padding="5"/>
+                        </StackPanel>
+                    </Grid>
+
+                    <!-- Código + Número Documento en una sola fila -->
+                    <TextBlock Text="Código / Número de Documento:"
+                               FontWeight="SemiBold" Foreground="#34495E" Margin="0 5 0 3"/>
+
+                    <Grid Margin="0 0 0 5">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="3*"/>
+                            <ColumnDefinition Width="8"/>
+                            <ColumnDefinition Width="1.2*"/>
+                        </Grid.ColumnDefinitions>
+
+                        <!-- Código Documento -->
+                        <TextBox x:Name="txtCodigoDocumento"
+                                 Grid.Column="0"
+                                 Height="28" Padding="5"
+                                 TextChanged="txtCodigoDocumento_TextChanged"
+                                 KeyDown="txtCodigoDocumento_KeyDown"
+                                 ToolTip="Código del documento (texto largo o alfanumérico)"
+                                 />
+
+                        <!-- Número Documento -->
+                        <TextBox x:Name="txtNumeroDocumento"
+                                 Grid.Column="2"
+                                 Height="28" Padding="5"
+                                 MaxLength="7"
+                                 ToolTip="Número del documento (máx. 7 dígitos)"
+                                 PreviewTextInput="txtNumeroDocumento_PreviewTextInput"
+                                 TextInput="txtNumeroDocumento_TextInput"
+                                 />
+                    </Grid>
+
+                    <!-- ListBox sugerencias -->
+                    <ListBox x:Name="lstDocumentos"
+                             Height="100"
+                             Background="White"
+                             BorderBrush="#D0D6DD"
+                             BorderThickness="1"
+                             Visibility="Collapsed"
+                             Margin="0 0 0 10"
+                             MouseDoubleClick="lstDocumentos_MouseDoubleClick"
+                             PreviewKeyDown="lstDocumentos_PreviewKeyDown"/>
+
+                    <!-- Rango de fechas -->
+                    <TextBlock Text="Rango de Fechas:"
+                               FontWeight="SemiBold" Foreground="#34495E" Margin="0 5 0 3"/>
+
+                    <Grid Margin="0 0 0 10">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="10"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+
+                        <StackPanel Grid.Column="0">
+                            <TextBlock Text="Desde:" FontSize="12" Foreground="#34495E" Margin="0 0 0 2"/>
+                            <DatePicker x:Name="dtpDesde" Height="28" SelectedDate="{x:Static sys:DateTime.Now}"/>
+                        </StackPanel>
+
+                        <StackPanel Grid.Column="2">
+                            <TextBlock Text="Hasta:" FontSize="12" Foreground="#34495E" Margin="0 0 0 2"/>
+                            <DatePicker x:Name="dtpHasta" Height="28" SelectedDate="{x:Static sys:DateTime.Now}"/>
+                        </StackPanel>
+                    </Grid>
+
+                    <!-- Cliente / Proveedor -->
+                    <TextBlock Text="Cliente / Proveedor:"
+                               FontWeight="SemiBold" Foreground="#34495E" Margin="0 5 0 3"/>
+                    <TextBox x:Name="txtTercero" Height="28" Margin="0 0 0 20" Padding="5" KeyDown="txtTercero_KeyDown"/>
+
+                    <!-- Botón Buscar -->
+                    <Button x:Name="btnBuscar"
+                            Content="🔍 Buscar"
+                            Background="#4A90E2" Foreground="White"
+                            FontWeight="Bold"
+                            Height="35"
+                            BorderBrush="{x:Null}"
+                            Cursor="Hand"
+                            BorderThickness="0"
+                            HorizontalAlignment="Stretch"
+                            Click="btnBuscar_Click"/>
+                </StackPanel>
+            </Border>
+
+            <!-- PANEL DERECHO -->
+            <Border Grid.Column="2" Background="White" CornerRadius="10" Padding="10" BorderBrush="#D0D6DD" BorderThickness="1">
+                <StackPanel>
+                    <TextBlock Text="📄 Resultados de la Búsqueda"
+                               FontSize="16" FontWeight="Bold"
+                               Foreground="#34495E" Margin="0 0 0 10"/>
+
+                    <DataGrid x:Name="dgResultados"
+                              AutoGenerateColumns="False"
+                              CanUserAddRows="False"
+                              HeadersVisibility="Column"
+                              GridLinesVisibility="None"
+                              RowHeight="32"
+                              AlternatingRowBackground="#F4F7FB"
+                              BorderBrush="#D0D6DD"
+                              BorderThickness="1"
+                              Margin="0 10 0 0"
+                              MouseDoubleClick="dgResultados_MouseDoubleClick">
+
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Header="Docto" Binding="{Binding Docto}" Width="43" IsReadOnly="True"/>
+                            <DataGridTextColumn Header="Número" Binding="{Binding Numero}" Width="*"  IsReadOnly="True"/>
+                            <DataGridTextColumn Header="Factura" Binding="{Binding Factura}" Width="*" IsReadOnly="True"/>
+                            <DataGridTextColumn Header="Fecha" Binding="{Binding Fecha, StringFormat=d}" Width="*"  IsReadOnly="True"/>
+                            <DataGridTextColumn Header="Cliente / Proveedor" Binding="{Binding Tercero}" Width="2*"  IsReadOnly="True"/>
+                            <DataGridTextColumn Header="Total" Binding="{Binding Total}" Width="*"  IsReadOnly="True"/>
+                        </DataGrid.Columns>
+                    </DataGrid>
+                </StackPanel>
+            </Border>
+        </Grid>
+    </Border>
+</Window>

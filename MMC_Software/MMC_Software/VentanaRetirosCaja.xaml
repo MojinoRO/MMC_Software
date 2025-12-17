@@ -1,0 +1,105 @@
+﻿<Window x:Class="MMC_Software.VentanaRetirosCaja"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:MMC_Software"
+        mc:Ignorable="d"
+        Title="Retiros de Caja" Height="350" Width="400"
+        WindowStartupLocation="CenterScreen"
+        Background="#2C3E50" Foreground="White"
+        xmlns:sys="clr-namespace:System;assembly=mscorlib">
+
+    <Grid Margin="10">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+
+        <!-- Título -->
+        <TextBlock Text="Generar Retiro de Caja"
+                   FontSize="18"
+                   FontWeight="Bold"
+                   HorizontalAlignment="Center"
+                   Margin="0 5 0 10"/>
+
+        <!-- Contenido principal -->
+        <StackPanel Grid.Row="1" VerticalAlignment="Center">
+            <!-- Vendedor -->
+            <StackPanel Orientation="Vertical">
+                <TextBlock Text="Seleccione Vendedor:" 
+                           FontWeight="SemiBold"
+                           Margin="0 0 0 3"/>
+                <ComboBox x:Name="CmbVendedores"
+                          Height="28"
+                          FontSize="13"
+                          Background="Transparent"
+                          Foreground="Black"
+                          BorderBrush="#1ABC9C"
+                          Padding="3"/>
+                <TextBlock Text="Fecha Retiro: " FontWeight="SemiBold"/>
+                <DatePicker x:Name="DpFecha"
+                    SelectedDate="{x:Static sys:DateTime.Now }" IsEnabled="False"
+                            FontWeight="SemiBold"/>
+            </StackPanel>
+
+            <!-- Valor retiro -->
+            <StackPanel Orientation="Vertical">
+                <TextBlock Text="Valor del Retiro:" 
+                           FontWeight="SemiBold"
+                           Margin="0 0 0 3"/>
+                <TextBox x:Name="TxtValorRetiro"
+                         Height="28"
+                         FontSize="13"
+                         Background="#34495E"
+                         Foreground="White"
+                         BorderBrush="#1ABC9C"
+                         Padding="3"
+                         HorizontalContentAlignment="Center"
+                         PreviewTextInput="TxtValorRetiro_PreviewTextInput"/>
+            </StackPanel>
+
+            <!-- Detalle -->
+            <StackPanel Orientation="Vertical">
+                <TextBlock Text="Detalle:" 
+                           FontWeight="SemiBold"
+                           Margin="0 0 0 3"/>
+                <TextBox x:Name="TxtDetalle"
+                         Height="60"
+                         FontSize="13"
+                         Background="#34495E"
+                         Foreground="White"
+                         BorderBrush="#1ABC9C"
+                         Padding="3"
+                         TextWrapping="Wrap"
+                         AcceptsReturn="True"/>
+            </StackPanel>
+        </StackPanel>
+
+        <!-- Botones -->
+        <StackPanel Grid.Row="2" Orientation="Horizontal"
+                    HorizontalAlignment="Center" Margin="0 10 0 0" >
+            <Button x:Name="BtnGuardar"
+                    Content="Guardar"
+                    Width="100"
+                    Height="30"
+                    Background="#1ABC9C"
+                    Foreground="White"
+                    FontWeight="Bold"
+                    Cursor="Hand"
+                    BorderThickness="0"
+                    Click="BtnGuardar_Click"/>
+            <Button x:Name="BtnCancelar"
+                    Content="Cancelar"
+                    Width="100"
+                    Height="30"
+                    Background="#E74C3C"
+                    Foreground="White"
+                    FontWeight="Bold"
+                    Cursor="Hand"
+                    BorderThickness="0"
+                    Click="BtnCancelar_Click"/>
+        </StackPanel>
+    </Grid>
+</Window>

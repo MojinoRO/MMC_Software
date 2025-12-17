@@ -1,0 +1,191 @@
+﻿<Window x:Class="MMC_Software.Dashboard"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Dashboard"
+        Height="650" Width="1000"
+        WindowStartupLocation="CenterScreen"
+        WindowStyle="None"
+        Background="#f4f6fa">
+
+    <Window.Resources>
+        <!-- Efecto sombra -->
+        <DropShadowEffect x:Key="CardShadow"
+                          BlurRadius="15"
+                          ShadowDepth="2"
+                          Opacity="0.15"
+                          Color="#222"/>
+
+        <!-- Botón tipo tarjeta -->
+        <Style x:Key="ModuloButtonStyle" TargetType="Button">
+            <Setter Property="Background" Value="White"/>
+            <Setter Property="BorderBrush" Value="Transparent"/>
+            <Setter Property="BorderThickness" Value="0"/>
+            <Setter Property="Padding" Value="12,8"/>
+            <Setter Property="Margin" Value="4,4,4,4"/>
+            <Setter Property="Cursor" Value="Hand"/>
+            <Setter Property="FontSize" Value="14"/>
+            <Setter Property="FontWeight" Value="SemiBold"/>
+            <Setter Property="HorizontalContentAlignment" Value="Left"/>
+            <Setter Property="Effect" Value="{StaticResource CardShadow}"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border Background="{TemplateBinding Background}"
+                                CornerRadius="8"
+                                Padding="{TemplateBinding Padding}">
+                            <ContentPresenter VerticalAlignment="Center"/>
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+            <Style.Triggers>
+                <!-- Animación hover -->
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="Background" Value="#e9f1ff"/>
+                    <Setter Property="Effect">
+                        <Setter.Value>
+                            <DropShadowEffect BlurRadius="20" ShadowDepth="4" Opacity="0.25" Color="#3a6fd0"/>
+                        </Setter.Value>
+                    </Setter>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+
+        <!-- Estilo encabezado de Expander -->
+        <Style TargetType="Expander">
+            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="FontWeight" Value="Bold"/>
+            <Setter Property="FontSize" Value="14"/>
+            <Setter Property="Margin" Value="8,12,8,0"/>
+            <Setter Property="Padding" Value="4"/>
+            <Setter Property="Background" Value="Transparent"/>
+        </Style>
+    </Window.Resources>
+
+    <Grid>
+        <Border CornerRadius="14"
+                Background="White"
+                Margin="20"
+                Effect="{StaticResource CardShadow}">
+
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="260"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+
+                <!-- Panel lateral con Expander -->
+                <Border Grid.Column="0" CornerRadius="14,0,0,14">
+                    <Border.Background>
+                        <LinearGradientBrush StartPoint="0,0" EndPoint="0,1">
+                            <GradientStop Color="#3a6fd0" Offset="0"/>
+                            <GradientStop Color="#2a4f91" Offset="1"/>
+                        </LinearGradientBrush>
+                    </Border.Background>
+
+                    <ScrollViewer VerticalScrollBarVisibility="Auto">
+                        <StackPanel Margin="12">
+
+                            <!-- Configuración -->
+                            <Expander Header="Configuración" IsExpanded="False">
+                                <StackPanel>
+                                    <Button Style="{StaticResource ModuloButtonStyle}" 
+                                            Click="ButtonAdministra_Click"
+                                            Content="Configuración Básica"/>
+                                </StackPanel>
+                            </Expander>
+
+                            <!-- Punto de Venta -->
+                            <Expander Header="Punto de Venta">
+                                <StackPanel>
+                                    <Button Style="{StaticResource ModuloButtonStyle}" 
+                                            Click="ButtonPuntoVenta_Click"
+                                            Content="Punto De Venta"/>
+                                </StackPanel>
+                            </Expander>
+
+                            <!-- Inventarios -->
+                            <Expander Header="Inventarios">
+                                <StackPanel>
+                                    <Button Style="{StaticResource ModuloButtonStyle}" 
+                                            Click="ButtonClick_Inventarios"
+                                            Content="Inventarios"/>
+                                </StackPanel>
+                            </Expander>
+
+                            <!-- Contabilidad -->
+                            <Expander Header="Contabilidad">
+                                <StackPanel>
+                                    <Button Style="{StaticResource ModuloButtonStyle}" 
+                                            Content="Contabilidad"/>
+                                </StackPanel>
+                            </Expander>
+
+                            <!-- Cartera -->
+                            <Expander Header="Cartera">
+                                <StackPanel>
+                                    <Button Style="{StaticResource ModuloButtonStyle}" 
+                                            Content="Cartera"/>
+                                </StackPanel>
+                            </Expander>
+
+                            <!-- Nómina -->
+                            <Expander Header="Nómina">
+                                <StackPanel>
+                                    <Button Style="{StaticResource ModuloButtonStyle}" 
+                                            Content="Nómina"/>
+                                </StackPanel>
+                            </Expander>
+
+
+                            <!-- Taller -->
+                            <Expander Header="Taller">
+                                <StackPanel>
+                                    <Button Style="{StaticResource ModuloButtonStyle}" 
+                                            Click="ButtonTaller_Click"
+                                            Content="Modulo De Taller"/>
+                                </StackPanel>
+                            </Expander>
+
+
+                            <!-- Sistema -->
+                            <Expander Header="Salir">
+                                <StackPanel>
+                                    <Button Style="{StaticResource ModuloButtonStyle}" 
+                                            Foreground="#ff4d4d"
+                                            Click="ButtonSalir_Click"
+                                            Content="Salir"/>
+                                </StackPanel>
+                            </Expander>
+                        </StackPanel>
+                    </ScrollViewer>
+                </Border>
+
+                <!-- Área de trabajo -->
+                <Grid Grid.Column="1" Background="#f8faff">
+                    <StackPanel>
+                        <!-- Encabezado -->
+                        <Border Background="White"
+                                Padding="18"
+                                CornerRadius="0,14,0,0"
+                                Effect="{StaticResource CardShadow}">
+                            <TextBlock Text="Bienvenido al Panel Principal"
+                                       FontSize="20"
+                                       FontWeight="Bold"
+                                       Foreground="#2a4f91"/>
+                        </Border>
+
+                        <!-- Contenido -->
+                        <Grid Background="#f8faff">
+                            <Image Source="/Background/MMC.png"
+                                   Stretch="Uniform"
+                                   Opacity="0.2"
+                                   HorizontalAlignment="Center"
+                                   VerticalAlignment="Center" Height="512"/>
+                        </Grid>
+                    </StackPanel>
+                </Grid>
+            </Grid>
+        </Border>
+    </Grid>
+</Window>

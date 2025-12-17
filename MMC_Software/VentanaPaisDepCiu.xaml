@@ -1,0 +1,213 @@
+﻿<UserControl x:Class="MMC_Software.VentanaPaisDepCiu"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:local="clr-namespace:MMC_Software"
+             mc:Ignorable="d"
+             Background="#2B3E5C">
+    <UserControl.Resources>
+        <!-- TextBox -->
+        <Style x:Key="TextBoxEstilo" TargetType="TextBox">
+            <Setter Property="Padding" Value="5"/>
+            <Setter Property="Background" Value="#F8F9FA"/>
+            <Setter Property="BorderBrush" Value="#B0BEC5"/>
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="Foreground" Value="#1E1E1E"/>
+            <Setter Property="FontSize" Value="13"/>
+        </Style>
+
+        <!-- Botones principales -->
+        <Style x:Key="BaseBoton" TargetType="Button">
+            <Setter Property="FontWeight" Value="Bold"/>
+            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="Padding" Value="6,4"/>
+            <Setter Property="FontSize" Value="13"/>
+            <Setter Property="Cursor" Value="Hand"/>
+            <Setter Property="BorderThickness" Value="0"/>
+            <Setter Property="MinWidth" Value="100"/>
+            <Setter Property="Height" Value="30"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border CornerRadius="6" Background="{TemplateBinding Background}">
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+            <Setter Property="Effect">
+                <Setter.Value>
+                    <DropShadowEffect ShadowDepth="2" BlurRadius="4" Opacity="0.4"/>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <!-- Botones por color -->
+        <Style x:Key="BtnAzul" BasedOn="{StaticResource BaseBoton}" TargetType="Button">
+            <Setter Property="Background" Value="#3B82F6"/>
+            <Setter Property="BorderBrush" Value="#3B82F6"/>
+        </Style>
+        <Style x:Key="BtnVerde" BasedOn="{StaticResource BaseBoton}" TargetType="Button">
+            <Setter Property="Background" Value="#10B981"/>
+        </Style>
+        <Style x:Key="BtnRojo" BasedOn="{StaticResource BaseBoton}" TargetType="Button">
+            <Setter Property="Background" Value="#EF4444"/>
+        </Style>
+        <Style x:Key="BtnGris" BasedOn="{StaticResource BaseBoton}" TargetType="Button">
+            <Setter Property="Background" Value="#6B7280"/>
+        </Style>
+    </UserControl.Resources>
+
+
+    <ScrollViewer VerticalScrollBarVisibility="Auto">
+        <StackPanel Margin="25" Orientation="Vertical" VerticalAlignment="Top" HorizontalAlignment="Stretch">
+
+            <!-- ======== PAISES ======== -->
+            <GroupBox Header="🌍 Países" Foreground="White" Margin="0,0,0,20"
+                      FontWeight="Bold"
+                      BorderBrush="#4A6FA5" BorderThickness="1.5"
+                      Padding="10" Background="#324B70">
+                <Grid Margin="10">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="150"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+
+                    <TextBlock Text="Código País:" Grid.Row="0" Grid.Column="0" Margin="5" VerticalAlignment="Center"/>
+                    <TextBox x:Name="txtCodigoPais" Grid.Row="0" Grid.Column="1" Margin="5" IsEnabled="False" Style="{StaticResource TextBoxEstilo}"/>
+
+                    <TextBlock Text="Nombre País:" Grid.Row="1" Grid.Column="0" Margin="5" VerticalAlignment="Center"/>
+                    <TextBox x:Name="txtNombrePais" Grid.Row="1" Grid.Column="1" Margin="5" IsEnabled="False" Style="{StaticResource TextBoxEstilo}"/>
+
+                    <TextBlock Text="Países creados:" Grid.Row="3" Grid.Column="0" Margin="5" VerticalAlignment="Top"/>
+                    <ListBox x:Name="listPaises" Grid.Row="3" Grid.Column="1" Height="100"
+                             Background="#f4f4f4" Foreground="Black"
+                             BorderBrush="#ccc"
+                             MouseDoubleClick="listPaises_MouseDoubleClick"/>
+
+                    <StackPanel Grid.Row="4" Grid.ColumnSpan="2" Orientation="Horizontal"
+                                HorizontalAlignment="Right" Margin="5">
+                        <Button Content="➕ Crear" Style="{StaticResource BtnAzul}" Margin="5" Click="ButtonCrear_Click"/>
+                        <Button Content="✏️ Modificar" Style="{StaticResource BtnGris}" Margin="5" Click="ButtonModificar_Click"/>
+                        <Button Content="💾 Guardar" Style="{StaticResource BtnVerde}" Margin="5" Click="ButtonGuarda_Click"/>
+                        <Button Content="🗑️ Eliminar" Style="{StaticResource BtnRojo}" Margin="5" Click="ButtonEliminar_Click"/>
+                    </StackPanel>
+                </Grid>
+            </GroupBox>
+
+            <!-- ======== DEPARTAMENTOS ======== -->
+            <GroupBox Header="🏛️ Departamentos" Foreground="White" Margin="0,0,0,20"
+                      FontWeight="Bold" BorderBrush="#4A6FA5" BorderThickness="1.5"
+                      Padding="10" Background="#324B70">
+                <Grid Margin="10">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="2*"/>
+                        <ColumnDefinition Width="1.2*"/>
+                    </Grid.ColumnDefinitions>
+
+                    <!-- Formulario -->
+                    <Grid Grid.Column="0">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="150"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                        </Grid.RowDefinitions>
+
+                        <TextBlock Text="País:" Grid.Row="0" Grid.Column="0" Margin="5" VerticalAlignment="Center"/>
+                        <ComboBox x:Name="cmbPaisDepartamento" Grid.Row="0" Grid.Column="1" Margin="5" IsEnabled="False"
+                                  MouseDoubleClick="cmbPaisDepartamentoList_MouseDoubleClick_1"/>
+
+                        <TextBlock Text="Código Departamento:" Grid.Row="1" Grid.Column="0" Margin="5" VerticalAlignment="Center"/>
+                        <TextBox x:Name="txtCodigoDepartamento" Grid.Row="1" Grid.Column="1" Margin="5" IsEnabled="False" Style="{StaticResource TextBoxEstilo}"/>
+
+                        <TextBlock Text="Nombre Departamento:" Grid.Row="2" Grid.Column="0" Margin="5" VerticalAlignment="Center"/>
+                        <TextBox x:Name="txtNombreDepartamento" Grid.Row="2" Grid.Column="1" Margin="5" IsEnabled="False" Style="{StaticResource TextBoxEstilo}"/>
+
+                        <TextBlock Text="Código ISO:" Grid.Row="3" Grid.Column="0" Margin="5" VerticalAlignment="Center"/>
+                        <TextBox x:Name="txtIsoDepartamento" Grid.Row="3" Grid.Column="1" Margin="5" IsEnabled="False" Style="{StaticResource TextBoxEstilo}"/>
+
+                        <StackPanel Grid.Row="4" Grid.ColumnSpan="2" Orientation="Horizontal" HorizontalAlignment="Right" Margin="5">
+                            <Button Content="➕ Crear" Style="{StaticResource BtnAzul}" Margin="5" Click="ButtonCrearDep_Click"/>
+                            <Button Content="✏️ Modificar" Style="{StaticResource BtnGris}" Margin="5" Click="ButtonModificadep_Click"/>
+                            <Button Content="💾 Guardar" Style="{StaticResource BtnVerde}" Margin="5" Click="ButtonGuardaDepartamento_Click"/>
+                            <Button Content="🗑️ Eliminar" Style="{StaticResource BtnRojo}" Margin="5" Click="ButtonEliminarDep_Click"/>
+                        </StackPanel>
+                    </Grid>
+
+                    <!-- Lista -->
+                    <ListBox x:Name="listDepartamentos" Grid.Column="1" Margin="10" Height="200"
+                             Background="#f4f4f4" Foreground="Black" BorderBrush="#ccc"
+                             MouseDoubleClick="listDepartamentos_MouseDoubleClick"/>
+                </Grid>
+            </GroupBox>
+
+            <!-- ======== CIUDADES ======== -->
+            <GroupBox Header="🏙️ Ciudades" Foreground="White" FontWeight="Bold"
+                      BorderBrush="#4A6FA5" BorderThickness="1.5"
+                      Padding="10" Background="#324B70">
+                <Grid Margin="10">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="2*"/>
+                        <ColumnDefinition Width="1.2*"/>
+                    </Grid.ColumnDefinitions>
+
+                    <!-- Formulario -->
+                    <Grid Grid.Column="0">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="150"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                        </Grid.RowDefinitions>
+
+                        <TextBlock Text="Departamento:" Grid.Row="0" Grid.Column="0" Margin="5" VerticalAlignment="Center"/>
+                        <ComboBox x:Name="cmbDepartamentoCiudad" Grid.Row="0" Grid.Column="1" Margin="5" IsEnabled="False"/>
+
+                        <TextBlock Text="País:" Grid.Row="1" Grid.Column="0" Margin="5" VerticalAlignment="Center"/>
+                        <ComboBox x:Name="cmbPaisCiudad" Grid.Row="1" Grid.Column="1" Margin="5"/>
+
+                        <TextBlock Text="Código Ciudad:" Grid.Row="2" Grid.Column="0" Margin="5" VerticalAlignment="Center"/>
+                        <TextBox x:Name="txtCodigoCiudad" Grid.Row="2" Grid.Column="1" Margin="5" Style="{StaticResource TextBoxEstilo}"/>
+
+                        <TextBlock Text="Nombre Ciudad:" Grid.Row="3" Grid.Column="0" Margin="5" VerticalAlignment="Center"/>
+                        <TextBox x:Name="txtNombreCiudad" Grid.Row="3" Grid.Column="1" Margin="5" Style="{StaticResource TextBoxEstilo}"/>
+
+                        <StackPanel Grid.Row="4" Grid.ColumnSpan="2" Orientation="Horizontal" HorizontalAlignment="Right" Margin="5">
+                            <Button Content="➕ Crear" Style="{StaticResource BtnAzul}" Margin="5"/>
+                            <Button Content="✏️ Modificar" Style="{StaticResource BtnGris}" Margin="5"/>
+                            <Button Content="💾 Guardar" Style="{StaticResource BtnVerde}" Margin="5"/>
+                            <Button Content="🗑️ Eliminar" Style="{StaticResource BtnRojo}" Margin="5"/>
+                        </StackPanel>
+                    </Grid>
+
+                    <!-- Lista -->
+                    <ListBox x:Name="listCiudades" Grid.Column="1" Margin="10" Height="200"
+                             Background="#f4f4f4" Foreground="Black" BorderBrush="#ccc"
+                             MouseDoubleClick="listCiudades_MouseDoubleClick"/>
+                </Grid>
+            </GroupBox>
+        </StackPanel>
+    </ScrollViewer>
+</UserControl>

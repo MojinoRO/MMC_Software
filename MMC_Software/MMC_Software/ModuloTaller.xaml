@@ -1,0 +1,85 @@
+﻿<Window x:Class="MMC_Software.ModuloTaller"
+            xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:local="clr-namespace:MMC_Software"
+    mc:Ignorable="d"
+    Title="Módulo de Inventarios" Height="450" Width="800"
+    WindowStartupLocation="CenterScreen"
+    WindowState="Maximized">
+
+    <Window.Resources>
+        <!-- Sombra general -->
+        <DropShadowEffect x:Key="CardShadow"
+                      BlurRadius="10"
+                      ShadowDepth="2"
+                      Opacity="0.15"
+                      Color="#000"/>
+    </Window.Resources>
+
+    <DockPanel>
+        <!-- Menú superior -->
+        <Menu DockPanel.Dock="Top" Background="#1e3a5f" Foreground="White" FontWeight="Bold">
+
+            <!-- Menú de opciones -->
+            <MenuItem  Header="Parámetros Básicos" FontSize="14">
+                <MenuItem Icon="" Background="#1e3a5f" Header="Tipo Vehiculo"
+                          Click="MenuItemTipoVehiculo_Click"/>
+                <MenuItem Icon="" Background="#1e3a5f" Header="Creacion de Terceros"
+                          Click="MenuItemTerceros_Click"/>
+                <MenuItem Icon="" Background="#1e3a5f" Header="Creacion Tecnicos"
+                          Click="MenuItemCrearTecnicos_Click"></MenuItem>
+                <MenuItem Icon="" Background="#1e3a5f" Header="Creacion Vehiculos"
+                          Click="MenuItemCrearVehiculos_Click"></MenuItem>
+            </MenuItem>
+
+            <Separator/>
+
+            <MenuItem Header="Movimientos Taller" FontSize="14">
+                <MenuItem  Background="#1e3a5f" Header="Orden De Compras"/>
+                <MenuItem Background="#1e3a5f" Header="Orden De Servicio"/>
+            </MenuItem>
+
+            <Separator/>
+
+            <MenuItem Header="Informes" FontSize="14">
+                <MenuItem Background="#1e3a5f" Header="Kardex"/>
+                <MenuItem Background="#1e3a5f" Header="Stock"/>
+            </MenuItem>
+
+            <Separator/>
+
+            <MenuItem Header="Utilitarios" FontSize="14">
+                <MenuItem Background="#1e3a5f" Header="Ajustes" />
+            </MenuItem>
+
+            <Separator/>
+
+            <!-- Espaciador con título -->
+            <MenuItem StaysOpenOnClick="True" Background="#1e3a5f" BorderThickness="0" IsEnabled="False">
+                <TextBlock Text="MÓDULO DE INVENTARIOS"
+                       FontSize="18"
+                       FontWeight="Bold"
+                       Foreground="White"
+                       HorizontalAlignment="Center"
+                       Padding="80,0,80,0"/>
+            </MenuItem>
+
+            <Separator/>
+        </Menu>
+
+        <!-- Área de pestañas -->
+        <TabControl x:Name="tabTaller"
+                BorderBrush="#ddd"
+                BorderThickness="1"
+                Margin="5"
+                Padding="10"
+                Effect="{StaticResource CardShadow}">
+            <TabControl.Background>
+                <ImageBrush ImageSource="/Background/MMC.png"></ImageBrush>
+            </TabControl.Background>
+            <!-- Aquí se abrirán las ventanas internas -->
+        </TabControl>
+    </DockPanel>
+</Window>

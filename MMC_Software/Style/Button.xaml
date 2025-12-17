@@ -1,0 +1,114 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+    <!-- ===========================
+         COLORES CORPORATIVOS MMC
+         =========================== -->
+    <Color x:Key="ColorCrear">#4A90E2</Color>
+    <Color x:Key="ColorModificar">#6C63FF</Color>
+    <Color x:Key="ColorGuardar">#2ECC71</Color>
+    <Color x:Key="ColorEliminar">#E74C3C</Color>
+    <Color x:Key="ColorCerrar">#34495E</Color>
+    <Color x:Key="ColorImprimir">#7D3C98</Color>
+
+    <!-- Brochas -->
+    <SolidColorBrush x:Key="BrushCrear" Color="{StaticResource ColorCrear}"/>
+    <SolidColorBrush x:Key="BrushModificar" Color="{StaticResource ColorModificar}"/>
+    <SolidColorBrush x:Key="BrushGuardar" Color="{StaticResource ColorGuardar}"/>
+    <SolidColorBrush x:Key="BrushEliminar" Color="{StaticResource ColorEliminar}"/>
+    <SolidColorBrush x:Key="BrushCerrar" Color="{StaticResource ColorCerrar}"/>
+    <SolidColorBrush x:Key="BrushImprimir" Color="{StaticResource ColorImprimir}"/>
+
+    <!-- ===========================
+         BOTÓN BASE EMPRESARIAL
+         =========================== -->
+    <Style x:Key="BotonBaseEmpresarial" TargetType="Button">
+        <Setter Property="Height" Value="32"/>
+        <Setter Property="Width" Value="36"/>
+        <Setter Property="Foreground" Value="White"/>
+        <Setter Property="FontFamily" Value="Segoe MDL2 Assets"/>
+        <Setter Property="FontSize" Value="16"/>
+        <Setter Property="FontWeight" Value="SemiBold"/>
+        <Setter Property="Margin" Value="3"/>
+        <Setter Property="Cursor" Value="Hand"/>
+        <Setter Property="ToolTipService.ShowDuration" Value="4000"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="Button">
+                    <Border x:Name="border"
+                            Background="{TemplateBinding Background}"
+                            CornerRadius="8">
+                        <ContentPresenter HorizontalAlignment="Center"
+                                          VerticalAlignment="Center"/>
+                    </Border>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter TargetName="border" Property="Opacity" Value="0.85"/>
+                        </Trigger>
+                        <Trigger Property="IsPressed" Value="True">
+                            <Setter TargetName="border" Property="Opacity" Value="0.70"/>
+                            <Setter TargetName="border" Property="RenderTransform">
+                                <Setter.Value>
+                                    <ScaleTransform ScaleX="0.96" ScaleY="0.96"/>
+                                </Setter.Value>
+                            </Setter>
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <!-- ===========================
+         BOTONES POR ACCIÓN
+         =========================== -->
+
+    <Style x:Key="BtnCrear" TargetType="Button" BasedOn="{StaticResource BotonBaseEmpresarial}">
+        <Setter Property="Background" Value="{StaticResource BrushCrear}"/>
+        <Setter Property="Content" Value="&#xE710;"/>
+        <Setter Property="ToolTip" Value="Crear nuevo registro"/>
+    </Style>
+
+    <Style x:Key="BtnModificar" TargetType="Button" BasedOn="{StaticResource BotonBaseEmpresarial}">
+        <Setter Property="Background" Value="{StaticResource BrushModificar}"/>
+        <Setter Property="Content" Value="&#xE70F;"/>
+        <Setter Property="ToolTip" Value="Modificar registro"/>
+    </Style>
+
+    <Style x:Key="BtnGuardar" TargetType="Button" BasedOn="{StaticResource BotonBaseEmpresarial}">
+        <Setter Property="Background" Value="{StaticResource BrushGuardar}"/>
+        <Setter Property="Content" Value="&#xE74E;"/>
+        <Setter Property="ToolTip" Value="Guardar cambios"/>
+    </Style>
+
+    <Style x:Key="BtnEliminar" TargetType="Button" BasedOn="{StaticResource BotonBaseEmpresarial}">
+        <Setter Property="Background" Value="{StaticResource BrushEliminar}"/>
+        <Setter Property="Content" Value="&#xE74D;"/>
+        <Setter Property="ToolTip" Value="Eliminar registro"/>
+    </Style>
+
+    <Style x:Key="BtnCerrar" TargetType="Button" BasedOn="{StaticResource BotonBaseEmpresarial}">
+        <Setter Property="Background" Value="{StaticResource BrushCerrar}"/>
+        <Setter Property="Content" Value="&#xE8BB;"/>
+        <Setter Property="ToolTip" Value="Salir"/>
+    </Style>
+
+    <Style x:Key="BtnImprimir" TargetType="Button" BasedOn="{StaticResource BotonBaseEmpresarial}">
+        <Setter Property="Background" Value="{StaticResource BrushImprimir}"/>
+        <Setter Property="Content" Value="&#xE749;"/>
+        <Setter Property="ToolTip" Value="Imprimir documento"/>
+    </Style>
+
+    <Style x:Key="BtnBuscar" TargetType="Button" BasedOn="{StaticResource BotonBaseEmpresarial}">
+        <Setter Property="Background" Value="{StaticResource BrushCrear}"/>
+        <Setter Property="Content" Value="&#xE721;"/>
+        <Setter Property="ToolTip" Value="Crear nuevo registro"/>
+    </Style>
+
+    <Style x:Key="BtnCrearEncabezado" TargetType="Button" BasedOn="{StaticResource BotonBaseEmpresarial}">
+        <Setter Property="Background" Value="{StaticResource BrushGuardar}"/>
+        <Setter Property="Content" Value="&#xE8FD;"/>
+        <Setter Property="ToolTip" Value="Guardar cambios"/>
+    </Style>
+    
+</ResourceDictionary>

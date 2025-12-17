@@ -1,0 +1,338 @@
+﻿<UserControl x:Class="MMC_Software.VentanaRegistroCompras"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:sys="clr-namespace:System;assembly=mscorlib"
+             mc:Ignorable="d"
+             d:DesignHeight="560" d:DesignWidth="900"
+             Background="#E8ECF3">
+
+    <UserControl.Resources>
+        <!-- === ESTILOS GLOBALES EMPRESARIALES === -->
+        <Style TargetType="TextBox">
+            <Setter Property="FontFamily" Value="Segoe UI"/>
+            <Setter Property="FontSize" Value="13"/>
+            <Setter Property="Foreground" Value="#2C3E50"/>
+            <Setter Property="BorderBrush" Value="#D0D3D4"/>
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="Padding" Value="2,1"/>
+            <Setter Property="Height" Value="24"/>
+        </Style>
+
+        <Style TargetType="ComboBox">
+            <Setter Property="FontFamily" Value="Segoe UI"/>
+            <Setter Property="FontSize" Value="13"/>
+            <Setter Property="Foreground" Value="#2C3E50"/>
+            <Setter Property="Background" Value="#FBFBFB"/>
+            <Setter Property="BorderBrush" Value="#D0D3D4"/>
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="Height" Value="24"/>
+        </Style>
+
+        <Style TargetType="TextBlock">
+            <Setter Property="FontFamily" Value="Segoe UI"/>
+            <Setter Property="Foreground" Value="#2C3E50"/>
+            <Setter Property="VerticalAlignment" Value="Center"/>
+        </Style>
+
+        <!-- Encabezado principal -->
+        <Style x:Key="HeaderTitulo" TargetType="TextBlock">
+            <Setter Property="FontFamily" Value="Segoe UI Semibold"/>
+            <Setter Property="FontSize" Value="18"/>
+            <Setter Property="Foreground" Value="#2C3E50"/>
+            <Setter Property="VerticalAlignment" Value="Center"/>
+        </Style>
+
+        <!-- Botón compacto -->
+        <Style TargetType="Button">
+            <Setter Property="FontFamily" Value="Segoe UI"/>
+            <Setter Property="FontSize" Value="13"/>
+            <Setter Property="FontWeight" Value="SemiBold"/>
+            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="BorderThickness" Value="0"/>
+            <Setter Property="Cursor" Value="Hand"/>
+            <Setter Property="Height" Value="28"/>
+            <Setter Property="Padding" Value="8,0"/>
+            <Setter Property="Margin" Value="2"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border Background="{TemplateBinding Background}" CornerRadius="6">
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+            <Style.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="Opacity" Value="0.85"/>
+                </Trigger>
+                <Trigger Property="IsPressed" Value="True">
+                    <Setter Property="Opacity" Value="0.7"/>
+                </Trigger>
+                <Trigger Property="IsEnabled" Value="False">
+                    <Setter Property="Opacity" Value="0.45"/>
+                    <Setter Property="Background" Value="#B0B7C3"/>
+                    <Setter Property="Foreground" Value="#E0E0E0"/>
+                    <Setter Property="Cursor" Value="No"/>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+
+    </UserControl.Resources>
+
+    <Grid Margin="10">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="113*"/>
+            <ColumnDefinition Width="767*"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+
+        <!-- ==============================
+             ENCABEZADO EMPRESARIAL
+        =============================== -->
+        <Border Grid.Row="0"
+                CornerRadius="8"
+                BorderBrush="#D0D3D4"
+                BorderThickness="1"
+                Background="#E8ECF3"
+                Padding="10"
+                Margin="0,0,0,6" Grid.ColumnSpan="2"
+                >
+
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+
+                <!-- TÍTULO -->
+                <StackPanel Grid.Row="0" Orientation="Horizontal" VerticalAlignment="Center" Margin="0,0,0,6">
+                    <Border Width="38" Height="38" Background="#4A90E2" CornerRadius="6" Margin="0,0,8,0">
+                        <TextBlock Text="📦" FontSize="22" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                    </Border>
+                    <TextBlock Text="Registro de Compras" Style="{StaticResource HeaderTitulo}"/>
+                </StackPanel>
+
+                <!-- FILA 1 -->
+                <Grid Grid.Row="1" Margin="0,0,0,4">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="1.4*"/>
+                        <ColumnDefinition Width="0.8*"/>
+                        <ColumnDefinition Width="1.2*"/>
+                        <ColumnDefinition Width="1.1*"/>
+                    </Grid.ColumnDefinitions>
+
+                    <StackPanel Orientation="Horizontal" Margin="4,0" Grid.Column="0">
+                        <TextBlock Text="Documento:" FontWeight="Bold" FontSize="13" Width="85"/>
+                        <TextBox x:Name="TxtDocumento" Width="40" MaxLength="4" CharacterCasing="Upper" KeyDown="TxtDocumento_KeyDown"/>
+                        <TextBox x:Name="TxtNombreDocto" Width="200" Margin="4,0,0,0" IsEnabled="False" IsReadOnly="True"/>
+                    </StackPanel>
+
+                    <StackPanel Orientation="Horizontal" Margin="4,0" Grid.Column="1">
+                        <TextBlock Text="N° Interno:" FontWeight="Bold" Width="75"/>
+                        <TextBox x:Name="txtNumeroDocumento" Width="70" KeyDown="txtNumeroDocumento_KeyDown" IsReadOnly="True"/>
+                    </StackPanel>
+
+                    <StackPanel Orientation="Horizontal" Margin="4,0" Grid.Column="2">
+                        <TextBlock Text="Factura:" FontWeight="Bold" Width="60"/>
+                        <TextBox x:Name="txtNumeroFactura" Width="80" CharacterCasing="Upper" KeyDown="txtNumeroFactura_KeyDown"/>
+                    </StackPanel>
+
+                    <StackPanel Orientation="Horizontal" Margin="4,0" Grid.Column="3">
+                        <TextBlock Text="Fecha:" FontWeight="Bold" Width="50"/>
+                        <DatePicker x:Name="dpFecha" Width="120" SelectedDate="{x:Static sys:DateTime.Now}" LostFocus="dpFecha_LostFocus"
+                                    Height="29" KeyDown="dpFecha_KeyDown" FontSize="16"/>
+                    </StackPanel>
+                </Grid>
+
+                <!-- FILA 2 -->
+                <Grid Grid.Row="2" Margin="0,0,0,4">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="1.2*"/>
+                        <ColumnDefinition Width="2.8*"/>
+                    </Grid.ColumnDefinitions>
+
+                    <StackPanel Orientation="Horizontal" Margin="4,0" Grid.Column="0">
+                        <TextBlock Text="Digitador:" FontWeight="Bold" Width="80"/>
+                        <ComboBox x:Name="cbxDigitador" Width="200"/>
+                    </StackPanel>
+
+                    <StackPanel Orientation="Horizontal" Margin="4,0" Grid.Column="1">
+                        <TextBlock Text="Proveedor:" FontWeight="Bold" Width="75"/>
+                        <TextBox x:Name="txtProveedor" Width="300" KeyDown="txtProveedor_KeyDown"/>
+                        <Button x:Name="btnBuscarProveedor" Content="🔍" Width="26" Background="#4A90E2"
+                                Click="btnBuscarProveedor_Click"/>
+                    </StackPanel>
+                </Grid>
+
+                <!-- FILA 3 -->
+                <StackPanel Grid.Row="3" Orientation="Horizontal" Margin="4,0,0,0">
+                    <TextBlock Text="Observaciones:" FontWeight="Bold" Width="100"/>
+                    <TextBox x:Name="txtObservaciones" Width="500" KeyDown="txtObservaciones_KeyDown"/>
+                    <Button x:Name="btnCrearCompra" Content="➕ Crear" Width="80" Background="#4A90E2"
+                            Click="btnCrearCompra_Click" Margin="10,0,0,0"/>
+                </StackPanel>
+            </Grid>
+        </Border>
+
+        <!-- ==============================
+             SECCIÓN PRODUCTOS
+        =============================== -->
+        <Border Grid.Row="1" CornerRadius="8" BorderBrush="#BDC3C7" BorderThickness="1" Background="White" Padding="10" Margin="0,0,0,6" Grid.ColumnSpan="2">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="8"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+
+                <!-- DATAGRID -->
+                <DataGrid x:Name="dgProductos" 
+                          ItemsSource="{Binding Articulos, RelativeSource={RelativeSource AncestorType=UserControl}}"
+                          AutoGenerateColumns="False"
+                          CanUserAddRows="False"
+                          CanUserDeleteRows="True"
+                          SelectionUnit="Cell"
+                          IsReadOnly="False"
+                          IsEnabled="False" 
+                          Background="#FAFAFA"
+                          BorderBrush="#BDC3C7"
+                          BorderThickness="1"
+                          RowHeight="25"
+                          FontSize="13"
+                          AlternatingRowBackground="#F2F4F4"
+                          HorizontalGridLinesBrush="#E5E8E8"
+                          VerticalGridLinesBrush="#E5E8E8"
+                          PreviewKeyDown="dgProductos_PreviewKeyDown"
+                          ScrollViewer.CanContentScroll="True"
+                          ScrollViewer.VerticalScrollBarVisibility="Auto"
+                          ScrollViewer.HorizontalScrollBarVisibility="Disabled"
+                          MaxHeight="220">
+                    <DataGrid.ColumnHeaderStyle>
+                        <Style TargetType="DataGridColumnHeader">
+                            <Setter Property="Background" Value="#EAECEE"/>
+                            <Setter Property="FontWeight" Value="Bold"/>
+                            <Setter Property="FontSize" Value="13"/>
+                            <Setter Property="HorizontalContentAlignment" Value="Center"/>
+                        </Style>
+                    </DataGrid.ColumnHeaderStyle>
+                    <DataGrid.Resources>
+                        <!-- Quitar el fondo azul cuando está seleccionada -->
+                        <SolidColorBrush x:Key="{x:Static SystemColors.HighlightBrushKey}" 
+                         Color="Transparent"/>
+                        <SolidColorBrush x:Key="{x:Static SystemColors.HighlightTextBrushKey}" 
+                         Color="Black"/>
+
+                        <!-- Quitar el fondo azul cuando pierde el foco -->
+                        <SolidColorBrush x:Key="{x:Static SystemColors.InactiveSelectionHighlightBrushKey}" 
+                         Color="Transparent"/>
+                        <SolidColorBrush x:Key="{x:Static SystemColors.InactiveSelectionHighlightTextBrushKey}" 
+                         Color="Black"/>
+                    </DataGrid.Resources>
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Header="#" Width="20" Binding="{Binding Items,UpdateSourceTrigger=PropertyChanged }" IsReadOnly="True"/>
+                        <DataGridTextColumn Header="Código" Width="60" Binding="{Binding CodigoArticulo, UpdateSourceTrigger=PropertyChanged}"/>
+                        <DataGridTextColumn Header="Descripción" Width="300" Binding="{Binding NombreArticulo, UpdateSourceTrigger=PropertyChanged}" IsReadOnly="True"/>
+                        <DataGridTextColumn Header="Almacén" Width="60" Binding="{Binding CodigoAlmacen}" IsReadOnly="True"/>
+                        <DataGridTextColumn Header="Cantidad" Width="70" Binding="{Binding Cantidad, UpdateSourceTrigger=PropertyChanged , Mode=TwoWay}"/>
+                        <DataGridTextColumn Header="IVA" Width="50" Binding="{Binding IvaCompra}" IsReadOnly="True"/>
+                        <DataGridTextColumn Header="Costo s/IVA" Width="100" Binding="{Binding CostoSinIva,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"/>
+                        <DataGridTextColumn Header="Costo c/IVA" Width="100" Binding="{Binding CostoConIVA,Mode=TwoWay , UpdateSourceTrigger=PropertyChanged}"/>
+                        <DataGridTextColumn Header="Total s/IVA" Width="115" Binding="{Binding TotalSinIVA,UpdateSourceTrigger=PropertyChanged}" IsReadOnly="True"/>
+                        <DataGridTextColumn Header="Total c/IVA" Width="115" Binding="{Binding TotalConIVA, UpdateSourceTrigger=PropertyChanged}" IsReadOnly="True"/>
+                    </DataGrid.Columns>
+                </DataGrid>
+            </Grid>
+        </Border>
+
+        <!-- ==============================
+             TOTALES + BOTONES CRUD
+        =============================== -->
+        <Grid Grid.Row="2" Margin="0,5,0,0" Grid.ColumnSpan="2">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="280"/>
+            </Grid.ColumnDefinitions>
+
+            <!-- BLOQUE DE TOTALES -->
+            <Border Grid.Column="0" Background="White" BorderBrush="#BDC3C7" BorderThickness="1"
+                    CornerRadius="6" Padding="5" Margin="0,0,8,0">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="1.5*"/>
+                        <ColumnDefinition Width="1.5*"/>
+                    </Grid.ColumnDefinitions>
+
+                    <!-- BASES -->
+                    <StackPanel Grid.Column="0" Margin="0,0,20,0">
+                        <TextBlock Text="Bases / IVA" FontWeight="Bold" Margin="0,0,0,5" Foreground="#34495E"/>
+                        <StackPanel Orientation="Horizontal" Margin="0,2">
+                            <TextBlock Text="Base 19%:" Width="90"/>
+                            <TextBox x:Name="txtBase19" Width="110" TextAlignment="Right"  IsReadOnly="True"/>
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal" Margin="0,2">
+                            <TextBlock Text="Base 5%:" Width="90"/>
+                            <TextBox x:Name="txtBase5" Width="110" TextAlignment="Right" Text="$ 0.00" IsReadOnly="True"/>
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal" Margin="0,2">
+                            <TextBlock Text="Exento:" Width="90"/>
+                            <TextBox x:Name="txtExento" Width="110" TextAlignment="Right" Text="$ 0.00" IsReadOnly="True"/>
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal" Margin="0,5,0,0">
+                            <TextBlock Text="Sub Total:" Width="90" FontWeight="Bold"/>
+                            <TextBox x:Name="txtSubTotal" Width="110" TextAlignment="Right" FontWeight="Bold" Text="$ 0.00" IsReadOnly="True"/>
+                        </StackPanel>
+                    </StackPanel>
+
+                    <!-- IMPUESTOS -->
+                    <StackPanel Grid.Column="1">
+                        <TextBlock Text="Impuestos / Totales" FontWeight="Bold" Margin="0,0,0,5" Foreground="#34495E"/>
+                        <StackPanel Orientation="Horizontal" Margin="0,2">
+                            <TextBlock Text="IVA 19%:" Width="80"/>
+                            <TextBox x:Name="txtIVA19" Width="100" TextAlignment="Right" Text="$ 0.00" IsReadOnly="True"/>
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal" Margin="0,2">
+                            <TextBlock Text="IVA 5%:" Width="80"/>
+                            <TextBox x:Name="txtIVA5" Width="100" TextAlignment="Right" Text="$ 0.00" IsReadOnly="True"/>
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal" Margin="0,2">
+                            <TextBlock Text="ReteFuente:" Width="80"/>
+                            <TextBox x:Name="txtReteFuente" Width="100" TextAlignment="Right" Text="$ 0.00" IsReadOnly="True"/>
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal" Margin="0,5,0,0">
+                            <TextBlock Text="Total Iva:" Width="80" FontWeight="Bold"/>
+                            <TextBox x:Name="txtTotalGeneralIVA" Width="100" TextAlignment="Right" FontWeight="Bold" IsReadOnly="True"/>
+                        </StackPanel>
+                    </StackPanel>
+                </Grid>
+            </Border>
+
+            <!-- BOTONES CRUD + TOTAL COMPRA -->
+            <StackPanel Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="0,0,4,0">
+                <Border Background="#4A90E2" CornerRadius="8" Padding="6" Margin="0,0,0,8">
+                    <TextBlock Text="TOTAL COMPRA" Foreground="White" FontSize="16" FontWeight="Bold" TextAlignment="Center"/>
+                </Border>
+                <TextBox x:Name="txtTotalCompra" Width="250" Height="35" IsReadOnly="True"
+                         FontSize="25" FontWeight="Bold" TextAlignment="Right" Foreground="#2C3E50" Background="#FBFBFB"/>
+
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Margin="10,8,0,0">
+                    <Button x:Name="btnNuevo" Content="➕" Width="40" Height="40" Background="#4A90E2" Click="btnNuevo_Click"/>
+                    <Button x:Name="btnGuardar" Content="💾" Width="40" Height="40" Background="#2ECC71" Click="btnGuardar_Click"/>
+                    <Button x:Name="btnEditar" Content="✏️" Width="40" Height="40" Background="#6C63FF"/>
+                    <Button x:Name="btnEliminar" Content="🗑️" Width="40" Height="40" Background="#E74C3C"/>
+                    <Button x:Name="btnCerrar" Content="🚪" Width="40" Height="40" Background="#34495E" Click="BtnCerrar_Click"/>
+                </StackPanel>
+            </StackPanel>
+        </Grid>
+    </Grid>
+</UserControl>
+
+    

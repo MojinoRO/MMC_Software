@@ -1,0 +1,88 @@
+﻿<UserControl x:Class="MMC_Software.VentanaListaPrecios"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:MMC_Software"
+        mc:Ignorable="d"
+        Height="450" Width="800">
+
+    <UserControl.Resources>
+        <!-- Estilo base para todos los botones CRUD -->
+        <Style x:Key="CrudButtonStyle" TargetType="Button">
+            <Setter Property="Width" Value="38"/>
+            <Setter Property="Height" Value="38"/>
+            <Setter Property="Margin" Value="5"/>
+            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="FontWeight" Value="Bold"/>
+            <Setter Property="Cursor" Value="Hand"/>
+            <Setter Property="BorderThickness" Value="0"/>
+            <Setter Property="FontSize" Value="16"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border Background="{TemplateBinding Background}" CornerRadius="20">
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter Property="Opacity" Value="0.85"/>
+                            </Trigger>
+                            <Trigger Property="IsPressed" Value="True">
+                                <Setter Property="Opacity" Value="0.7"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <!-- Colores corporativos -->
+        <SolidColorBrush x:Key="ColorCrear" Color="#4A90E2"/>
+        <SolidColorBrush x:Key="ColorEditar" Color="#6C63FF"/>
+        <SolidColorBrush x:Key="ColorGuardar" Color="#2ECC71"/>
+        <SolidColorBrush x:Key="ColorEliminar" Color="#E74C3C"/>
+        <SolidColorBrush x:Key="ColorNeutro" Color="#34495E"/>
+    </UserControl.Resources>
+
+    <Grid Margin="15">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="2.2*"/>
+            <ColumnDefinition Width="2.8*"/>
+        </Grid.ColumnDefinitions>
+
+        <!-- Panel de formulario -->
+        <Border Grid.Column="0" Background="#34495E" CornerRadius="10" Padding="15" Margin="0,0,10,0"
+                BorderBrush="#DADADA" BorderThickness="1">
+            <StackPanel VerticalAlignment="Top">
+
+                <TextBlock Text="Código Lista:" FontWeight="Bold" Margin="0,0,0,5" Foreground="White"/>
+                <TextBox  Height="25" x:Name="txtCodigoLista" MaxLength="3" Margin="0,0,0,10" Width="30" HorizontalAlignment="Left" PreviewTextInput="txtCodigoLista_PreviewTextInput"/>
+
+                <TextBlock Text="Nombre Lista de Precios:" FontWeight="Bold" Margin="0,0,0,5" Foreground="White"/>
+                <TextBox Height="25" x:Name="txtNombreLista" MaxLength="50" Margin="0,0,0,10" CharacterCasing="Upper"/>
+
+                <!-- Botones empresariales -->
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
+                    <Button x:Name="btnCrear" Content="➕" Background="{StaticResource ColorCrear}" Style="{StaticResource CrudButtonStyle}" ToolTip="Nuevo" Click="btnCrear_Click"/>
+                    <Button x:Name="btnEditar" Content="✏️" Background="{StaticResource ColorEditar}" Style="{StaticResource CrudButtonStyle}" ToolTip="Editar" Click="btnEditar_Click"/>
+                    <Button x:Name="btnEliminar" Content="🗑️" Background="{StaticResource ColorEliminar}" Style="{StaticResource CrudButtonStyle}" ToolTip="Eliminar" Click="btnEliminar_Click"/>
+                    <Button x:Name="btnGuardar" Content="💾" Background="{StaticResource ColorGuardar}" Style="{StaticResource CrudButtonStyle}" ToolTip="Guardar" Click="btnGuardar_Click"/>
+                    <Button x:Name="btnSalir" Content="Salir" Background="{StaticResource ColorEliminar}" Style="{StaticResource CrudButtonStyle}" ToolTip="Guardar"
+                            Click="btnSalir_Click"/>
+                </StackPanel>
+            </StackPanel>
+        </Border>
+
+        <!-- Lista de precios registradas -->
+        <Border Grid.Column="1" Background="#34495E" CornerRadius="10" Padding="15"
+                BorderBrush="#DADADA" BorderThickness="1">
+            <DockPanel LastChildFill="True">
+                <TextBlock Text="Listas de Precios Registradas" FontSize="16" FontWeight="Bold" Foreground="White"
+                           Margin="0,0,0,10" DockPanel.Dock="Top"/>
+                <ListBox x:Name="lstListaPrecios" DisplayMemberPath="NombreListaPrecios" MouseDoubleClick="lstListaPrecios_MouseDoubleClick"/>
+            </DockPanel>
+        </Border>
+    </Grid>
+
+</UserControl>

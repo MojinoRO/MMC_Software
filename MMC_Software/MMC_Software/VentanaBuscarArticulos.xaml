@@ -1,0 +1,195 @@
+﻿<Window x:Class="MMC_Software.VentanaBuscarArticulos"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:MMC_Software"
+        mc:Ignorable="d"
+        Title="Buscar Artículos"
+        Height="520" Width="900"
+        WindowStartupLocation="CenterScreen"
+        Background="#E9EEF4"
+        FontFamily="Segoe UI">
+
+    <Grid Margin="20">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="10*"/>
+            <ColumnDefinition Width="11*"/>
+            <ColumnDefinition Width="409*"/>
+        </Grid.ColumnDefinitions>
+        <!-- Tarjeta principal -->
+        <Border CornerRadius="12"
+                Background="White"
+                BorderBrush="#D0D7DE"
+                BorderThickness="1"
+                SnapsToDevicePixels="True" Grid.ColumnSpan="3">
+            <Border.Effect>
+                <DropShadowEffect Color="#000000" BlurRadius="20" ShadowDepth="3" Opacity="0.25"/>
+            </Border.Effect>
+
+            <Grid Margin="25">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+
+                <!-- ENCABEZADO -->
+                <Border Background="#4A90E2"
+                        CornerRadius="8"
+                        Padding="12,10"
+                        Margin="0,0,0,20">
+                    <TextBlock Text="Buscar Artículos"
+                               Foreground="White"
+                               FontSize="20"
+                               FontWeight="SemiBold"
+                               VerticalAlignment="Center"/>
+                </Border>
+
+                <!-- BÚSQUEDA -->
+                <StackPanel Grid.Row="1" Orientation="Horizontal" Margin="0,0,0,15">
+                    <Border Background="#FFFFFF"
+                            CornerRadius="8"
+                            BorderBrush="#D0D7DE"
+                            BorderThickness="1"
+                            Height="42"
+                            Width="360"
+                            VerticalAlignment="Center">
+                        <DockPanel>
+                            <TextBox x:Name="txtBuscar"
+                                     Margin="10,0,6,0"
+                                     VerticalContentAlignment="Center"
+                                     FontSize="14"
+                                     Background="Transparent"
+                                     BorderThickness="0"
+                                     Foreground="#2C3E50"
+                                     Padding="5,0"
+                                     KeyDown="txtBuscar_KeyDown"
+                                     ToolTip="Buscar por código, nombre o marca..." />
+                        </DockPanel>
+                    </Border>
+
+                    <!-- Contador de resultados (opcional visual) -->
+                    <TextBlock x:Name="txtTotal"
+                               Margin="15,0,0,0"
+                               VerticalAlignment="Center"
+                               FontSize="13"
+                               Foreground="#555"
+                               Text=""/>
+                </StackPanel>
+
+                <!-- DATAGRID -->
+                <Border Grid.Row="2"
+                        CornerRadius="8"
+                        BorderBrush="#D0D7DE"
+                        BorderThickness="1"
+                        Background="#FDFDFD"
+                        Padding="5">
+                    <DataGrid x:Name="dgArticulos"
+                              AutoGenerateColumns="False"
+                              CanUserAddRows="False"
+                              IsReadOnly="True"
+                              RowHeight="32"
+                              GridLinesVisibility="Horizontal"
+                              HeadersVisibility="Column"
+                              SelectionMode="Single"
+                              AlternatingRowBackground="#F4F6F8"
+                              VerticalScrollBarVisibility="Auto"
+                              HorizontalScrollBarVisibility="Auto"
+                              FontSize="14"
+                              BorderThickness="0"
+                              FontFamily="Segoe UI"
+                              PreviewKeyDown="dgArticulos_PreviewKeyDown"
+                              MouseDoubleClick="dgArticulos_MouseDoubleClick">
+
+                        <DataGrid.Resources>
+                            <!-- Encabezados -->
+                            <Style TargetType="DataGridColumnHeader">
+                                <Setter Property="Background" Value="#4A90E2"/>
+                                <Setter Property="Foreground" Value="White"/>
+                                <Setter Property="FontWeight" Value="SemiBold"/>
+                                <Setter Property="FontSize" Value="13"/>
+                                <Setter Property="Padding" Value="6"/>
+                                <Setter Property="HorizontalContentAlignment" Value="Center"/>
+                            </Style>
+
+                            <!-- Filas -->
+                            <Style TargetType="DataGridRow">
+                                <Setter Property="Cursor" Value="Hand"/>
+                                <Setter Property="Background" Value="White"/>
+                                <Style.Triggers>
+                                    <Trigger Property="IsMouseOver" Value="True">
+                                        <Setter Property="Background" Value="#EAF2FF"/>
+                                    </Trigger>
+                                    <Trigger Property="IsSelected" Value="True">
+                                        <Setter Property="Background" Value="#D6E4FF"/>
+                                    </Trigger>
+                                </Style.Triggers>
+                            </Style>
+                        </DataGrid.Resources>
+
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Header="Código" Binding="{Binding Codigo}" Width="100"/>
+                            <DataGridTextColumn Header="Nombre" Binding="{Binding Nombre}" Width="*"/>
+                            <DataGridTextColumn Header="Marca" Binding="{Binding Marca}" Width="120"/>
+                            <DataGridTextColumn Header="IVA" Binding="{Binding TarifaIVA}" Width="60"/>
+                            <DataGridTextColumn Header="Valor Venta" Binding="{Binding ValorVenta, StringFormat=C}" Width="120"/>
+                            <DataGridTextColumn Header="Saldo" Binding="{Binding Saldo,Mode=OneWay}" Width="80"/>
+                        </DataGrid.Columns>
+                    </DataGrid>
+                </Border>
+
+                <!-- PIE -->
+                <Grid Grid.Row="3" Margin="0,20,0,0">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="Auto"/>
+                    </Grid.ColumnDefinitions>
+
+                    <TextBlock Text="Doble clic en un artículo para seleccionarlo"
+                               FontSize="12"
+                               Foreground="#555"
+                               VerticalAlignment="Center"/>
+
+                    <Button x:Name="btnSeleccionar"
+                            Grid.Column="1"
+                            Content="Seleccionar"
+                            Width="140"
+                            Height="38"
+                            Margin="10,0,0,0"
+                            FontWeight="SemiBold"
+                            Cursor="Hand"
+                            Foreground="White"
+                            ToolTip="Seleccionar el artículo marcado"
+                            BorderThickness="0">
+                        <Button.Background>
+                            <SolidColorBrush Color="#4A90E2"/>
+                        </Button.Background>
+                        <Button.Style>
+                            <Style TargetType="Button">
+                                <Setter Property="Template">
+                                    <Setter.Value>
+                                        <ControlTemplate TargetType="Button">
+                                            <Border CornerRadius="8" Background="{TemplateBinding Background}">
+                                                <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                            </Border>
+                                            <ControlTemplate.Triggers>
+                                                <Trigger Property="IsMouseOver" Value="True">
+                                                    <Setter Property="Opacity" Value="0.9"/>
+                                                </Trigger>
+                                                <Trigger Property="IsPressed" Value="True">
+                                                    <Setter Property="Opacity" Value="0.75"/>
+                                                </Trigger>
+                                            </ControlTemplate.Triggers>
+                                        </ControlTemplate>
+                                    </Setter.Value>
+                                </Setter>
+                            </Style>
+                        </Button.Style>
+                    </Button>
+                </Grid>
+            </Grid>
+        </Border>
+    </Grid>
+</Window>

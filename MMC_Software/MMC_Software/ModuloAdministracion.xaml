@@ -1,0 +1,137 @@
+﻿<Window x:Class="MMC_Software.ModuloAdministracion"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:MMC_Software"
+        mc:Ignorable="d"
+        Title="Módulo de Administración"
+        WindowStartupLocation="CenterScreen"
+        WindowState="Maximized">
+
+    <Window.Resources>
+        <!-- Sombra general -->
+        <DropShadowEffect x:Key="CardShadow"
+                          BlurRadius="10"
+                          ShadowDepth="2"
+                          Opacity="0.15"
+                          Color="Black"/>
+
+        <!-- Estilo de botones laterales -->
+        <Style x:Key="SideMenuButton" TargetType="Button">
+            <Setter Property="Background" Value="Transparent"/>
+            <Setter Property="Foreground" Value="#2b3e5c"/>
+            <Setter Property="FontWeight" Value="SemiBold"/>
+            <Setter Property="Margin" Value="0,3,0,3"/>
+            <Setter Property="HorizontalContentAlignment" Value="Left"/>
+            <Setter Property="Cursor" Value="Hand"/>
+            <Setter Property="BorderThickness" Value="0"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border Background="{TemplateBinding Background}">
+                            <ContentPresenter VerticalAlignment="Center" Margin="10,0"/>
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+            <Style.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="Background" Value="#dbe4f0"/>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+    </Window.Resources>
+
+    <!-- Estructura principal -->
+    <DockPanel >
+        <!-- Fondo de imagen -->
+        <DockPanel.Background>
+            <ImageBrush ImageSource="/MMC_Software;component/Background/MMC.png"
+                        Opacity="0.06" />
+        </DockPanel.Background>
+
+        <!-- Encabezado superior -->
+        <Border DockPanel.Dock="Top" Background="#1e3a5f" Padding="12">
+            <TextBlock Text="Configuración Basica  ⚙️"
+                       Foreground="White"
+                       FontSize="20"
+                       FontWeight="Bold"
+                       VerticalAlignment="Center"/>
+        </Border>
+
+        <!-- Panel lateral -->
+        <StackPanel DockPanel.Dock="Left"
+                    Width="260"
+                    Background="#f0f3f7"
+                    Effect="{StaticResource CardShadow}"
+                    Margin="0,0,4,0">
+
+            <!-- Parámetros Básicos -->
+            <Expander Header="⚙️ Parámetros Básicos" IsExpanded="True"
+                      Background="#e8eef7" FontWeight="Bold" Margin="0,5,0,10">
+                <StackPanel>
+                    <Button Style="{StaticResource SideMenuButton}" Content="Datos Empresa"
+                            Click="MenuDatosEmpresa_Click"/>
+                    <Button Style="{StaticResource SideMenuButton}" Content="Centro de Costos / Subcentros" 
+                            Click="ButtonAbreSCC_Click"/>
+                    <Button Style="{StaticResource SideMenuButton}" Content="País / Departamentos / Ciudades" 
+                            Click="ButtonDepCiudad_Click"/>
+                    <Button Style="{StaticResource SideMenuButton}" Content="Formas y Medios de Pago"
+                            Click="ButtonCrearFormaPago_Click"/>
+                    <Button Style="{StaticResource SideMenuButton}" Content="Documentos"
+                            Click="ButtonCrearDocto_Click"/>
+                    <Button Style="{StaticResource SideMenuButton}" Content="Resoluciones"/>
+                    <Button Style="{StaticResource SideMenuButton}" Content="Vendedores"
+                            Click="ButtonCrearVendedores_Click"/>
+                    <Button Style="{StaticResource SideMenuButton}" Content="Usuarios"
+                            Click="ButtonCrearUsuarios_Click"/>
+                    <Button Style="{StaticResource SideMenuButton}" Content="Sistema de Claves"
+                            Click="ButtonCrearClaves_Click"/>
+                </StackPanel>
+            </Expander>
+
+            <!-- Parámetros Inventarios -->
+            <Expander Header="📦 Parámetros de Inventarios" Background="#e8eef7" FontWeight="Bold" Margin="0,5,0,10">
+                <StackPanel>
+                    <Button Style="{StaticResource SideMenuButton}" Content="Almacenes"
+                            Click="ButtonCrearAlmacen_Click"/>
+                    <Button Style="{StaticResource SideMenuButton}" Content="Categorías de Productos"
+                            Click="ButtonCrearCategorias_Click"/>
+                    <Button Style="{StaticResource SideMenuButton}" Content="Subcategorías"
+                            Click="ButtonCrearSubCat_Click"/>
+                    <Button Style="{StaticResource SideMenuButton}" Content="Marcas"
+                            Click="ButtonCrearMarcas_Click"/>
+                    <Button Style="{StaticResource SideMenuButton}" Content="Lista de Precios"
+                            Click="ButtonCrearListadoPrecios_Click"/>
+                </StackPanel>
+            </Expander>
+
+            <!-- Parámetros Contables -->
+            <Expander Header="📊 Parámetros Contables" Background="#e8eef7" FontWeight="Bold">
+                <StackPanel>
+                    <Button Style="{StaticResource SideMenuButton}" Content="Cuentas PUC"
+                            Click="ButtonCrearCuentasPuc_Click"/>
+                    <Button Style="{StaticResource SideMenuButton}" Content="Parámetros Informe IVA"/>
+                    <Button Style="{StaticResource SideMenuButton}" Content="Bases Retenciones Compras/Ventas"/>
+                    <Button Style="{StaticResource SideMenuButton}" Content="Exógena"/>
+                    <Button Style="{StaticResource SideMenuButton}" Content="Anticipos"/>
+                </StackPanel>
+            </Expander>
+        </StackPanel>
+
+        <!-- Contenido central -->
+        <Grid>
+            <TabControl x:Name="tabAdministracion"
+                        Margin="16"
+                        Padding="8"
+                        BorderBrush="#ddd"
+                        BorderThickness="1"
+                        Effect="{StaticResource CardShadow}"
+                        FontFamily="Tahoma"
+                        FontWeight="SemiBold"
+                        Background="#e8eef7">
+            </TabControl>
+        </Grid>
+    </DockPanel>
+</Window>

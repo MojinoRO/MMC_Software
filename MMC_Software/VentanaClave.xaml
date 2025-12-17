@@ -1,0 +1,49 @@
+﻿<Window x:Class="MMC_Software.VentanaClave"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Autorización"
+        Height="180" Width="280"
+        WindowStartupLocation="CenterScreen"
+        ResizeMode="NoResize"
+        Background="#2C3E50">
+
+    <Grid Margin="10">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+
+        <TextBlock Text="Ingrese clave"
+                   Foreground="White"
+                   FontWeight="Bold"
+                   FontSize="16"
+                   HorizontalAlignment="Center"
+                   Margin="0,0,0,10"/>
+
+        <PasswordBox x:Name="TxtClave"
+                     Grid.Row="1"
+                     Width="200"
+                     Height="30"
+                     FontSize="14"
+                     HorizontalAlignment="Center"
+                     Margin="0,0,0,10"
+                     Padding="5" HorizontalContentAlignment="Center"
+                     KeyDown="TxtClave_KeyDown"/>
+
+        <StackPanel Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Center">
+            <Button x:Name="BtnAceptar"
+                    Content="Aceptar"
+                    Width="90"
+                    Height="30"
+                    Margin="5"
+                    Click="BtnAceptar_Click"/>
+            <Button x:Name="BtnCancelar"
+                    Content="Cancelar"
+                    Width="90"
+                    Height="30"
+                    Margin="5"
+                    Click="BtnCancelar_Click"/>
+        </StackPanel>
+    </Grid>
+</Window>

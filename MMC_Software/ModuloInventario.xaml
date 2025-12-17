@@ -1,0 +1,350 @@
+﻿<Window x:Class="MMC_Software.ModuloInventario"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        mc:Ignorable="d"
+        Title="Módulo de Inventarios"
+        WindowStartupLocation="CenterScreen"
+        WindowState="Maximized"
+        Background="#F7F9FC">
+
+    <!-- ==================== RECURSOS Y ESTILOS ==================== -->
+    <Window.Resources>
+
+        <!-- SOMBRA DE TARJETAS -->
+        <DropShadowEffect x:Key="CardShadow"
+                          BlurRadius="12"
+                          ShadowDepth="2"
+                          Opacity="0.20"
+                          Color="Black"/>
+
+        <!-- Estilo menú lateral (Botones) -->
+        <Style x:Key="SideMenuButton" TargetType="Button">
+            <Setter Property="Foreground" Value="#2B3E5C"/>
+            <Setter Property="Background" Value="Transparent"/>
+            <Setter Property="FontWeight" Value="SemiBold"/>
+            <Setter Property="Padding" Value="10,5"/>
+            <Setter Property="HorizontalContentAlignment" Value="Left"/>
+            <Setter Property="Cursor" Value="Hand"/>
+            <Setter Property="BorderThickness" Value="0"/>
+            <Setter Property="FontFamily" Value="Segoe UI"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border Background="{TemplateBinding Background}">
+                            <ContentPresenter Content="{TemplateBinding Content}" VerticalAlignment="Center" Margin="10,0"/>
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+            <Style.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="Background" Value="#DBE4F0"/>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+
+        <!-- ESTILO GLOBAL BOTONES DE ENCABEZADO y la perra animacion esa -->
+        <Style x:Key="HeaderButtonStyle" TargetType="Button">
+
+            <!-- PROPIEDADES ORIGINALES -->
+            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="BorderThickness" Value="0"/>
+            <Setter Property="Padding" Value="12 8"/>
+            <Setter Property="FontFamily" Value="Segoe UI"/>
+            <Setter Property="FontSize" Value="16"/>
+            <Setter Property="Cursor" Value="Hand"/>
+            <Setter Property="MinWidth" Value="140"/>
+            
+
+            <!-- ACERCAMIENTO -->
+            <Setter Property="RenderTransformOrigin" Value="0.5,0.5"/>
+            <Setter Property="RenderTransform">
+                <Setter.Value>
+                    <ScaleTransform ScaleX="1" ScaleY="1"/>
+                </Setter.Value>
+            </Setter>
+
+            <!-- SOMBRA DEFAULT -->
+            <Setter Property="Effect">
+                <Setter.Value>
+                    <DropShadowEffect BlurRadius="10" ShadowDepth="2" Opacity="0.4"/>
+                </Setter.Value>
+            </Setter>
+
+            <!-- TEMPLATE DEFAULT -->
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border x:Name="Bg"
+                            Background="{TemplateBinding Background}"
+                            CornerRadius="12">
+                            <ContentPresenter HorizontalAlignment="Center"
+                                      VerticalAlignment="Center"/>
+                        </Border>
+
+                        <ControlTemplate.Triggers>
+
+                            <!-- EL HOVER ORIGINAL, EL QUE HABIA (OPACIDAD) -->
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter TargetName="Bg" Property="Opacity" Value="0.85"/>
+                            </Trigger>
+
+                            <!-- EL PRESSED -->
+                            <Trigger Property="IsPressed" Value="True">
+                                <Setter TargetName="Bg" Property="Opacity" Value="0.75"/>
+                            </Trigger>
+
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+
+
+            <!-- ZONA DE ANIMACIONES HOVER -->
+            <Style.Triggers>
+
+                <!-- ANIMACIÓN DE COLOR Y EL ACERCAMIENTO ESE -->
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Trigger.EnterActions>
+                        <BeginStoryboard>
+                            <Storyboard>
+
+                                <!-- Agrandar suavemente -->
+                                 <DoubleAnimation
+                                    Storyboard.TargetProperty="RenderTransform.(ScaleTransform.ScaleX)"
+                                    To="1.07"
+                                    Duration="0:0:0.15"/>
+                                <DoubleAnimation
+                                    Storyboard.TargetProperty="RenderTransform.(ScaleTransform.ScaleY)"
+                                    To="1.07"
+                                    Duration="0:0:0.15"/>
+
+                            </Storyboard>
+                        </BeginStoryboard>
+                    </Trigger.EnterActions>
+
+                    <Trigger.ExitActions>
+                        <BeginStoryboard>
+                            <Storyboard>
+
+                                <!-- Volver al tamaño original -->
+                                <DoubleAnimation
+                                    Storyboard.TargetProperty="RenderTransform.(ScaleTransform.ScaleX)"
+                                    To="1"
+                                    Duration="0:0:0.15"/>
+                                <DoubleAnimation
+                                    Storyboard.TargetProperty="RenderTransform.(ScaleTransform.ScaleY)"
+                                    To="1"
+                                    Duration="0:0:0.15"/>
+
+                            </Storyboard>
+                        </BeginStoryboard>
+                    </Trigger.ExitActions>
+
+                </Trigger>
+
+            </Style.Triggers>
+
+        </Style>
+
+
+
+    </Window.Resources>
+   
+
+
+
+    <!-- ==================== CONTENEDOR PRINCIPAL ==================== -->
+    <DockPanel>
+
+        <!-- ==================== ENCABEZADO ==================== -->
+        <Border DockPanel.Dock="Top"
+                Margin="10"
+                CornerRadius="15"
+                Background="#1E4D7A"
+                Padding="18"
+                Effect="{StaticResource CardShadow}">
+
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="Auto"/>
+                </Grid.ColumnDefinitions>
+
+                <!-- TÍTULO -->
+                <TextBlock Text="MÓDULO DE INVENTARIOS 📦"
+                           Foreground="White"
+                           FontSize="28"
+                           FontWeight="Bold"
+                           VerticalAlignment="Center"
+                           FontFamily="Segoe UI"/>
+
+                <!-- BOTONES -->
+                <StackPanel Orientation="Horizontal"
+                            Grid.Column="1"
+                            HorizontalAlignment="Right"
+                            VerticalAlignment="Center">
+
+                    <!-- BOTÓN COMPRAS -->
+                    <Button x:Name="btnCompras"
+                            Click="btnCompras_Click"
+                            Style="{StaticResource HeaderButtonStyle}"
+                            
+                            Background="#2D9CDB"
+                            ToolTip="Registrar Compras"
+                            Margin="0,0,15,0">
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock Text="📦 Compras" FontSize="20" Margin="0,0,8,0" Padding="5"/>
+                        </StackPanel>
+                    </Button>
+
+                    <!-- BOTÓN VENTAS -->
+                    <Button x:Name="btnVentas"
+                            Click="btnVentas_Click"
+                            Style="{StaticResource HeaderButtonStyle}"
+                            Background="#27AE60"
+                            ToolTip="Registrar Ventas"
+                            Margin="0,0,15,0">
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock Text="💰 Ventas" FontSize="20" Margin="0,0,8,0" Padding="5"/>
+                        </StackPanel>
+                    </Button>
+
+                    <!-- BOTÓN BUSCAR -->
+                    <Button x:Name="btnBuscar"
+                            Click="btnBuscar_Click"
+                            Style="{StaticResource HeaderButtonStyle}"
+                            Background="#34495E"
+                            MinWidth="170"
+                            ToolTip="Buscar Comprobante">
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock Text="🔍 Buscar Comprobante" FontSize="20" Margin="0,0,8,0" Padding="5"/>
+                        </StackPanel>
+                    </Button>
+
+                </StackPanel>
+            </Grid>
+        </Border>
+
+
+
+        <!-- ==================== MENÚ LATERAL ==================== -->
+        <StackPanel x:Name="ExpanderContainer"
+                    DockPanel.Dock="Left"
+                    Width="250"
+                    Background="#F0F3F7"
+                    Margin="10"
+                    Effect="{StaticResource CardShadow}">
+
+            <!-- PARÁMETROS -->
+            <Expander Header="📦 Parámetros Básicos"
+                      IsExpanded="True"
+                      Background="#B6D1E8"
+                      FontWeight="Bold"
+                      Padding="5"
+                      FontFamily="Segoe UI"
+                      Margin="0,0,0,10"
+                      Expanded="Expander_Expanded">
+                <StackPanel>
+                    <Button Style="{StaticResource SideMenuButton}"
+                            Content="Creación de Artículos"
+                            Click="MenuItemCrearArticulos_Click"/>
+                    <Button Style="{StaticResource SideMenuButton}"
+                            Content="Creación de Terceros"
+                            Click="MenuItemCrearTerceros_Click"/>
+                </StackPanel>
+            </Expander>
+
+
+            <!-- MOVIMIENTOS -->
+            <Expander Header="📋 Movimientos de Inventario"
+                      Background="#B6D1E8"
+                      FontWeight="Bold"
+                      Padding="5"
+                      Expanded="Expander_Expanded"
+                      Margin="0,0,0,10">
+                <StackPanel>
+
+                    <!-- COMPRAS -->
+                    <Expander Header="📦 Compras"
+                              Background="#F2F5FA"
+                              Margin="5"
+                              >
+                        <StackPanel Margin="2">
+                            <Button Style="{StaticResource SideMenuButton}"
+                                    Content="Registro de Compras"
+                                    Click="ButtonRegistroCompras_Click"/>
+                            <Button Style="{StaticResource SideMenuButton}"
+                                    Content="Devoluciones a Proveedor"/>
+                            <Button Style="{StaticResource SideMenuButton}"
+                                    Content="Órdenes de Compra"/>
+                            <Button Style="{StaticResource SideMenuButton}"
+                                    Content="Ajustes de Inventario"/>
+                        </StackPanel>
+                    </Expander>
+
+                    <!-- VENTAS -->
+                    <Expander Header="🛒 Ventas"
+                              Background="#F2F5FA"
+                              Margin="5">
+                        <StackPanel>
+                            <Button Style="{StaticResource SideMenuButton}"
+                                    Content="Facturación De Ventas"
+                                    Click="Button_Click"/>
+                            <Button Style="{StaticResource SideMenuButton}"
+                                    Content="Devoluciones De Ventas"/>
+                        </StackPanel>
+                    </Expander>
+
+                </StackPanel>
+            </Expander>
+
+
+            <!-- INFORMES -->
+            <Expander Header="📊 Informes"
+                      Background="#B6D1E8"
+                      FontWeight="Bold"
+                      Margin="0,0,0,10"
+                      Padding="5"
+                      Expanded="Expander_Expanded">
+                <StackPanel>
+                    <Button Style="{StaticResource SideMenuButton}" Content="Kardex"/>
+                    <Button Style="{StaticResource SideMenuButton}" Content="Stock"/>
+                </StackPanel>
+            </Expander>
+
+
+            <!-- UTILITARIOS -->
+            <Expander Header="⚙️ Utilitarios"
+                      Background="#B6D1E8"
+                      FontWeight="Bold"
+                      Padding="5"
+                      Expanded="Expander_Expanded">
+                <StackPanel>
+                    <Button Style="{StaticResource SideMenuButton}"
+                            Content="Ajuste Consumidor Final"
+                            Click="MenuItemAjusteConsumidor_Click"/>
+                </StackPanel>
+            </Expander>
+
+        </StackPanel>
+
+
+
+        <!-- ==================== ÁREA DE TRABAJO ==================== -->
+        <Grid Background="#F7F9FC">
+            <TabControl x:Name="tabInventarios"
+                        Background="White"
+                        Margin="10"
+                        Padding="10"
+                        BorderBrush="#DDD"
+                        BorderThickness="1"
+                        Effect="{StaticResource CardShadow}">
+            </TabControl>
+        </Grid>
+
+    </DockPanel>
+
+</Window>

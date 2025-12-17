@@ -1,0 +1,35 @@
+﻿<UserControl x:Class="MMC_Software.VentanaCrearVehiculos"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:MMC_Software"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800">
+    <Border Background="White" Margin="5">
+        <!--Titulo-->
+        <Grid Background="#F4F6F9" Margin="5">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="433"/>
+                <ColumnDefinition Width="350"/>
+            </Grid.ColumnDefinitions>
+            <GroupBox Grid.Column="0" Header="Datos Vehiculos" FontFamily="Tahoma" FontSize="15">
+                <StackPanel>
+                    <StackPanel Orientation="Horizontal" Margin="5">
+                        <TextBlock Text="Placa:"  Margin="5"></TextBlock>
+                        <TextBox x:Name="txtPlaca" Margin="5" VerticalAlignment="Center" Width="100"></TextBox>
+                    </StackPanel>
+                </StackPanel>
+            </GroupBox>
+            <GroupBox Grid.Column="1" Header="Listado Placas" FontFamily="Tahoma" FontSize="15"
+                      Width="300">
+                <StackPanel>
+                    <StackPanel Orientation="Vertical" Margin="5">
+                        <TextBox x:Name="txtBuscadorPlaca" Width="270" Margin="5"></TextBox>
+                        <ListBox x:Name="lstListadoPlacas" Margin="5" Width="270" Height="350"></ListBox>
+                    </StackPanel>
+                </StackPanel>
+            </GroupBox>
+        </Grid>
+    </Border>
+</UserControl>

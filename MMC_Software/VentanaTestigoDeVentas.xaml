@@ -1,0 +1,49 @@
+﻿<Window x:Class="MMC_Software.VentanaTestigoDeVentas"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="CIERRE DE CAJA" Height="500" Width="450"
+        xmlns:sys="clr-namespace:System;assembly=mscorlib"
+        WindowStartupLocation="CenterScreen" Background="#2C3E50">
+
+    <StackPanel Margin="15">
+        <TextBlock Text="CIERRE CAJA " Foreground="White" FontSize="20" FontWeight="Bold" HorizontalAlignment="Center"/>
+
+        <GroupBox Header="Opciones de Cierre" Foreground="White" Padding="10" Margin="5">
+            <StackPanel>
+                <StackPanel Orientation="Horizontal" Margin="5">
+                    <TextBlock Text="Fecha:" Width="140" Foreground="White"/>
+                    <DatePicker Width="180" SelectedDate="{x:Static sys:DateTime.Now}" x:Name="dpFechaCierre"/>
+                </StackPanel>
+                <StackPanel Orientation="Horizontal" Margin="5">
+                    <TextBlock Text="Cajero / Vendedor:" Width="140" Foreground="White"/>
+                    <ComboBox Width="180" x:Name="cmbVendedor"/>
+                </StackPanel>
+                <StackPanel Orientation="Horizontal" Margin="5">
+                    <TextBlock Text="Documento Venta:" Width="140" Foreground="White"/>
+                    <ComboBox Width="180" x:Name="cmbDocumento"/>
+                </StackPanel>
+                <StackPanel Orientation="Horizontal" Margin="5">
+                    <TextBlock Text="Documento Devolución:" Width="140" Foreground="White"/>
+                    <ComboBox Width="180" x:Name="cmbDv"/>
+                </StackPanel>
+                <StackPanel Orientation="Horizontal" Margin="5">
+                    <TextBlock Text="Máquina Facturación:" Width="140" Foreground="White"/>
+                    <ComboBox Width="180" x:Name="cmbMaquina"/>
+                </StackPanel>
+            </StackPanel>
+        </GroupBox>
+
+        <TextBlock Text="Total Conteo" Foreground="White" FontWeight="Bold" FontSize="14"
+                   HorizontalAlignment="Center" VerticalAlignment="Center"></TextBlock>
+        <TextBox x:Name="TxtTotalConteo" HorizontalAlignment="Center" VerticalAlignment="Center"
+                 HorizontalContentAlignment="Center" Width="350" Height="25" Margin="5"
+                 IsReadOnly="True"></TextBox>
+
+        <Button Content="Abrir Conteo" Width="350" Height="40" 
+                Margin="0,20,0,0" Background="#1ABC9C" Foreground="White" FontWeight="Bold"
+                Click="ButtonAbrirConteo_Click"/>
+        <Button Content="Generar Cierre " Width="350" Height="40" Margin="5"
+                Background="White" Foreground="#2C3E50" FontWeight="Bold"
+                Click="ButtonGenerar_Click"/>
+    </StackPanel>
+</Window>

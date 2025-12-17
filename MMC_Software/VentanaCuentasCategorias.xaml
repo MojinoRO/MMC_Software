@@ -1,0 +1,49 @@
+﻿<Window x:Class="MMC_Software.VentanaCuentasCategorias"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:MMC_Software"
+        mc:Ignorable="d"
+        Title="Configuración Contable" Height="570" Width="850"
+        WindowStartupLocation="CenterScreen"
+        Background="#F4F6F7">
+
+    <Grid Margin="20,20,20,368">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <!-- Encabezado -->
+            <RowDefinition Height="*"/>
+            <!-- Cuerpo -->
+            <RowDefinition Height="Auto"/>
+            <!-- Botones -->
+        </Grid.RowDefinitions>
+
+        <!-- ENCABEZADO -->
+        <Border Background="White" CornerRadius="8" Padding="15" BorderBrush="#D1D1D1" BorderThickness="1">
+            <StackPanel>
+                <TextBlock Text="Configuración Contable para Categoría"
+                           FontSize="18" FontWeight="Bold"
+                           Foreground="#2A3F54" Margin="0 0 0 10"/>
+
+                <Grid Margin="0 0 0 5">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="150"/>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="300"/>
+                    </Grid.ColumnDefinitions>
+
+                    <TextBlock Text="Código:" VerticalAlignment="Center" FontWeight="SemiBold" Grid.Column="0"/>
+                    <TextBox x:Name="txtCodigoCategoria" Grid.Column="1" Margin="5 0"
+                             IsReadOnly="True" Background="#EEE" Height="26"/>
+
+                    <TextBlock Text="Nombre:" VerticalAlignment="Center" FontWeight="SemiBold" Grid.Column="2" Margin="20,0,0,0"/>
+                    <TextBox x:Name="txtNombreCategoria" Grid.Column="3" Margin="5 0"
+                             IsReadOnly="True" Background="#EEE" Height="26"/>
+                </Grid>
+            </StackPanel>
+        </Border>
+
+    </Grid>
+</Window>

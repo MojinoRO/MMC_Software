@@ -1,0 +1,53 @@
+﻿<UserControl x:Class="MMC_Software.VentanaCrearTipoVehiculos"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:MMC_Software"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800">
+    <Grid Background="White">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto"></ColumnDefinition>
+            <ColumnDefinition Width="*"></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+        
+        <GroupBox Grid.Column="0" Header="Creacion Tipos de Vehiculos" Margin="5" 
+           FontFamily="Tahoma" FontSize="15"
+           Background="#F4F6F9">
+
+            <StackPanel Margin="5">
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock Text="Codigo Tipo Vehiculo" Margin="5"></TextBlock>
+                    <TextBox Margin="5" x:Name="txtCodigo" Width="50"
+                      HorizontalContentAlignment="Left"
+                      MaxLength="3" KeyDown="txtCodigo_KeyDown"></TextBox>
+                </StackPanel>
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock Text="Nombre Tipos De Vehiculo" Margin="5"></TextBlock>
+                    <TextBox x:Name="txtNombreTipo" Margin="5" Width="200" CharacterCasing="Upper"></TextBox>
+                </StackPanel>
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock Text="Estado Tipo Vehiculo" Margin="5"> </TextBlock>
+                    <ComboBox x:Name="cmbEstado" Margin="5" Width="100"></ComboBox>
+                </StackPanel>
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Margin="0 10 0 0">
+                    <Button x:Name="btnCrear" Content="➕" Width="32" Height="32" Margin="5"
+                         Background="#2A3F54" Foreground="White" FontWeight="Bold" Click="btnCrear_Click"/>
+                    <Button x:Name="btnEditar" Content="✏️" Width="32" Height="32" Margin="5"
+                         Background="#2A3F54" Foreground="White" FontWeight="Bold" Click="btnEditar_Click"/>
+                    <Button x:Name="btnEliminar" Content="❌" Width="32" Height="32" Margin="5"
+                         Background="#2A3F54" Foreground="White" FontWeight="Bold" Click="btnEliminar_Click"/>
+                    <Button x:Name="btnGuardar" Content="💾" Width="32" Height="32" Margin="5"
+                         Background="#2A3F54" Foreground="White" FontWeight="Bold" Click="btnGuardar_Click"/>
+                    <Button x:Name="btnCerrar" Content="🚪" Width="32" Height="32" Margin="5"
+                     Background="#2A3F54" Foreground="White" FontWeight="Bold" Click="btnCerrar_Click"></Button>
+                </StackPanel>
+            </StackPanel>
+        </GroupBox>
+        <GroupBox Margin="5" Grid.Column="1" Width="Auto"
+           Background="#F4F6F9">
+            <ListBox x:Name="lstTiposVehiculos" Margin="5" SelectionChanged="lstTiposVehiculos_SelectionChanged"></ListBox>
+        </GroupBox>
+    </Grid>
+</UserControl>

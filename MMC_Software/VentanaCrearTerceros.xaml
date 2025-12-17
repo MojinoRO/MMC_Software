@@ -1,0 +1,233 @@
+﻿<Window x:Class="MMC_Software.VentanaCrearTerceros"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Registro de Terceros"
+        Height="650" Width="1000"
+        Background="#F5F6FA"
+        WindowStartupLocation="CenterScreen"
+        WindowState="Maximized"
+        WindowStyle="None">
+
+    <Window.Resources>
+        <!-- Colores corporativos -->
+        <SolidColorBrush x:Key="AccentBrush" Color="#2D89EF"/>
+        <SolidColorBrush x:Key="AccentBrushDark" Color="#1E5EA8"/>
+        <SolidColorBrush x:Key="DisabledBackground" Color="#ECECEC"/>
+        <SolidColorBrush x:Key="DisabledForeground" Color="#888"/>
+
+        <!-- Estilo de tarjetas -->
+        <Style x:Key="CardStyle" TargetType="Border">
+            <Setter Property="CornerRadius" Value="8"/>
+            <Setter Property="Background" Value="White"/>
+            <Setter Property="Padding" Value="15"/>
+            <Setter Property="Margin" Value="0 0 0 15"/>
+            <Setter Property="BorderBrush" Value="#E0E0E0"/>
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="Effect">
+                <Setter.Value>
+                    <DropShadowEffect Color="#000" BlurRadius="6" ShadowDepth="1" Opacity="0.08"/>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <!-- Estilo campos de entrada -->
+        <Style TargetType="TextBox">
+            <Setter Property="Height" Value="32"/>
+            <Setter Property="Margin" Value="0,0,0,10"/>
+            <Setter Property="Padding" Value="6,0"/>
+            <Setter Property="FontSize" Value="14"/>
+            <Style.Triggers>
+                <Trigger Property="IsEnabled" Value="False">
+                    <Setter Property="Background" Value="{StaticResource DisabledBackground}"/>
+                    <Setter Property="Foreground" Value="{StaticResource DisabledForeground}"/>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+
+        <Style TargetType="ComboBox">
+            <Setter Property="Height" Value="32"/>
+            <Setter Property="Margin" Value="0,0,0,10"/>
+            <Setter Property="FontSize" Value="14"/>
+            <Style.Triggers>
+                <Trigger Property="IsEnabled" Value="False">
+                    <Setter Property="Background" Value="{StaticResource DisabledBackground}"/>
+                    <Setter Property="Foreground" Value="{StaticResource DisabledForeground}"/>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+
+        <Style TargetType="TextBlock">
+            <Setter Property="FontWeight" Value="SemiBold"/>
+            <Setter Property="FontSize" Value="13"/>
+            <Setter Property="Margin" Value="0,0,0,3"/>
+        </Style>
+
+        <!-- Botones CRUD -->
+        <Style x:Key="AltButtonStyle" TargetType="Button">
+            <Setter Property="Width" Value="40"/>
+            <Setter Property="Height" Value="40"/>
+            <Setter Property="Margin" Value="5"/>
+            <Setter Property="Background" Value="{StaticResource AccentBrush}"/>
+            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="FontWeight" Value="Bold"/>
+            <Setter Property="FontSize" Value="16"/>
+            <Setter Property="BorderThickness" Value="0"/>
+            <Setter Property="Cursor" Value="Hand"/>
+            <Setter Property="ToolTipService.ShowOnDisabled" Value="True"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border Background="{TemplateBinding Background}" CornerRadius="6">
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter Property="Background" Value="{StaticResource AccentBrushDark}"/>
+                            </Trigger>
+                            <Trigger Property="IsPressed" Value="True">
+                                <Setter Property="Background" Value="#16497F"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </Window.Resources>
+
+    <Grid Margin="20">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+
+        <!-- Encabezado -->
+        <TextBlock Text="Registro de Terceros"
+                   FontSize="24" FontWeight="Bold"
+                   Foreground="#333" Margin="0 0 0 15"/>
+
+        <!-- Contenido -->
+        <ScrollViewer Grid.Row="1" VerticalScrollBarVisibility="Auto">
+            <StackPanel Orientation="Vertical">
+
+                <!-- Datos de Identificación -->
+                <Border Style="{StaticResource CardStyle}">
+                    <StackPanel>
+                        <TextBlock Text="Datos de Identificación" FontSize="16" Margin="0 0 0 10"/>
+                        <WrapPanel>
+                            <StackPanel Width="200" Margin="0,0,20,0">
+                                <TextBlock Text="Tipo de Tercero"/>
+                                <CheckBox x:Name="chkCliente" Content="Cliente" Margin="0,0,0,5"/>
+                                <CheckBox x:Name="chkProveedor" Content="Proveedor" Margin="0,0,0,5"/>
+                                <CheckBox x:Name="chkEmpleado" Content="Empleado"/>
+                            </StackPanel>
+                            <StackPanel Width="200" Margin="0,0,20,0">
+                                <TextBlock Text="Tipo Documento"/>
+                                <ComboBox x:Name="cbTipoDocumento" SelectionChanged="cbTipoDocumento_SelectionChanged"/>
+                            </StackPanel>
+                            <StackPanel Width="260">
+                                <TextBlock Text="Identificación"/>
+                                <StackPanel Orientation="Horizontal">
+                                    <TextBox x:Name="txtIdentificacion" Width="150"
+                                             PreviewTextInput="txtIdentificacion_PreviewTextInput"
+                                             LostFocus="txtIdentificacion_LostFocus"
+                                             KeyDown="txtIdentificacion_KeyDown"/>
+                                    <TextBox x:Name="txtDV" Width="40" IsReadOnly="True"
+                                             HorizontalContentAlignment="Center" ToolTip="Dígito de Verificación"/>
+                                </StackPanel>
+                            </StackPanel>
+                        </WrapPanel>
+                    </StackPanel>
+                </Border>
+
+                <!-- Nombres y Razón Social -->
+                <Border Style="{StaticResource CardStyle}">
+                    <StackPanel>
+                        <TextBlock Text="Nombres y Razón Social" FontSize="16" Margin="0 0 0 10"/>
+                        <WrapPanel>
+                            <!-- Columna izquierda: Nombres y Apellidos -->
+                            <StackPanel Width="200" Margin="0,0,20,0">
+                                <TextBlock Text="Primer Nombre"/>
+                                <TextBox x:Name="txtPrimerNombre" CharacterCasing="Upper"/>
+                                <TextBlock Text="Segundo Nombre"/>
+                                <TextBox x:Name="txtSegundoNombre" CharacterCasing="Upper"/>
+                                <TextBlock Text="Primer Apellido"/>
+                                <TextBox x:Name="txtPrimerApellido" CharacterCasing="Upper"/>
+                                <TextBlock Text="Segundo Apellido"/>
+                                <TextBox x:Name="txtSegundoApellido" CharacterCasing="Upper"/>
+                            </StackPanel>
+
+                            <!-- Columna derecha: Razón Social y Establecimiento -->
+                            <StackPanel Width="300">
+                                <TextBlock Text="Razón Social"/>
+                                <TextBox x:Name="txtRazonSocial" CharacterCasing="Upper"/>
+                                <TextBlock Text="Establecimiento"/>
+                                <TextBox x:Name="txtEstablecimiento" CharacterCasing="Upper"/>
+                            </StackPanel>
+                        </WrapPanel>
+                    </StackPanel>
+                </Border>
+
+                <!-- Ubicación -->
+                <Border Style="{StaticResource CardStyle}">
+                    <StackPanel>
+                        <TextBlock Text="Ubicación" FontSize="16" Margin="0 0 0 10"/>
+                        <WrapPanel>
+                            <StackPanel Width="220" Margin="0,0,20,0">
+                                <TextBlock Text="Ciudad"/>
+                                <TextBox x:Name="txtbuscadorCiudad" TextChanged="BuscadorCiudad_TextChanged"/>
+                                <ListBox x:Name="lstCiudad" Height="60" SelectionChanged="lstCiudad_SelectionChanged"/>
+                            </StackPanel>
+                            <StackPanel Width="200" Margin="0,0,20,0">
+                                <TextBlock Text="Departamento"/>
+                                <TextBox x:Name="txtDepartamento"/>
+                            </StackPanel>
+                            <StackPanel Width="300">
+                                <TextBlock Text="Dirección"/>
+                                <TextBox x:Name="txtDireccion" CharacterCasing="Upper"/>
+                            </StackPanel>
+                        </WrapPanel>
+                    </StackPanel>
+                </Border>
+
+                <!-- Contacto -->
+                <Border Style="{StaticResource CardStyle}">
+                    <StackPanel>
+                        <TextBlock Text="Contacto" FontSize="16" Margin="0 0 0 10"/>
+                        <WrapPanel>
+                            <StackPanel Width="200" Margin="0,0,20,0">
+                                <TextBlock Text="Teléfono"/>
+                                <TextBox x:Name="txtTelefono" MaxLength="10" PreviewTextInput="txtIdentificacion_PreviewTextInput"/>
+                            </StackPanel>
+                            <StackPanel Width="300">
+                                <TextBlock Text="Email"/>
+                                <TextBox x:Name="txtEmail"/>
+                            </StackPanel>
+                        </WrapPanel>
+                    </StackPanel>
+                </Border>
+
+                <!-- Configuración Comercial -->
+                <Border Style="{StaticResource CardStyle}">
+                    <StackPanel>
+                        <TextBlock Text="Configuración Comercial" FontSize="16" Margin="0 0 0 10"/>
+                        <StackPanel Width="250">
+                            <TextBlock Text="Lista de Precios"/>
+                            <ComboBox x:Name="cbListaPrecios"/>
+                        </StackPanel>
+                    </StackPanel>
+                </Border>
+
+            </StackPanel>
+        </ScrollViewer>
+
+        <!-- Botones CRUD -->
+        <StackPanel Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Right" Margin="0,15,0,0">
+            <Button x:Name="btnCrear" Content="➕" Style="{StaticResource AltButtonStyle}" ToolTip="Nuevo" Click="btnCrear_Click"/>
+            <Button x:Name="btnEditar" Content="✏️" Style="{StaticResource AltButtonStyle}" ToolTip="Editar" Click="btnEditar_Click"/>
+            <Button x:Name="btnEliminar" Content="❌" Style="{StaticResource AltButtonStyle}" ToolTip="Eliminar"/>
+            <Button x:Name="btnGuardar" Content="💾" Style="{StaticResource AltButtonStyle}" ToolTip="Guardar" Click="btnGuardar_Click"/>
+            <Button x:Name="btnSalir" Content="❎" Style="{StaticResource AltButtonStyle}" ToolTip="Salir" Click="btnSalir_Click"/>
+        </StackPanel>
+    </Grid>
+</Window>

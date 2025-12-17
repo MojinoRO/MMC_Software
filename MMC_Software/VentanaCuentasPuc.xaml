@@ -1,0 +1,128 @@
+﻿<UserControl x:Class="MMC_Software.VentanaCuentasPuc"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:local="clr-namespace:MMC_Software"
+        Height="560" Width="820"
+        Background="#34495E">
+    <UserControl.Resources>
+        <!-- Estilo base para todos los botones CRUD -->
+        <Style x:Key="CrudButtonStyle" TargetType="Button">
+            <Setter Property="Width" Value="38"/>
+            <Setter Property="Height" Value="38"/>
+            <Setter Property="Margin" Value="5"/>
+            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="FontWeight" Value="Bold"/>
+            <Setter Property="Cursor" Value="Hand"/>
+            <Setter Property="BorderThickness" Value="0"/>
+            <Setter Property="FontSize" Value="16"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border Background="{TemplateBinding Background}" CornerRadius="20">
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter Property="Opacity" Value="0.85"/>
+                            </Trigger>
+                            <Trigger Property="IsPressed" Value="True">
+                                <Setter Property="Opacity" Value="0.7"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <!-- Colores corporativos -->
+        <SolidColorBrush x:Key="ColorCrear" Color="#4A90E2"/>
+        <SolidColorBrush x:Key="ColorEditar" Color="#6C63FF"/>
+        <SolidColorBrush x:Key="ColorGuardar" Color="#2ECC71"/>
+        <SolidColorBrush x:Key="ColorEliminar" Color="#E74C3C"/>
+        <SolidColorBrush x:Key="ColorNeutro" Color="#34495E"/>
+
+    </UserControl.Resources>
+    <Grid Margin="20">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="260"/>
+            <ColumnDefinition Width="20"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+
+        <!-- Título -->
+        <TextBlock Grid.Column="0" Grid.ColumnSpan="3"
+                 Text="Gestión de Cuentas PUC" 
+                 FontSize="24" FontWeight="Bold" 
+                 Foreground="White" 
+                 HorizontalAlignment="Center" Margin="0,0,0,20"/>
+
+        <!-- Sección izquierda: buscador + lista -->
+        <StackPanel Grid.Row="1" Grid.Column="0">
+            <Grid Margin="5">
+                <TextBox x:Name="txtBuscarCuenta" Foreground="White"
+                       Width="240"
+                       Height="25"
+                       TextChanged="txtBuscarCuenta_TextChanged"/>
+            </Grid>
+
+            <GroupBox Header="Cuentas Existentes" FontWeight="Bold" Margin="5,10,5,0" Foreground="White">
+                <ListBox x:Name="listCuentasPuc" 
+                       DisplayMemberPath="CuentasPucNombre" 
+                       Height="360"
+                       MouseDoubleClick="listCuentasPuc_MouseDoubleClick"/>
+            </GroupBox>
+        </StackPanel>
+
+        <!-- Formulario a la derecha -->
+        <StackPanel Grid.Row="1" Grid.Column="2" Orientation="Vertical" Margin="0,0,0,0">
+
+            <StackPanel Orientation="Horizontal" Margin="0,5">
+                <Label Content="Concepto DIAN:" Width="180" Foreground="White"/>
+                <ComboBox x:Name="cbConceptoDian" Width="300" IsEnabled="False" MouseDoubleClick="cbConceptoDian_MouseDoubleClick"/>
+            </StackPanel>
+
+            <StackPanel Orientation="Horizontal" Margin="0,5">
+                <Label Content="Código PUC:" Width="180" Foreground="White"/>
+                <TextBox x:Name="txtCodigo" Width="102" IsEnabled="False" PreviewTextInput="txtCodigo_PreviewTextInput"/>
+            </StackPanel>
+
+            <StackPanel Orientation="Horizontal" Margin="0,5">
+                <Label Content="Nombre Cuenta:" Width="180" Foreground="White"/>
+                <TextBox x:Name="txtNombre" Width="300" IsEnabled="False" PreviewTextInput="txtNombre_PreviewTextInput"/>
+            </StackPanel>
+
+            <StackPanel Orientation="Horizontal" Margin="0,5">
+                <Label Content="Naturaleza (D/C):" Width="180" Foreground="White"/>
+                <TextBox x:Name="txtNaturaleza" Width="20" MaxLength="1" IsEnabled="False" Height="18"/>
+            </StackPanel>
+
+            <StackPanel Orientation="Horizontal" Margin="0,5">
+                <Label Content="¿Permite Movimiento?" Width="180" Foreground="White"/>
+                <CheckBox x:Name="chkPermiteMov" IsEnabled="False"/>
+            </StackPanel>
+
+            <StackPanel Orientation="Horizontal" Margin="0,5">
+                <Label Content="¿Permite Tercero?" Width="180" Foreground="White" />
+                <CheckBox x:Name="chkPermiteTer" IsEnabled="False"/>
+            </StackPanel>
+        </StackPanel>
+
+        <!-- Botones -->
+        <StackPanel Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="3" Orientation="Horizontal" 
+                  HorizontalAlignment="Center" Margin="0,20,0,0">
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
+                <Button x:Name="btnCrear" Content="➕" Background="{StaticResource ColorCrear}" Style="{StaticResource CrudButtonStyle}" ToolTip="Nuevo" Click="btnNuevo_Click"/>
+                <Button x:Name="btnEditar" Content="✏️" Background="{StaticResource ColorEditar}" Style="{StaticResource CrudButtonStyle}" ToolTip="Editar" Click="btnModificar_Click_1"/>
+                <Button x:Name="btnEliminar" Content="🗑️" Background="{StaticResource ColorEliminar}" Style="{StaticResource CrudButtonStyle}" ToolTip="Eliminar" Click="btnEliminar_Click"/>
+                <Button x:Name="btnGuardar" Content="💾" Background="{StaticResource ColorGuardar}" Style="{StaticResource CrudButtonStyle}" ToolTip="Guardar" Click="btnGuardar_Click"/>
+                <Button x:Name="btnSalir" Content="Salir" Background="{StaticResource ColorEliminar}" Style="{StaticResource CrudButtonStyle}" ToolTip="Guardar"
+                                Click="btnSalir_Click"/>
+            </StackPanel>
+        </StackPanel>
+    </Grid>
+</UserControl>

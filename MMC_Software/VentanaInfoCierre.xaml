@@ -1,0 +1,285 @@
+﻿<Window x:Class="MMC_Software.VentanaInfoCierre"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:MMC_Software"
+        mc:Ignorable="d"
+        Title="VentanaInfoCierre" Height="600" Width="1000"
+        WindowStartupLocation="CenterScreen" Background="#2C3E50">
+
+    <Grid Margin="10">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <!-- Encabezado -->
+            <RowDefinition Height="110*"/>
+            <RowDefinition Height="87*"/>
+            <!-- Zona principal -->
+        </Grid.RowDefinitions>
+
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="2*"/>
+            <!-- Izquierda -->
+            <ColumnDefinition Width="*"/>
+            <!-- Derecha -->
+        </Grid.ColumnDefinitions>
+
+        <!-- ========================= ENCABEZADO ========================= -->
+        <Border Grid.Row="0" Grid.ColumnSpan="2" Background="#1F3244" CornerRadius="5" Padding="10" Margin="0,0,0,10">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+
+                <!-- Título -->
+                <StackPanel Grid.Row="0" HorizontalAlignment="Center" Margin="0,0,0,5">
+                    <TextBlock Text="INFORMACIÓN CIERRE DE CAJA" 
+                               FontSize="18" FontWeight="Bold" Foreground="White" 
+                               TextAlignment="Center"/>
+                    <TextBox x:Name="TxtNombreEmpresa"
+                             IsReadOnly="True"
+                             Background="Transparent"
+                             BorderBrush="Transparent"
+                             Foreground="White"
+                             FontSize="14"
+                             TextAlignment="Center"
+                             HorizontalAlignment="Center"
+                             Width="400"/>
+                </StackPanel>
+
+                <!-- Datos -->
+                <Grid Grid.Row="1" Margin="0,5,0,0">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="Auto"/>
+                    </Grid.ColumnDefinitions>
+
+                    <!-- NIT -->
+                    <StackPanel Grid.Column="0" Margin="5,0">
+                        <TextBlock Text="NIT:" FontWeight="Bold" Foreground="White"/>
+                        <TextBox x:Name="Txtnit" 
+                                 IsReadOnly="True"
+                                 Background="#2E4B62"
+                                 BorderBrush="Transparent"
+                                 Foreground="White"
+                                 FontWeight="Bold"
+                                 Margin="0,2,0,0"/>
+                    </StackPanel>
+
+                    <!-- Dirección -->
+                    <StackPanel Grid.Column="1" Margin="5,0">
+                        <TextBlock Text="Dirección:" FontWeight="Bold" Foreground="White"/>
+                        <TextBox x:Name="TxtDireccion" 
+                                 IsReadOnly="True"
+                                 Background="#2E4B62"
+                                 BorderBrush="Transparent"
+                                 Foreground="White"
+                                 FontWeight="Bold"
+                                 Margin="0,2,0,0"/>
+                    </StackPanel>
+
+                    <!-- Teléfono -->
+                    <StackPanel Grid.Column="2" Margin="5,0">
+                        <TextBlock Text="Teléfono:" FontWeight="Bold" Foreground="White"/>
+                        <TextBox x:Name="TxtTelefono" 
+                                 IsReadOnly="True"
+                                 Background="#2E4B62"
+                                 BorderBrush="Transparent"
+                                 Foreground="White"
+                                 FontWeight="Bold"
+                                 Margin="0,2,0,0"/>
+                    </StackPanel>
+
+                    <!-- Cajero -->
+                    <StackPanel Grid.Column="3" Margin="5,0">
+                        <TextBlock Text="Cajero:" FontWeight="Bold" Foreground="White"/>
+                        <TextBox x:Name="TxtVendeodor" 
+                                 IsReadOnly="True"
+                                 Background="#2E4B62"
+                                 BorderBrush="Transparent"
+                                 Foreground="White"
+                                 FontWeight="Bold"
+                                 Margin="0,2,0,0"/>
+                    </StackPanel>
+
+                    <!-- Fecha -->
+                    <StackPanel Grid.Column="4" Margin="5,0" HorizontalAlignment="Right">
+                        <TextBlock Text="Fecha:" FontWeight="Bold" Foreground="White"/>
+                        <TextBox x:Name="TxtFecha" 
+                                 IsReadOnly="True"
+                                 Background="#2E4B62"
+                                 BorderBrush="Transparent"
+                                 Foreground="White"
+                                 FontWeight="Bold"
+                                 Margin="0,2,0,0"
+                                 Width="120"/>
+                    </StackPanel>
+                </Grid>
+            </Grid>
+        </Border>
+
+        <!-- ========================= CUERPO PRINCIPAL ========================= -->
+        <Grid Grid.ColumnSpan="2" Margin="0,120,0,0" Grid.RowSpan="3">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="2*"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+
+            <!-- Columna Izquierda -->
+            <StackPanel Grid.Column="0" Margin="0,0,10,0">
+                <!-- Relación Facturas -->
+                <GroupBox Header="Relación Facturas" Foreground="White" Margin="0,0,0,10">
+                    <DataGrid IsReadOnly="True"
+                              x:Name="dgRelacionFacturas"
+                              HeadersVisibility="Column"
+                              FontFamily="Tahoma"
+                              RowHeight="25"
+                              AutoGenerateColumns="False"
+                              Margin="3"
+                              ColumnWidth="*">
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Header="Documento" Binding="{Binding Docto}" Width="*"/>
+                            <DataGridTextColumn Header="Numero Desde" Binding="{Binding NumDesde}" Width="*"/>
+                            <DataGridTextColumn Header="Numero Hasta" Binding="{Binding NumHasta}" Width="*"/>
+                            <DataGridTextColumn Header="Cantidad" Binding="{Binding Cantidad}" Width="*"/>
+                        </DataGrid.Columns>
+                    </DataGrid>
+                </GroupBox>
+
+                <!-- Relación Impuestos -->
+                <GroupBox Header="Relación Impuestos" Foreground="White" Margin="0,0,0,10">
+                    <DataGrid x:Name="dgRelacionImpuestos"
+                              IsReadOnly="True"
+                              HeadersVisibility="Column"
+                              FontFamily="Tahoma"
+                              RowHeight="25"
+                              AutoGenerateColumns="False"
+                              Margin="3"
+                              ColumnWidth="*">
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Header="Tarifa" Binding="{Binding Tarifa}" Width="*"/>
+                            <DataGridTextColumn Header="Base" Binding="{Binding Base}" Width="*"/>
+                            <DataGridTextColumn Header="Impuesto" Binding="{Binding Impuesto}" Width="*"/>
+                            <DataGridTextColumn Header="Base + Impuesto" Binding="{Binding BaseMasImpuesto}" Width="*"/>
+                        </DataGrid.Columns>
+                    </DataGrid>
+                </GroupBox>
+
+                <!-- Relación Productos -->
+                <GroupBox Header="Total Productos" Foreground="White">
+                    <DataGrid x:Name="dgRelacionProductos"
+                              IsReadOnly="True"
+                              HeadersVisibility="Column"
+                              FontFamily="Tahoma"
+                              RowHeight="25"
+                              AutoGenerateColumns="False"
+                              Margin="3"
+                              ColumnWidth="*">
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Header="Categoria" Binding="{Binding Categoria}" Width="*"/>
+                            <DataGridTextColumn Header="Cantidad Items" Binding="{Binding Cantidad}" Width="*"/>
+                        </DataGrid.Columns>
+                    </DataGrid>
+                </GroupBox>
+            </StackPanel>
+
+            <!-- Columna Derecha -->
+            <StackPanel Grid.Column="1">
+                <!-- Formas de Pago -->
+                <GroupBox Header="Relación Formas de Pago" Foreground="White" Margin="0,0,0,10">
+                    <DataGrid x:Name="dgFormasPago"
+                              FontFamily="Tahoma"
+                              RowHeight="25"
+                              IsReadOnly="True"
+                              AutoGenerateColumns="False"
+                              HeadersVisibility="Column"
+                              ColumnWidth="*">
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Header="FormaPago" Binding="{Binding FormaPago}" Width="*"/>
+                            <DataGridTextColumn Header="Cantidad Transacciones" Binding="{Binding Cantidad}" Width="*"/>
+                            <DataGridTextColumn Header="Valor Total" Binding="{Binding ValorTotal}" Width="*"/>
+                        </DataGrid.Columns>
+                    </DataGrid>
+                </GroupBox>
+
+                <!-- Conclusiones -->
+                <GroupBox Header="Resumen Cierre" Foreground="White" Height="230"
+                          Background="#2C3E50" Margin="3">
+                    <Grid Margin="5">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="160"/>
+                            <!-- Etiquetas -->
+                            <ColumnDefinition Width="*"/>
+                            <!-- Valores -->
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                        </Grid.RowDefinitions>
+
+                        <!-- Base Entregada -->
+                        <TextBlock Grid.Row="0" Grid.Column="0" Text="Base Entregada:" 
+                                   Foreground="White" VerticalAlignment="Center" Margin="3"/>
+                        <TextBox Grid.Row="0" Grid.Column="1" x:Name="TxtBaseCaja" 
+                                 Background="Transparent" BorderBrush="Transparent"
+                                 Foreground="White" HorizontalContentAlignment="Right" 
+                                 Margin="3"/>
+
+                        <!-- Conteo Caja -->
+                        <TextBlock Grid.Row="1" Grid.Column="0" Text="Conteo Caja:" 
+                                   Foreground="White" VerticalAlignment="Center" Margin="3"/>
+                        <TextBox Grid.Row="1" Grid.Column="1" x:Name="TxtConteoCaja"
+                                 Background="Transparent" BorderBrush="Transparent"
+                                 Foreground="White" HorizontalContentAlignment="Right"
+                                 Margin="3"/>
+
+                        <!-- Total Ventas -->
+                        <TextBlock Grid.Row="2" Grid.Column="0" Text="Total Ventas:" 
+                                   Foreground="White" VerticalAlignment="Center" Margin="3"/>
+                        <TextBox Grid.Row="2" Grid.Column="1" x:Name="TxtTotalMovimiento"
+                                 Background="Transparent" BorderBrush="Transparent"
+                                 Foreground="White" HorizontalContentAlignment="Right"
+                                 Margin="3"/>
+
+                        <!-- Efectivo Por Entregar -->
+                        <TextBlock Grid.Row="3" Grid.Column="0" Text="Efectivo Por Entregar:" 
+                                   Foreground="White" VerticalAlignment="Center" Margin="3"/>
+                        <TextBox Grid.Row="3" Grid.Column="1" x:Name="TxtEfecitvoPorEntregar"
+                                 Background="Transparent" BorderBrush="Transparent"
+                                 Foreground="White" HorizontalContentAlignment="Right"
+                                 Margin="3"/>
+
+                        <TextBlock Text="Retiros Caja:" Grid.Row="4" Grid.Column="0"
+                                   Foreground="White" VerticalAlignment="Center" Margin="3"/>
+                        <TextBox x:Name="TxtRetirosCaja" Grid.Row="4" Grid.Column="1" Background="Transparent"
+                                 BorderBrush="Transparent" Foreground="White" HorizontalAlignment="Right"
+                                 Margin="3"/>
+
+                        <!-- Estado Caja -->
+                        <TextBlock Grid.Row="5" Grid.Column="0" Text="Estado Caja:" 
+                                   Foreground="White" VerticalAlignment="Center" Margin="3"/>
+                        <TextBox Grid.Row="5" Grid.Column="1" x:Name="TxtEstadoCaja"
+                                 Background="Transparent" BorderBrush="Transparent"
+                                Foreground="White" HorizontalContentAlignment="Right"
+                                Margin="3"/>
+
+                        <Button Background="#1ABC9C" Grid.Row="6" Grid.Column="0" Grid.ColumnSpan="2"
+                                Width="200" Height="30" Margin="10" Content="Imprimir" Foreground="White"
+                                Click="ButtonImprimir_Click"/>
+
+                    </Grid>
+                </GroupBox>
+
+            </StackPanel>
+        </Grid>
+    </Grid>
+</Window>

@@ -1,0 +1,92 @@
+﻿<Application x:Class="MMC_Software.App"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:local="clr-namespace:MMC_Software"
+             StartupUri="SeleccionEmpresa.xaml">
+    <Application.Resources>
+
+        <!-- ✅ Estilo global estándar para todos los botones empresariales -->
+        <Style x:Key="BotonEmpresarialEstandar" TargetType="Button">
+            <Setter Property="Height" Value="38"/>
+            <Setter Property="MinWidth" Value="120"/>
+            <Setter Property="FontWeight" Value="SemiBold"/>
+            <Setter Property="FontSize" Value="14"/>
+            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="BorderThickness" Value="0"/>
+            <Setter Property="Padding" Value="8,3"/>
+            <Setter Property="Cursor" Value="Hand"/>
+            <Setter Property="SnapsToDevicePixels" Value="True"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border x:Name="border"
+                            Background="{TemplateBinding Background}"
+                            SnapsToDevicePixels="True">
+                            <Border.Effect>
+                                <DropShadowEffect Color="Black"
+                                              Opacity="0.25"
+                                              BlurRadius="8"
+                                              ShadowDepth="2"/>
+                            </Border.Effect>
+
+                            <ContentPresenter HorizontalAlignment="Center"
+                                          VerticalAlignment="Center"/>
+                        </Border>
+
+                        <ControlTemplate.Triggers>
+                            <!-- Hover: resalta y eleva -->
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter TargetName="border" Property="Effect">
+                                    <Setter.Value>
+                                        <DropShadowEffect Color="Black"
+                                                      Opacity="0.35"
+                                                      BlurRadius="12"
+                                                      ShadowDepth="4"/>
+                                    </Setter.Value>
+                                </Setter>
+                                <Setter TargetName="border" Property="RenderTransform">
+                                    <Setter.Value>
+                                        <ScaleTransform ScaleX="1.03" ScaleY="1.03"/>
+                                    </Setter.Value>
+                                </Setter>
+                                <Setter TargetName="border" Property="RenderTransformOrigin" Value="0.5,0.5"/>
+                            </Trigger>
+
+                            <!-- Click: animación de pulsado -->
+                            <Trigger Property="IsPressed" Value="True">
+                                <Setter TargetName="border" Property="RenderTransform">
+                                    <Setter.Value>
+                                        <ScaleTransform ScaleX="0.97" ScaleY="0.97"/>
+                                    </Setter.Value>
+                                </Setter>
+                                <Setter TargetName="border" Property="Opacity" Value="0.8"/>
+                            </Trigger>
+
+                            <!-- Deshabilitado -->
+                            <Trigger Property="IsEnabled" Value="False">
+                                <Setter TargetName="border" Property="Background" Value="#BDC3C7"/>
+                                <Setter Property="Foreground" Value="White"/>
+                                <Setter TargetName="border" Property="Effect">
+                                    <Setter.Value>
+                                        <DropShadowEffect Opacity="0"/>
+                                    </Setter.Value>
+                                </Setter>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <!-- 🎨 Colores corporativos para los botones -->
+        <SolidColorBrush x:Key="ColorCrear" Color="#4A90E2"/>
+        <SolidColorBrush x:Key="ColorModificar" Color="#6C63FF"/>
+        <SolidColorBrush x:Key="ColorGuardar" Color="#2ECC71"/>
+        <SolidColorBrush x:Key="ColorEliminar" Color="#E74C3C"/>
+        <SolidColorBrush x:Key="ColorSalir" Color="#34495E"/>
+        
+        
+
+    </Application.Resources>
+
+</Application>
