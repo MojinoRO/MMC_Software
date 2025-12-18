@@ -27,7 +27,7 @@ namespace MMC_Software.ViewModel
 
         }
 
-        //Intento de push
+        //Intento de push S
     }
 
 }
