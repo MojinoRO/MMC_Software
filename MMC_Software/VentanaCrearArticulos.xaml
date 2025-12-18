@@ -122,7 +122,7 @@
 
                                     <TextBlock Text="Incremento"/>
                                     <TextBox x:Name="txtIncremento"
-                                             PreviewTextInput="txtMargen_PreviewTextInput"
+                                            
                                              KeyDown="txtIncremento_KeyDown"/>
                                 </StackPanel>
 
@@ -176,24 +176,19 @@
                             Margin="15">
 
                     <Button x:Name="btnCrear"
-                            Style="{StaticResource BtnCrear}"
-                            Click="btnCrear_Click"/>
+                            Style="{StaticResource BtnCrear}"/>
 
                     <Button x:Name="btnEditar"
-                            Style="{StaticResource BtnModificar}"
-                            Click="btnEditar_Click"/>
+                            Style="{StaticResource BtnModificar}"/>
 
                     <Button x:Name="btnEliminar"
-                            Style="{StaticResource BtnEliminar}"
-                            Click="btnEliminar_Click"/>
+                            Style="{StaticResource BtnEliminar}"/>
 
                     <Button x:Name="btnGuardar"
-                            Style="{StaticResource BtnGuardar}"
-                            Click="btnGuardar_Click"/>
+                            Style="{StaticResource BtnGuardar}"/>
 
                     <Button x:Name="btnSalir"
-                            Style="{StaticResource BtnCerrar}"
-                            Click="btnSalir_Click"/>
+                            Style="{StaticResource BtnCerrar}"/>
                 </StackPanel>
 
             </Grid>
