@@ -64,15 +64,24 @@
 
                                     <TextBlock Text="Categoría"/>
                                     <ComboBox x:Name="cbCategoria" ItemsSource="{Binding Categories}"
-                                              DisplayMemberPath="InfoCategoria"
-                                              SelectedValuePath="CategoriasID"
-                                              SelectedValue="CategoriaSeleccionadaID"/>
+                                                DisplayMemberPath="InfoCategorias"
+                                                SelectedItem="{Binding Categoriesselection, Mode=TwoWay}"
+                                                SelectedValuePath="CategoriasID"/>
 
                                     <TextBlock Text="Subcategoría"/>
-                                    <ComboBox x:Name="cbSubCategoria"/>
+                                    <ComboBox x:Name="cbSubCategoria"
+                                              ItemsSource="{Binding SubCategories}"
+                                              DisplayMemberPath="InfoSubCategoria"
+                                              SelectedValuePath="SubCategoriaID"
+                                              SelectedValue="{Binding SubCategoriesSelecctionID , UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}"/>
 
                                     <TextBlock Text="Marca"/>
-                                    <ComboBox x:Name="cbMarca"/>
+                                    <ComboBox x:Name="cbMarca"
+                                              ItemsSource="{Binding Marca}"
+                                              DisplayMemberPath="InfoMarca"
+                                              SelectedValuePath="MarcasID"
+                                              SelectedValue="{Binding MarcaSelecctionChanged , UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"/>
+                                    
                                 </StackPanel>
 
                                 <StackPanel Grid.Column="1" Margin="10,0,0,0">
@@ -118,7 +127,8 @@
                                     <TextBlock Text="Tarifa IVA"/>
                                     <TextBox x:Name="txtTarifaIva"
                                              IsReadOnly="True"
-                                             Background="#F0F0F0"/>
+                                             Background="#F0F0F0"
+                                             Text="{Binding IvaCategoria}"/>
 
                                     <TextBlock Text="Incremento"/>
                                     <TextBox x:Name="txtIncremento"/>
