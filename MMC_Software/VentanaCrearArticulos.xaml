@@ -60,11 +60,13 @@
 
                                 <StackPanel Grid.Column="0">
                                     <TextBlock Text="Código Artículo"/>
-                                    <TextBox x:Name="txtCodigo"/>
+                                    <TextBox x:Name="txtCodigo" IsEnabled="{Binding CodigoArticulo}"/>
 
                                     <TextBlock Text="Categoría"/>
-                                    <ComboBox x:Name="cbCategoria"
-                                              SelectionChanged="cbCategoria_SelectionChanged"/>
+                                    <ComboBox x:Name="cbCategoria" ItemsSource="{Binding Categories}"
+                                              DisplayMemberPath="InfoCategoria"
+                                              SelectedValuePath="CategoriasID"
+                                              SelectedValue="CategoriaSeleccionadaID"/>
 
                                     <TextBlock Text="Subcategoría"/>
                                     <ComboBox x:Name="cbSubCategoria"/>
@@ -87,8 +89,7 @@
                                                  Width="220"
                                                  Margin="0,0,5,0"/>
                                         <Button x:Name="BtnBarras"
-                                                Style="{StaticResource BtnBuscar}"
-                                                Click="BtnBarras_Click"/>
+                                                Style="{StaticResource BtnBuscar}"/>
                                     </StackPanel>
                                 </StackPanel>
                             </Grid>
@@ -107,8 +108,7 @@
 
                                 <StackPanel Grid.Column="0">
                                     <TextBlock Text="Costo sin IVA"/>
-                                    <TextBox x:Name="txtCostoSinIva"
-                                             KeyDown="txtCostoSinIva_KeyDown"/>
+                                    <TextBox x:Name="txtCostoSinIva"/>
 
                                     <TextBlock Text="Costo con IVA"/>
                                     <TextBox x:Name="txtCostoConIva"/>
@@ -121,15 +121,13 @@
                                              Background="#F0F0F0"/>
 
                                     <TextBlock Text="Incremento"/>
-                                    <TextBox x:Name="txtIncremento"
-                                            
-                                             KeyDown="txtIncremento_KeyDown"/>
+                                    <TextBox x:Name="txtIncremento"/>
+                                    
                                 </StackPanel>
 
                                 <StackPanel Grid.Column="2" Margin="10,0,0,0">
                                     <TextBlock Text="Margen"/>
-                                    <TextBox x:Name="txtMargen"
-                                             KeyDown="txtMargen_KeyDown"/>
+                                    <TextBox x:Name="txtMargen"/>
 
                                     <TextBlock Text="Utilidad"/>
                                     <TextBox x:Name="txtUtilidad"
@@ -151,8 +149,7 @@
 
                                 <StackPanel Grid.Column="0">
                                     <TextBlock Text="Precio Venta"/>
-                                    <TextBox x:Name="txtPrecioVenta"
-                                             PreviewTextInput="txtMargen_PreviewTextInput"/>
+                                    <TextBox x:Name="txtPrecioVenta"/>
                                 </StackPanel>
 
                                 <StackPanel Grid.Column="1" Margin="10,0,0,0">

@@ -26,7 +26,7 @@ namespace MMC_Software
         {
             InitializeComponent();
             this.DataContext = new ArticulosViewModel();
+        }
 
-        }   
     }
 }
