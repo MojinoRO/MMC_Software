@@ -10,6 +10,7 @@ using System.Security.RightsManagement;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Windows.Forms.VisualStyles;
 using System.Windows.Input;
 using System.Windows.Navigation;
 
@@ -33,12 +34,24 @@ namespace MMC_Software.ViewModel
         {
             LoadedCategories();
             LoadedMarcas();
+            CmdInputNameArticle = new RelayCommand(InputName);
         }
 
+        ///<summary>
+        /// Icommand View
+        /// </summary>
+
+        public ICommand CmdInputNameArticle { get;}
 
         /// <summary>
         ///   METODOS
         /// </summary>
+
+
+        public void InputName(object obj)
+        {
+
+        }
 
         public void LoadedMarcas()
         {
@@ -76,6 +89,20 @@ namespace MMC_Software.ViewModel
             set
             {
                 _CodigoArticulo = value;
+            }
+        }
+
+        private string _Namearticle;
+        public string Namearticle
+        {
+            get => _Namearticle;
+            set
+            {
+                if(_Namearticle != value)
+                {
+                    _Namearticle = value;
+                    OnPropertyChanged(nameof(Namearticle));
+                }
             }
         }
 

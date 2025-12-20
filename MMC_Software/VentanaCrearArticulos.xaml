@@ -87,7 +87,9 @@
                                 <StackPanel Grid.Column="1" Margin="10,0,0,0">
                                     <TextBlock Text="Nombre Artículo"/>
                                     <TextBox x:Name="txtNombre"
-                                             CharacterCasing="Upper"/>
+                                             CharacterCasing="Upper"
+                                             Text="{Binding Namearticle , UpdateSourceTrigger=PropertyChanged , Mode=TwoWay}">
+                                    </TextBox>
 
                                     <TextBlock Text="Referencia Artículo"/>
                                     <TextBox x:Name="txtReferencia"/>
