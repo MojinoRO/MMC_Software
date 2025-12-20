@@ -6,6 +6,8 @@ using System.Data;
 using System.Data.SqlClient;
 using System.IO.Packaging;
 using System.Linq;
+using System.Printing;
+using System.Runtime.InteropServices;
 using System.Security.RightsManagement;
 using System.Text;
 using System.Threading.Tasks;
@@ -106,6 +108,20 @@ namespace MMC_Software.ViewModel
             }
         }
 
+        private string _Referencia;
+        public string Referencia
+        {
+            get => _Referencia;
+            set
+            {
+                if(_Referencia != value)
+                {
+                    _Referencia = value;
+                    OnPropertyChanged(nameof(Referencia));
+                }
+            }
+        }
+
         private DataTable _categories;
         public DataTable Categories
         {
@@ -144,7 +160,89 @@ namespace MMC_Software.ViewModel
                 }
             }
         }
+        private decimal _CostoSinIva;
+        public decimal CostoSinIva
+        {
+            get => _CostoSinIva;
+            set
+            {
+                if(_CostoSinIva != value)
+                {
+                    _CostoSinIva= value;
+                    OnPropertyChanged(nameof(CostoSinIva));
+                }
+            }
+        }
 
+        private decimal _CostoConIva;
+        public decimal CostoConIva
+        {
+            get => _CostoConIva;
+            set
+            {
+                if (_CostoConIva != value)
+                {
+                    _CostoConIva= value;
+                    OnPropertyChanged(nameof(CostoConIva));
+                }
+            }
+        }
+
+        private decimal _Margen;
+        public decimal Margen
+        {
+            get => _Margen;
+            set
+            {
+                if(_Margen != value)
+                {
+                    _Margen= value;
+                    OnPropertyChanged(nameof(Margen));
+                }
+            }
+        }
+
+        private decimal _Incremento;
+        public decimal Incremento
+        {
+            get => _Incremento;
+            set
+            {
+                if (_Incremento != value)
+                {
+                    _Incremento = value;
+                    OnPropertyChanged(nameof(Margen));
+                }
+            }
+        }
+
+        private decimal _PrecioVenta;
+        public decimal PrecioVenta
+        {
+            get => _PrecioVenta;
+            set
+            {
+                if(_PrecioVenta!= value)
+                {
+                    _PrecioVenta = value;
+                    OnPropertyChanged(nameof(PrecioVenta));
+                }
+            }
+        }
+
+        private decimal _PrecioMinimo;
+        public decimal PrecioMinimo
+        {
+            get => _PrecioMinimo;
+            set
+            {
+                if(_PrecioMinimo != value)
+                {
+                    _PrecioMinimo= value;
+                    OnPropertyChanged(nameof(PrecioMinimo));
+                }
+            }
+        }
 
         private decimal _IvaCategoria;
         public decimal IvaCategoria

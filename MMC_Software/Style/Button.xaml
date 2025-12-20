@@ -110,5 +110,15 @@
         <Setter Property="Content" Value="&#xE8FD;"/>
         <Setter Property="ToolTip" Value="Guardar cambios"/>
     </Style>
-    
+
+    <Style x:Key="TextBox" TargetType="TextBox">
+        <Setter Property="Height" Value="26"/>
+        <Setter Property="Margin" Value="0,2"/>
+    </Style>
+
+    <Style TargetType="ComboBox">
+        <Setter Property="MinHeight" Value="26"/>
+        <Setter Property="Margin" Value="0,2"/>
+    </Style>
+
 </ResourceDictionary>
