@@ -239,7 +239,7 @@
                     Effect="{StaticResource CardShadow}">
 
             <!-- PARÁMETROS -->
-            <Expander Header="📦 Parámetros Básicos"
+            <Expander Header="📦 Gestion De Inventarios"
                       IsExpanded="True"
                       Background="#B6D1E8"
                       FontWeight="Bold"

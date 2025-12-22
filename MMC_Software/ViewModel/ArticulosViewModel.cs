@@ -1,4 +1,6 @@
-﻿using MMC_Software.Repositorys;
+﻿using MMC_Software.Helpers;
+using MMC_Software.Repositorys;
+using MMC_Software.Services;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -11,6 +13,7 @@ using System.Runtime.InteropServices;
 using System.Security.RightsManagement;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Data;
 using System.Windows.Forms;
 using System.Windows.Forms.VisualStyles;
 using System.Windows.Input;
@@ -20,6 +23,8 @@ namespace MMC_Software.ViewModel
 {
     public class ArticulosViewModel : INotifyPropertyChanged
     {
+        public static readonly serviceTransactionCreationArticle SeviceArticuleCreation = new serviceTransactionCreationArticle();
+        public static readonly RepositorioOperacionesMatematicas RepoMate = new RepositorioOperacionesMatematicas();
         public static readonly RepositoryCreacionArticulos RepoCreacionArticulos = new RepositoryCreacionArticulos(
             ConfiguracionConexion.ObtenerCadenaConexion(ConexionEmpresaActual.BaseDeDatosSeleccionada));
         public int ArticulosID { get; }
@@ -36,23 +41,62 @@ namespace MMC_Software.ViewModel
         {
             LoadedCategories();
             LoadedMarcas();
-            CmdInputNameArticle = new RelayCommand(InputName);
+            CalCostPlusTax = new RelayCommand(CalculatorCostPlusTax);
+            CalCostMenTax = new RelayCommand(CalculatorCostMeTax);
+            CalculatePriceSale = new RelayCommand(CalculatorPriceSale);
+            CalculatePriceMinim = new RelayCommand(CalculatorPriceMinim);
+            CreateNewArticle = new RelayCommand(GetCodeArticle);
         }
 
         ///<summary>
         /// Icommand View
         /// </summary>
 
-        public ICommand CmdInputNameArticle { get;}
+        public ICommand CalCostPlusTax { get; }
+        public ICommand CalCostMenTax { get; }
+        public ICommand CalculatePriceSale { get; }
+        public ICommand CalculatePriceMinim {  get; }
+        public ICommand CreateNewArticle { get; }
 
         /// <summary>
         ///   METODOS
         /// </summary>
+        /// 
 
-
-        public void InputName(object obj)
+        public void GetCodeArticle(object obj)
         {
+            if(ArticulosID == 0)
+            {
+                string CodigoNew = SeviceArticuleCreation.GenerateCodeArticle();
+                CodigoArticulo = CodigoNew;
+                MessageBox.Show(CodigoNew);
+            }
+        }
+        public void CalculatorPriceMinim(object obj)
+        {
+            PrecioMinimo = Math.Round(RepoMate.CalcularValorVentaIncremento(2, CostoSinIva, Margen, IvaCategoria),2);
+            if (PrecioMinimo > PrecioVenta)
+            {
+                PrecioVenta = PrecioMinimo;
+            }
+        }
+        public void CalculatorPriceSale(object obj)
+        {
+            PrecioVenta = RepoMate.CalcularValorVentaIncremento(2, CostoSinIva,Incremento, IvaCategoria);
+            Utilidad = PrecioVenta - CostoConIva;
+        }
 
+        public void CalculatorCostPlusTax(object obj)
+        {
+            CostoConIva = Math.Round(RepoMate.CalcularValorMasIva(CostoSinIva, IvaCategoria),2);
+            PrecioVenta = CostoConIva;
+            PrecioMinimo = CostoConIva;
+        }
+
+        public void CalculatorCostMeTax(object obj)
+        {
+            CostoSinIva = Math.Round(RepoMate.CalcularValirSinIva(CostoConIva,IvaCategoria),2);
+            PrecioVenta = CostoConIva;
         }
 
         public void LoadedMarcas()
@@ -83,14 +127,16 @@ namespace MMC_Software.ViewModel
         /// <summary>
         ///       PROPIEDADES DE VIEW MODEL 
         /// </summary>
+        public bool _Actualizando = false;
 
-        private bool _CodigoArticulo = false;
-        public bool CodigoArticulo
+        private string _CodigoArticulo;
+        public string  CodigoArticulo
         {
             get { return _CodigoArticulo; }
             set
             {
                 _CodigoArticulo = value;
+                OnPropertyChanged(nameof(CodigoArticulo));
             }
         }
 
@@ -170,6 +216,7 @@ namespace MMC_Software.ViewModel
                 {
                     _CostoSinIva= value;
                     OnPropertyChanged(nameof(CostoSinIva));
+                    
                 }
             }
         }
@@ -211,7 +258,7 @@ namespace MMC_Software.ViewModel
                 if (_Incremento != value)
                 {
                     _Incremento = value;
-                    OnPropertyChanged(nameof(Margen));
+                    OnPropertyChanged(nameof(Incremento));
                 }
             }
         }
@@ -240,6 +287,20 @@ namespace MMC_Software.ViewModel
                 {
                     _PrecioMinimo= value;
                     OnPropertyChanged(nameof(PrecioMinimo));
+                }
+            }
+        }
+
+        private decimal _Utilidad;
+        public decimal Utilidad
+        {
+            get => _Utilidad;
+            set
+            {
+                if(_Utilidad != value)
+                {
+                    _Utilidad = value;
+                    OnPropertyChanged(nameof(Utilidad));
                 }
             }
         }
@@ -309,6 +370,80 @@ namespace MMC_Software.ViewModel
                 OnPropertyChanged(nameof(MarcaSelecctionChanged));
             }
         }
-    }
 
+        ///<summary>
+        ///
+        /// Botones
+        /// </summary>
+        /// 
+        private bool _BtnCrear= true;  
+        public bool BtnCrear
+        {
+            get =>_BtnCrear;
+            set
+            {
+                if (_BtnCrear!=value)
+                {
+                    _BtnCrear=value;
+                    OnPropertyChanged(nameof(BtnCrear));
+                }
+            }
+        }
+
+        private bool _BtnEditar= true;
+        public bool BtnEditar
+        {
+            get=>_BtnEditar;
+            set
+            {
+                if(_BtnEditar != value)
+                {
+                    _BtnEditar = value;
+                    OnPropertyChanged(nameof(BtnEditar));
+                }
+            }
+        }
+
+        private bool _BtnDelete= true;
+        public bool BtnDelete
+        {
+            get=> _BtnDelete;
+            set
+            {
+                if (_BtnDelete != value)
+                {
+                    _BtnDelete=value;  
+                    OnPropertyChanged(nameof(BtnDelete));
+                }
+            }
+        }
+
+        private bool _BtnGuarde= true;
+        public bool BtnGuarde
+        {
+            get => _BtnGuarde;
+            set
+            {
+               if( _BtnGuarde != value)
+                {
+                    _BtnGuarde = value;
+                    OnPropertyChanged(nameof(BtnGuarde));
+                }
+            }
+        }
+
+        private bool _BtnClose =true;
+        public bool BtnClose
+        {
+            get=>_BtnClose;
+            set
+            {
+                if(_BtnClose != value)
+                {
+                    _BtnClose=value;
+                    OnPropertyChanged(nameof(BtnClose));
+                }
+            }
+        }
+    }
 }

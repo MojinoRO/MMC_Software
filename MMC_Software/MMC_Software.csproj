@@ -127,6 +127,7 @@
     <Compile Include="Repositorys\RepositoryArticulos.cs" />
     <Compile Include="Repositorys\RepositoryCreacionArticulos.cs" />
     <Compile Include="Services\CultureInfoHelper.cs" />
+    <Compile Include="Services\ServicesTransactionArticulos.cs" />
     <Compile Include="ViewModel\ArticulosViewModel.cs" />
     <Compile Include="ViewModel\HelperCommandsViewModel.cs" />
     <Compile Include="ImpresionDocumentos.xaml.cs">

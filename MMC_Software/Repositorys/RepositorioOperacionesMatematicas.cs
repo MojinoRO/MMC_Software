@@ -29,7 +29,7 @@ namespace MMC_Software
         {
             // el parametro que se le pone de tipo de redondeo va ser para que redondie o no 
             // 1 sin redondeo 
-            // con redondeo
+            // 2 con redondeo
             decimal VentaMasUtilidad = CostoSinIva * (1 + (Incremento / 100));
             decimal Resultado = VentaMasUtilidad * (1 + iva / 100);
 

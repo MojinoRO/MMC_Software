@@ -5,221 +5,593 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         mc:Ignorable="d"
         Title="Creación de Artículos"
-        Height="550"
-        Width="850"
+        Height="700"
+        Width="1100"
         WindowStartupLocation="CenterScreen"
         WindowStyle="None"
-        Background="#F4F6F8">
+        AllowsTransparency="True"
+        Background="Transparent"
+        ResizeMode="CanResize">
 
-    <Grid Margin="15">
-        <Border Background="White"
-                CornerRadius="10"
-                BorderBrush="#E0E0E0"
-                BorderThickness="1">
+    <Border Background="#FFFFFF" 
+            CornerRadius="15"
+            BorderThickness="1"
+            BorderBrush="#E0E0E0">
+        <Border.Effect>
+            <DropShadowEffect Color="#000000" 
+                            BlurRadius="30" 
+                            ShadowDepth="0" 
+                            Opacity="0.12"/>
+        </Border.Effect>
 
-            <Grid>
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="55"/>
-                    <RowDefinition Height="*"/>
-                    <RowDefinition Height="60"/>
-                </Grid.RowDefinitions>
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="60"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="70"/>
+            </Grid.RowDefinitions>
 
-                <!-- =======================
-                     HEADER ERP
-                     ======================= -->
-                <Border Background="#2C3E50"
-                        CornerRadius="10,10,0,0">
-                    <TextBlock Text="📦 Creación de Artículos"
-                               Foreground="White"
-                               FontSize="20"
-                               FontWeight="SemiBold"
-                               VerticalAlignment="Center"
-                               Margin="20,0"/>
-                </Border>
+            <!-- =======================
+                 HEADER EMPRESARIAL
+                 ======================= -->
+            <Border Background="#2C3E50"
+                    CornerRadius="15,15,0,0">
+                <Grid Margin="25,0">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="Auto"/>
+                    </Grid.ColumnDefinitions>
 
-                <!-- =======================
-                     CONTENIDO
-                     ======================= -->
-                <ScrollViewer Grid.Row="1"
-                              VerticalScrollBarVisibility="Auto">
+                    <!-- Logo y Título -->
+                    <StackPanel Orientation="Horizontal" 
+                                VerticalAlignment="Center"
+                                Grid.Column="0">
+                        <Border Background="#4A90E2" 
+                                Width="38" 
+                                Height="38" 
+                                CornerRadius="8"
+                                Margin="0,0,15,0">
+                            <TextBlock Text="📦" 
+                                     FontSize="22" 
+                                     HorizontalAlignment="Center" 
+                                     VerticalAlignment="Center"/>
+                        </Border>
 
-                    <StackPanel Margin="20">
-
-                        <!-- DATOS ARTÍCULO -->
-                        <GroupBox Header="Información General"
-                                  FontWeight="SemiBold"
-                                  Margin="0,0,0,15">
-
-                            <Grid Margin="10">
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="*"/>
-                                    <ColumnDefinition Width="*"/>
-                                </Grid.ColumnDefinitions>
-
-                                <!-- COLUMNA IZQ -->
-                                <Grid Grid.Column="0">
-                                    <Grid.RowDefinitions>
-                                        <RowDefinition/>
-                                        <RowDefinition/>
-                                        <RowDefinition/>
-                                        <RowDefinition/>
-                                    </Grid.RowDefinitions>
-
-                                    <StackPanel>
-                                        <TextBlock Text="Código Artículo"/>
-                                        <TextBox x:Name="txtCodigo"
-                                                 Style="{StaticResource TextBox}"
-                                                 IsEnabled="{Binding CodigoArticulo}"/>
-                                    </StackPanel>
-
-                                    <StackPanel Grid.Row="1">
-                                        <TextBlock Text="Categoría"/>
-                                        <ComboBox x:Name="cbCategoria"
-                                                  ItemsSource="{Binding Categories}"
-                                                  DisplayMemberPath="InfoCategorias"
-                                                  SelectedItem="{Binding Categoriesselection, Mode=TwoWay}"
-                                                  SelectedValuePath="CategoriasID"/>
-                                    </StackPanel>
-
-                                    <StackPanel Grid.Row="2">
-                                        <TextBlock Text="Subcategoría"/>
-                                        <ComboBox x:Name="cbSubCategoria"
-                                                  ItemsSource="{Binding SubCategories}"
-                                                  DisplayMemberPath="InfoSubCategoria"
-                                                  SelectedValuePath="SubCategoriaID"
-                                                  SelectedValue="{Binding SubCategoriesSelecctionID , Mode=TwoWay}"/>
-                                    </StackPanel>
-
-                                    <StackPanel Grid.Row="3">
-                                        <TextBlock Text="Marca"/>
-                                        <ComboBox x:Name="cbMarca"
-                                                  ItemsSource="{Binding Marca}"
-                                                  DisplayMemberPath="InfoMarca"
-                                                  SelectedValuePath="MarcasID"
-                                                  SelectedValue="{Binding MarcaSelecctionChanged , Mode=TwoWay}"/>
-                                    </StackPanel>
-                                </Grid>
-
-                                <!-- COLUMNA DER -->
-                                <Grid Grid.Column="1" Margin="15,0,0,0">
-                                    <Grid.RowDefinitions>
-                                        <RowDefinition/>
-                                        <RowDefinition/>
-                                        <RowDefinition/>
-                                    </Grid.RowDefinitions>
-
-                                    <StackPanel>
-                                        <TextBlock Text="Nombre Artículo"/>
-                                        <TextBox x:Name="txtNombre"
-                                                 Style="{StaticResource TextBox}"
-                                                 CharacterCasing="Upper"
-                                                 Text="{Binding Namearticle , Mode=TwoWay}"/>
-                                    </StackPanel>
-
-                                    <StackPanel Grid.Row="1">
-                                        <TextBlock Text="Referencia"/>
-                                        <TextBox x:Name="txtReferencia"
-                                                 Style="{StaticResource TextBox}"
-                                                 Text="{Binding Referencia , Mode=TwoWay}"/>
-                                    </StackPanel>
-
-                                    <StackPanel Grid.Row="2">
-                                        <TextBlock Text="Código de Barras"/>
-                                        <StackPanel Orientation="Horizontal">
-                                            <TextBox x:Name="TxtBarras"
-                                                     Width="220"
-                                                     Margin="0,0,5,0"
-                                                     Height="25"/>
-                                            <Button x:Name="BtnBarras"
-                                                    Style="{StaticResource BtnBuscar}"/>
-                                        </StackPanel>
-                                    </StackPanel>
-                                </Grid>
-                            </Grid>
-                        </GroupBox>
-
-                        <!-- COSTOS -->
-                        <GroupBox Header="Costos e Impuestos"
-                                  FontWeight="SemiBold">
-
-                            <Grid Margin="10">
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition/>
-                                    <ColumnDefinition/>
-                                    <ColumnDefinition/>
-                                    <ColumnDefinition/>
-                                </Grid.ColumnDefinitions>
-
-                                <StackPanel>
-                                    <TextBlock Text="Costo sin IVA"/>
-                                    <TextBox x:Name="txtCostoSinIva"
-                                             Text="{Binding CostoSinIva , Mode=TwoWay}"/>
-
-                                    <TextBlock Text="Costo con IVA"/>
-                                    <TextBox x:Name="txtCostoConIva"
-                                             Text="{Binding CostoConIva , Mode=TwoWay}"/>
-                                </StackPanel>
-
-                                <StackPanel Grid.Column="1">
-                                    <TextBlock Text="Tarifa IVA"/>
-                                    <TextBox x:Name="txtTarifaIva"
-                                             Width="60"
-                                             IsReadOnly="True"
-                                             Background="#F0F0F0"
-                                             Text="{Binding IvaCategoria}"/>
-
-                                    <TextBlock Text="Incremento"/>
-                                    <TextBox x:Name="txtIncremento"
-                                             Width="60"/>
-                                </StackPanel>
-
-                                <StackPanel Grid.Column="2">
-                                    <TextBlock Text="Margen"/>
-                                    <TextBox x:Name="txtMargen"
-                                             Width="60"/>
-
-                                    <TextBlock Text="Utilidad"/>
-                                    <TextBox x:Name="txtUtilidad"
-                                             IsReadOnly="True"
-                                             Background="#F0F0F0"
-                                             Width="60"/>
-                                </StackPanel>
-
-                                <StackPanel Grid.Column="3">
-                                    <TextBlock Text="Precio Venta"/>
-                                    <TextBox x:Name="txtPrecioVenta"/>
-
-                                    <TextBlock Text="Precio Mínimo"/>
-                                    <TextBox x:Name="txtPrecioMinimo"
-                                             IsReadOnly="True"
-                                             Background="#F0F0F0"/>
-                                </StackPanel>
-                            </Grid>
-                        </GroupBox>
-
+                        <StackPanel VerticalAlignment="Center">
+                            <TextBlock Text="Gestión de Artículos"
+                                     Foreground="White"
+                                     FontSize="16"
+                                     FontWeight="SemiBold"
+                                     Margin="0,0,0,2"/>
+                            <TextBlock Text="Módulo de Inventario • Sistema ERP"
+                                     Foreground="#95A5A6"
+                                     FontSize="10.5"
+                                     FontWeight="Regular"/>
+                        </StackPanel>
                     </StackPanel>
-                </ScrollViewer>
+                </Grid>
+            </Border>
 
-                <!-- =======================
-                     BOTONERA ERP
-                     ======================= -->
-                <Border Grid.Row="2"
-                        Background="#ECF0F1"
-                        CornerRadius="0,0,10,10">
+            <!-- =======================
+                 CONTENIDO PRINCIPAL
+                 ======================= -->
+            <Grid Grid.Row="1" Background="#F8F9FA">
+                <ScrollViewer VerticalScrollBarVisibility="Auto"
+                              HorizontalScrollBarVisibility="Disabled"
+                              Padding="25,20">
+
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="2*"/>
+                            <ColumnDefinition Width="20"/>
+                            <ColumnDefinition Width="1*"/>
+                        </Grid.ColumnDefinitions>
+
+                        <!-- PANEL IZQUIERDO: DATOS PRINCIPALES -->
+                        <StackPanel Grid.Column="0">
+
+                            <!-- SECCIÓN: IDENTIFICACIÓN -->
+                            <Border Background="White"
+                                    CornerRadius="12"
+                                    Padding="20"
+                                    Margin="0,0,0,15"
+                                    BorderThickness="1"
+                                    BorderBrush="#E8EAED">
+                                <StackPanel>
+                                    <!-- Header de Sección -->
+                                    <Grid Margin="0,0,0,15">
+                                        <StackPanel Orientation="Horizontal">
+                                            <Border Background="#E3F2FD"
+                                                    Width="32"
+                                                    Height="32"
+                                                    CornerRadius="6"
+                                                    Margin="0,0,10,0">
+                                                <TextBlock Text="🏷️"
+                                                         FontSize="16"
+                                                         HorizontalAlignment="Center"
+                                                         VerticalAlignment="Center"/>
+                                            </Border>
+                                            <StackPanel VerticalAlignment="Center">
+                                                <TextBlock Text="Identificación del Artículo"
+                                                         FontSize="14"
+                                                         FontWeight="SemiBold"
+                                                         Foreground="#2C3E50"/>
+                                                <TextBlock Text="Datos básicos de identificación"
+                                                         FontSize="10"
+                                                         Foreground="#7F8C8D"
+                                                         Margin="0,2,0,0"/>
+                                            </StackPanel>
+                                        </StackPanel>
+                                    </Grid>
+
+                                    <!-- Grid de Campos -->
+                                    <Grid>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="*"/>
+                                            <ColumnDefinition Width="15"/>
+                                            <ColumnDefinition Width="*"/>
+                                        </Grid.ColumnDefinitions>
+                                        <Grid.RowDefinitions>
+                                            <RowDefinition Height="Auto"/>
+                                            <RowDefinition Height="Auto"/>
+                                            <RowDefinition Height="Auto"/>
+                                        </Grid.RowDefinitions>
+
+                                        <!-- Código Artículo -->
+                                        <StackPanel Grid.Row="0" Grid.Column="0" Margin="0,0,0,12">
+                                            <TextBlock Text="Código Artículo *"
+                                                     Foreground="#34495E"
+                                                     FontSize="11.5"
+                                                     FontWeight="Medium"
+                                                     Margin="0,0,0,5"/>
+                                            <TextBox x:Name="txtCodigo"
+                                                   Style="{StaticResource TextBox}"
+                                                   Text="{Binding CodigoArticulo, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
+                                                   FontWeight="SemiBold"/>
+                                        </StackPanel>
+
+                                        <!-- Nombre Artículo -->
+                                        <StackPanel Grid.Row="0" Grid.Column="2" Margin="0,0,0,12">
+                                            <TextBlock Text="Nombre del Artículo *"
+                                                     Foreground="#34495E"
+                                                     FontSize="11.5"
+                                                     FontWeight="Medium"
+                                                     Margin="0,0,0,5"/>
+                                            <TextBox x:Name="txtNombre"
+                                                   Style="{StaticResource TextBox}"
+                                                   CharacterCasing="Upper"
+                                                   Text="{Binding Namearticle, UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}"/>
+                                        </StackPanel>
+
+                                        <!-- Referencia -->
+                                        <StackPanel Grid.Row="1" Grid.Column="0" Margin="0,0,0,12">
+                                            <TextBlock Text="Referencia"
+                                                     Foreground="#34495E"
+                                                     FontSize="11.5"
+                                                     FontWeight="Medium"
+                                                     Margin="0,0,0,5"/>
+                                            <TextBox x:Name="txtReferencia"
+                                                   Style="{StaticResource TextBox}"
+                                                   Text="{Binding Referencia, UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}"/>
+                                        </StackPanel>
+
+                                        <!-- Código de Barras -->
+                                        <StackPanel Grid.Row="1" Grid.Column="2">
+                                            <TextBlock Text="Código de Barras"
+                                                     Foreground="#34495E"
+                                                     FontSize="11.5"
+                                                     FontWeight="Medium"
+                                                     Margin="0,0,0,5"/>
+                                            <Grid>
+                                                <Grid.ColumnDefinitions>
+                                                    <ColumnDefinition Width="*"/>
+                                                    <ColumnDefinition Width="8"/>
+                                                    <ColumnDefinition Width="Auto"/>
+                                                </Grid.ColumnDefinitions>
+
+                                                <TextBox x:Name="TxtBarras"
+                                                       Style="{StaticResource TextBox}"/>
+
+                                                <Button x:Name="BtnBarras"
+                                                      Grid.Column="2"
+                                                      Style="{StaticResource BtnBuscar}"/>
+                                            </Grid>
+                                        </StackPanel>
+                                    </Grid>
+                                </StackPanel>
+                            </Border>
+
+                            <!-- SECCIÓN: CLASIFICACIÓN -->
+                            <Border Background="White"
+                                    CornerRadius="12"
+                                    Padding="20"
+                                    Margin="0,0,0,15"
+                                    BorderThickness="1"
+                                    BorderBrush="#E8EAED">
+                                <StackPanel>
+                                    <!-- Header de Sección -->
+                                    <Grid Margin="0,0,0,15">
+                                        <StackPanel Orientation="Horizontal">
+                                            <Border Background="#F3E5F5"
+                                                    Width="32"
+                                                    Height="32"
+                                                    CornerRadius="6"
+                                                    Margin="0,0,10,0">
+                                                <TextBlock Text="📂"
+                                                         FontSize="16"
+                                                         HorizontalAlignment="Center"
+                                                         VerticalAlignment="Center"/>
+                                            </Border>
+                                            <StackPanel VerticalAlignment="Center">
+                                                <TextBlock Text="Clasificación"
+                                                         FontSize="14"
+                                                         FontWeight="SemiBold"
+                                                         Foreground="#2C3E50"/>
+                                                <TextBlock Text="Categorización y agrupación"
+                                                         FontSize="10"
+                                                         Foreground="#7F8C8D"
+                                                         Margin="0,2,0,0"/>
+                                            </StackPanel>
+                                        </StackPanel>
+                                    </Grid>
+
+                                    <!-- Grid de Clasificación -->
+                                    <Grid>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="*"/>
+                                            <ColumnDefinition Width="15"/>
+                                            <ColumnDefinition Width="*"/>
+                                            <ColumnDefinition Width="15"/>
+                                            <ColumnDefinition Width="*"/>
+                                        </Grid.ColumnDefinitions>
+
+                                        <!-- Categoría -->
+                                        <StackPanel Grid.Column="0">
+                                            <TextBlock Text="Categoría *"
+                                                     Foreground="#34495E"
+                                                     FontSize="11.5"
+                                                     FontWeight="Medium"
+                                                     Margin="0,0,0,5"/>
+                                            <ComboBox x:Name="cbCategoria"
+                                                    ItemsSource="{Binding Categories}"
+                                                    DisplayMemberPath="InfoCategorias"
+                                                    SelectedItem="{Binding Categoriesselection, Mode=TwoWay}"
+                                                    SelectedValuePath="CategoriasID"
+                                                    Height="26"/>
+                                        </StackPanel>
+
+                                        <!-- Subcategoría -->
+                                        <StackPanel Grid.Column="2">
+                                            <TextBlock Text="Subcategoría"
+                                                     Foreground="#34495E"
+                                                     FontSize="11.5"
+                                                     FontWeight="Medium"
+                                                     Margin="0,0,0,5"/>
+                                            <ComboBox x:Name="cbSubCategoria"
+                                                    ItemsSource="{Binding SubCategories}"
+                                                    DisplayMemberPath="InfoSubCategoria"
+                                                    SelectedValuePath="SubCategoriaID"
+                                                    SelectedValue="{Binding SubCategoriesSelecctionID, Mode=TwoWay}"
+                                                    Height="26"/>
+                                        </StackPanel>
+
+                                        <!-- Marca -->
+                                        <StackPanel Grid.Column="4">
+                                            <TextBlock Text="Marca"
+                                                     Foreground="#34495E"
+                                                     FontSize="11.5"
+                                                     FontWeight="Medium"
+                                                     Margin="0,0,0,5"/>
+                                            <ComboBox x:Name="cbMarca"
+                                                    ItemsSource="{Binding Marca}"
+                                                    DisplayMemberPath="InfoMarca"
+                                                    SelectedValuePath="MarcasID"
+                                                    SelectedValue="{Binding MarcaSelecctionChanged, Mode=TwoWay}"
+                                                    Height="26"/>
+                                        </StackPanel>
+                                    </Grid>
+                                </StackPanel>
+                            </Border>
+
+                            <!-- SECCIÓN: COSTOS BASE -->
+                            <Border Background="White"
+                                    CornerRadius="12"
+                                    Padding="20"
+                                    BorderThickness="1"
+                                    BorderBrush="#E8EAED">
+                                <StackPanel>
+                                    <!-- Header de Sección -->
+                                    <Grid Margin="0,0,0,15">
+                                        <StackPanel Orientation="Horizontal">
+                                            <Border Background="#E8F5E9"
+                                                    Width="32"
+                                                    Height="32"
+                                                    CornerRadius="6"
+                                                    Margin="0,0,10,0">
+                                                <TextBlock Text="💰"
+                                                         FontSize="16"
+                                                         HorizontalAlignment="Center"
+                                                         VerticalAlignment="Center"/>
+                                            </Border>
+                                            <StackPanel VerticalAlignment="Center">
+                                                <TextBlock Text="Estructura de Costos"
+                                                         FontSize="14"
+                                                         FontWeight="SemiBold"
+                                                         Foreground="#2C3E50"/>
+                                                <TextBlock Text="Costos base e impuestos aplicables"
+                                                         FontSize="10"
+                                                         Foreground="#7F8C8D"
+                                                         Margin="0,2,0,0"/>
+                                            </StackPanel>
+                                        </StackPanel>
+                                    </Grid>
+
+                                    <!-- Grid de Costos -->
+                                    <Grid>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="*"/>
+                                            <ColumnDefinition Width="*"/>
+                                            <ColumnDefinition Width="*"/>
+                                            <ColumnDefinition Width="*"/>
+                                        </Grid.ColumnDefinitions>
+                                        <Grid.RowDefinitions>
+                                            <RowDefinition Height="Auto"/>
+                                            <RowDefinition Height="Auto"/>
+                                        </Grid.RowDefinitions>
+
+                                        <!-- Costo sin IVA -->
+                                        <StackPanel Grid.Row="0" Grid.Column="0" Margin="0,0,8,12">
+                                            <TextBlock Text="Costo sin IVA *"
+                                                     Foreground="#34495E"
+                                                     FontSize="11.5"
+                                                     FontWeight="Medium"
+                                                     Margin="0,0,0,5"/>
+                                            <TextBox x:Name="txtCostoSinIva"
+                                                   Text="{Binding CostoSinIva, UpdateSourceTrigger=PropertyChanged,Mode=TwoWay ,ValidatesOnExceptions=True,NotifyOnValidationError=True}"
+                                                    Style="{StaticResource TextBox}">
+                                                <TextBox.InputBindings>
+                                                    <KeyBinding Key="Enter" Command="{Binding CalCostPlusTax}"/>
+                                                </TextBox.InputBindings>
+                                            </TextBox>
+                                        </StackPanel>
+
+                                        <!-- Tarifa IVA -->
+                                        <StackPanel Grid.Row="0" Grid.Column="1" Margin="0,0,8,12">
+                                            <TextBlock Text="Tarifa IVA (%)"
+                                                     Foreground="#34495E"
+                                                     FontSize="11.5"
+                                                     FontWeight="Medium"
+                                                     Margin="0,0,0,5"/>
+                                            <TextBox x:Name="txtTarifaIva"
+                                                   IsReadOnly="True"
+                                                   Background="#ECF0F1"
+                                                   Text="{Binding IvaCategoria}"
+                                                   Style="{StaticResource TextBox}"/>
+                                        </StackPanel>
+
+                                        <!-- Costo con IVA -->
+                                        <StackPanel Grid.Row="0" Grid.Column="2" Margin="0,0,8,12">
+                                            <TextBlock Text="Costo con IVA"
+                                                     Foreground="#34495E"
+                                                     FontSize="11.5"
+                                                     FontWeight="Medium"
+                                                     Margin="0,0,0,5"/>
+                                            <TextBox x:Name="txtCostoConIva"
+                                                   Text="{Binding CostoConIva, Mode=TwoWay , UpdateSourceTrigger=PropertyChanged}"
+                                                   Style="{StaticResource TextBox}">
+                                                <TextBox.InputBindings>
+                                                    <KeyBinding Key="Enter" Command="{Binding CalCostMenTax}"/>
+                                                </TextBox.InputBindings>
+                                            </TextBox>
+                                        </StackPanel>
+
+                                        <!-- Incremento -->
+                                        <StackPanel Grid.Row="1" Grid.Column="0" Margin="0,0,8,0">
+                                            <TextBlock Text="Incremento (%)"
+                                                     Foreground="#34495E"
+                                                     FontSize="11.5"
+                                                     FontWeight="Medium"
+                                                     Margin="0,0,0,5"/>
+                                            <TextBox x:Name="txtIncremento"
+                                                     Style="{StaticResource TextBox}"
+                                                     Text="{Binding Incremento , UpdateSourceTrigger=PropertyChanged , Mode=TwoWay}">
+                                                <TextBox.InputBindings>
+                                                    <KeyBinding Key="Enter" Command="{Binding CalculatePriceSale}"></KeyBinding>
+                                                </TextBox.InputBindings>
+                                            </TextBox>
+                                        </StackPanel>
+
+                                        <!-- Margen -->
+                                        <StackPanel Grid.Row="1" Grid.Column="1" Margin="0,0,8,0">
+                                            <TextBlock Text="Margen (%)"
+                                                     Foreground="#34495E"
+                                                     FontSize="11.5"
+                                                     FontWeight="Medium"
+                                                     Margin="0,0,0,5"/>
+                                            <TextBox x:Name="txtMargen"
+                                                     Style="{StaticResource TextBox}"
+                                                     Text="{Binding Margen ,UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}">
+                                                <TextBox.InputBindings>
+                                                    <KeyBinding Key="Enter" Command="{ Binding CalculatePriceMinim}" ></KeyBinding>
+                                                </TextBox.InputBindings>
+                                            </TextBox>
+                                        </StackPanel>
+
+                                        <!-- Utilidad -->
+                                        <StackPanel Grid.Row="1" Grid.Column="2" Margin="0,0,8,0">
+                                            <TextBlock Text="Utilidad"
+                                                     Foreground="#34495E"
+                                                     FontSize="11.5"
+                                                     FontWeight="Medium"
+                                                     Margin="0,0,0,5"/>
+                                            <TextBox x:Name="txtUtilidad"
+                                                     Background="#ECF0F1"
+                                                     Style="{StaticResource TextBox}"
+                                                     Text="{Binding Utilidad , UpdateSourceTrigger=PropertyChanged}"/>
+                                        </StackPanel>
+                                    </Grid>
+                                </StackPanel>
+                            </Border>
+
+                        </StackPanel>
+
+                        <!-- PANEL DERECHO: PRECIOS Y RESUMEN -->
+                        <StackPanel Grid.Column="2">
+
+                            <!-- TARJETA: PRECIO DE VENTA -->
+                            <Border Background="White"
+                                    CornerRadius="12"
+                                    Padding="20"
+                                    Margin="0,0,0,15"
+                                    BorderThickness="1"
+                                    BorderBrush="#E8EAED">
+                                <StackPanel>
+                                    <Grid Margin="0,0,0,12">
+                                        <Border Background="#E8F5E9"
+                                                Width="32"
+                                                Height="32"
+                                                CornerRadius="6"
+                                                HorizontalAlignment="Left">
+                                            <TextBlock Text="💵"
+                                                     FontSize="16"
+                                                     HorizontalAlignment="Center"
+                                                     VerticalAlignment="Center"/>
+                                        </Border>
+                                    </Grid>
+
+                                    <TextBlock Text="Precio de Venta"
+                                             FontSize="12"
+                                             Foreground="#7F8C8D"
+                                             Margin="0,0,0,8"/>
+
+                                    <TextBox x:Name="txtPrecioVenta"
+                                             Style="{StaticResource TextBox}"
+                                             FontSize="20"
+                                             Height="40"
+                                             FontWeight="Bold"
+                                             Foreground="Black"
+                                             Background="#F0F9F4"
+                                             BorderBrush="#2ECC71"
+                                             BorderThickness="2"
+                                             Text="{Binding PrecioVenta}"/>
+
+                                    <Border Height="1" 
+                                            Background="#E8EAED" 
+                                            Margin="0,15"/>
+
+                                    <TextBlock Text="Precio Mínimo"
+                                             FontSize="11"
+                                             Foreground="#7F8C8D"
+                                             Margin="0,0,0,5"/>
+
+                                    <TextBox x:Name="txtPrecioMinimo"
+                                               IsReadOnly="True"
+                                               Background="#ECF0F1"
+                                               Style="{StaticResource TextBox}"
+                                               FontSize="14"
+                                               Height="32"
+                                               FontWeight="SemiBold"
+                                               Foreground="#E74C3C"
+                                              Text="{Binding PrecioMinimo}"/>
+                                </StackPanel>
+                            </Border>
+
+                            <!-- TARJETA: INFORMACIÓN RÁPIDA -->
+                            <Border Background="White"
+                                    CornerRadius="12"
+                                    Padding="20"
+                                    BorderThickness="1"
+                                    BorderBrush="#E8EAED">
+                                <StackPanel>
+                                    <TextBlock Text="ℹ️ Información"
+                                             FontSize="13"
+                                             FontWeight="SemiBold"
+                                             Foreground="#2C3E50"
+                                             Margin="0,0,0,12"/>
+
+                                    <StackPanel Margin="0,0,0,10">
+                                        <TextBlock Text="Campos Obligatorios"
+                                                 FontSize="10.5"
+                                                 Foreground="#7F8C8D"
+                                                 Margin="0,0,0,4"/>
+                                        <TextBlock Text="• Código Artículo
+• Nombre Artículo
+• Categoría
+• Costo sin IVA"
+                                                 FontSize="10"
+                                                 Foreground="#34495E"
+                                                 LineHeight="16"/>
+                                    </StackPanel>
+
+                                    <Border Height="1" 
+                                            Background="#E8EAED" 
+                                            Margin="0,8,0,12"/>
+
+                                    <TextBlock Text="💡 Sugerencia"
+                                             FontSize="10"
+                                             Foreground="#7F8C8D"
+                                             TextWrapping="Wrap"
+                                             LineHeight="14">
+                                        Complete todos los campos para obtener cálculos precisos de precios y márgenes de ganancia.
+                                    </TextBlock>
+                                </StackPanel>
+                            </Border>
+
+                        </StackPanel>
+
+                    </Grid>
+                </ScrollViewer>
+            </Grid>
+
+            <!-- =======================
+                 FOOTER CON ACCIONES
+                 ======================= -->
+            <Border Grid.Row="2"
+                    Background="#F8F9FA"
+                    BorderBrush="#E8EAED"
+                    BorderThickness="0,1,0,0">
+                <Grid Margin="25,0">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="Auto"/>
+                    </Grid.ColumnDefinitions>
+
+                    <!-- Estado -->
+                    <StackPanel Orientation="Horizontal" 
+                                VerticalAlignment="Center"
+                                Grid.Column="0">
+                        <Border Background="#E8F5E9"
+                                CornerRadius="12"
+                                Padding="10,5">
+                            <TextBlock Text="✓ Listo para guardar"
+                                     FontSize="11"
+                                     Foreground="#2ECC71"
+                                     FontWeight="Medium"/>
+                        </Border>
+                    </StackPanel>
+
+                    <!-- Botones de Acción -->
                     <StackPanel Orientation="Horizontal"
                                 HorizontalAlignment="Right"
                                 VerticalAlignment="Center"
-                                Margin="15">
+                                Grid.Column="2">
 
-                        <Button x:Name="btnCrear" Style="{StaticResource BtnCrear}"/>
-                        <Button x:Name="btnEditar" Style="{StaticResource BtnModificar}"/>
-                        <Button x:Name="btnEliminar" Style="{StaticResource BtnEliminar}"/>
-                        <Button x:Name="btnGuardar" Style="{StaticResource BtnGuardar}"/>
-                        <Button x:Name="btnSalir" Style="{StaticResource BtnCerrar}"/>
+                        <Button x:Name="btnCrear" Style="{StaticResource BtnCrear}" Command="{Binding CreateNewArticle}"
+                                IsEnabled="{Binding BtnCrear}"/>
+                        <Button x:Name="btnEditar" Style="{StaticResource BtnModificar}"
+                                IsEnabled="{Binding BtnEditar}"/>
+                        <Button x:Name="btnEliminar" Style="{StaticResource BtnEliminar }"
+                                IsEnabled="{Binding BtnEliminar}"/>
+                        <Button x:Name="btnGuardar" Style="{StaticResource BtnGuardar}"
+                                IsEnabled="{Binding BtnGuardar}"/>
+                        <Button x:Name="btnSalir" Style="{StaticResource BtnCerrar}"
+                                IsEnabled="{Binding BtnSalir}"/>
                     </StackPanel>
-                </Border>
+                </Grid>
+            </Border>
 
-            </Grid>
-        </Border>
-    </Grid>
+        </Grid>
+    </Border>
 </Window>
