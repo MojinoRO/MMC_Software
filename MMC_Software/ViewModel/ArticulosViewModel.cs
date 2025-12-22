@@ -63,6 +63,36 @@ namespace MMC_Software.ViewModel
         /// </summary>
         /// 
 
+
+        public bool ValidateCompleteDate()
+        {
+            if(CodigoArticulo == null) return false;
+            else if(Namearticle == null)return false;
+            else if(CostoSinIva == 0)return false;
+            else if(CostoConIva == 0) return false;
+            else if(PrecioVenta<0) return false;
+            else if(CategoriaSeleccionadaID <0) return false;
+            else if(SubCategoriesSelecctionID<0)return false;
+            else if(PrecioMinimo<0) return false;
+            else
+            {
+                return true;
+            }
+        }
+
+        public void SaveArticle()
+        {
+            bool Complete = ValidateCompleteDate();
+            if(Complete == false)
+            {
+                MessageBox.Show("Revisa Datos de Articulos", "Mensaje", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+            else
+            {
+                
+            }
+        }
         public void GetCodeArticle(object obj)
         {
             if(ArticulosID == 0)
