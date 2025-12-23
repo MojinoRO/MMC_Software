@@ -20,12 +20,16 @@ namespace MMC_Software
         {
             InitializeComponent();
             this.ArticulosID = ArticulosID;
-            this.DataContext = new ArticulosViewModel();
+            var vm = new ArticulosViewModel();
+            vm.RequetsClose += () => this.Close();
+            DataContext = vm;
         }
         public VentanaCrearArticulos()
         {
             InitializeComponent();
-            this.DataContext = new ArticulosViewModel();
+            var vm = new ArticulosViewModel();
+            vm.RequetsClose += () => this.Close();
+            DataContext = vm;
         }
 
     }

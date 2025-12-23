@@ -13,8 +13,6 @@ namespace MMC_Software.Services
 {
     public class serviceTransactionCreationArticle
     {
-        private static readonly RepositoryCreacionArticulos RepoArticle= new RepositoryCreacionArticulos(ConfiguracionConexion.ObtenerCadenaConexion(
-            ConexionEmpresaActual.BaseDeDatosSeleccionada));
         string _ConexionSql = ConfiguracionConexion.ObtenerCadenaConexion(ConexionEmpresaActual.BaseDeDatosSeleccionada);
         public serviceTransactionCreationArticle()
         {

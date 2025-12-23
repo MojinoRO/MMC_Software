@@ -99,9 +99,9 @@ namespace MMC_Software.Repositorys
             string Query = @"INSERT INTO InveArticulos
                             (CodigoArticulo, NombreArticulo, CostoArticuloSinIva, CostoArticuloMasIva,
                             ArticulosVenta, ArticulosMargen, ArticulosIncremento,ArticulosUtilidad, ArticulosVentaMinima, CategoriasID,
-                            SubCategoriaID, ArticulosBarras , MarcasID, ArticulosReferencias, CostoAnterior)
+                            SubCategoriaID, ArticulosBarras , MarcasID, ArticulosReferencias, CostoAnterior,IvaArticulo)
                             VALUES(@codigo,@nombrearticulo,@costosiniva,@costomasiva,@articuloventa,@articulosmargen,@articulosincremento,@articulosutilidad,
-                            @articulosventaminima, @categoriaid,@subcategoriaid,@articulosBarras,@marcasid,@articulosreferencia,@costoanterior)";
+                            @articulosventaminima, @categoriaid,@subcategoriaid,@articulosBarras,@marcasid,@articulosreferencia,@costoanterior,@ivaarticulo)";
             using (SqlCommand cmd = new SqlCommand(Query, _Conn, _Trans))
             {
                 cmd.Parameters.Add(new SqlParameter("@codigo", SqlDbType.NVarChar)).Value = CodeArticle;
@@ -119,6 +119,7 @@ namespace MMC_Software.Repositorys
                 cmd.Parameters.Add(new SqlParameter("@marcasid", SqlDbType.Int)).Value = MarcaArticleID;
                 cmd.Parameters.Add(new SqlParameter("@articulosreferencia", SqlDbType.NVarChar)).Value = Reference;
                 cmd.Parameters.Add(new SqlParameter("@costoanterior", SqlDbType.Decimal)).Value = CosteSinIva;
+                cmd.Parameters.Add(new SqlParameter("@ivaarticulo", SqlDbType.Decimal)).Value = TarifaIva;
                 cmd.ExecuteNonQuery();
             }
         }

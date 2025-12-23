@@ -47,6 +47,7 @@ namespace MMC_Software.ViewModel
             CalculatePriceMinim = new RelayCommand(CalculatorPriceMinim);
             CreateNewArticle = new RelayCommand(GetCodeArticle);
             SaveArticleBD = new RelayCommand(SaveArticle);
+            CloseWindowsCommand = new RelayCommand(_ => RequetsClose?.Invoke());
         }
 
         ///<summary>
@@ -59,13 +60,13 @@ namespace MMC_Software.ViewModel
         public ICommand CalculatePriceMinim {  get; }
         public ICommand CreateNewArticle { get; }
         public ICommand SaveArticleBD { get; }
-
+        public ICommand CloseWindowsCommand { get; }
         /// <summary>
         ///   METODOS
         /// </summary>
         /// 
 
-
+        public event Action RequetsClose;
         public bool ValidateCompleteDate()
         {
             if(CodigoArticulo == null) return false;

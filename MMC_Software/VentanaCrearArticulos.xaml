@@ -587,7 +587,8 @@
                         <Button x:Name="btnGuardar" Style="{StaticResource BtnGuardar}"
                                 IsEnabled="{Binding BtnGuardar}" Command="{Binding SaveArticleBD}"/>
                         <Button x:Name="btnSalir" Style="{StaticResource BtnCerrar}"
-                                IsEnabled="{Binding BtnSalir}"/>
+                                IsEnabled="{Binding BtnSalir}"
+                                Command="{Binding CloseWindowsCommand}"/>
                     </StackPanel>
                 </Grid>
             </Border>
