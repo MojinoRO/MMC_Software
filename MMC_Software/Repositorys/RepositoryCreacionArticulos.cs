@@ -91,6 +91,37 @@ namespace MMC_Software.Repositorys
             return dt;
         }
 
+
+        public void CreateArticleBD(string CodeArticle, string NameArticle, string Reference, string CodeBarr,
+            int CategoryID, int SubCategoriaID, int MarcaArticleID, decimal CosteSinIva, decimal CosteMasIva, decimal TarifaIva,
+            decimal Incremento, decimal Margen, decimal Utility, decimal PriceSale, decimal PriceMinim)
+        {
+            string Query = @"INSERT INTO InveArticulos
+                            (CodigoArticulo, NombreArticulo, CostoArticuloSinIva, CostoArticuloMasIva,
+                            ArticulosVenta, ArticulosMargen, ArticulosIncremento,ArticulosUtilidad, ArticulosVentaMinima, CategoriasID,
+                            SubCategoriaID, ArticulosBarras , MarcasID, ArticulosReferencias, CostoAnterior)
+                            VALUES(@codigo,@nombrearticulo,@costosiniva,@costomasiva,@articuloventa,@articulosmargen,@articulosincremento,@articulosutilidad,
+                            @articulosventaminima, @categoriaid,@subcategoriaid,@articulosBarras,@marcasid,@articulosreferencia,@costoanterior)";
+            using (SqlCommand cmd = new SqlCommand(Query, _Conn, _Trans))
+            {
+                cmd.Parameters.Add(new SqlParameter("@codigo", SqlDbType.NVarChar)).Value = CodeArticle;
+                cmd.Parameters.Add(new SqlParameter("@nombrearticulo", SqlDbType.NVarChar)).Value = NameArticle;
+                cmd.Parameters.Add(new SqlParameter("@costosiniva", SqlDbType.Decimal)).Value = CosteSinIva;
+                cmd.Parameters.Add(new SqlParameter("@costomasiva", SqlDbType.Decimal)).Value = CosteMasIva;
+                cmd.Parameters.Add(new SqlParameter("@articuloventa", SqlDbType.Decimal)).Value = PriceSale;
+                cmd.Parameters.Add(new SqlParameter("@articulosmargen", SqlDbType.Decimal)).Value = Margen;
+                cmd.Parameters.Add(new SqlParameter("@articulosincremento", SqlDbType.Decimal)).Value = Incremento;
+                cmd.Parameters.Add(new SqlParameter("@articulosutilidad", SqlDbType.Decimal)).Value = Utility;
+                cmd.Parameters.Add(new SqlParameter("@articulosventaminima", SqlDbType.Decimal)).Value = PriceMinim;
+                cmd.Parameters.Add(new SqlParameter("@categoriaid", SqlDbType.Int)).Value = CategoryID;
+                cmd.Parameters.Add(new SqlParameter("@subcategoriaid", SqlDbType.Int)).Value = SubCategoriaID;
+                cmd.Parameters.Add(new SqlParameter("@articulosBarras", SqlDbType.NVarChar)).Value = CodeBarr;
+                cmd.Parameters.Add(new SqlParameter("@marcasid", SqlDbType.Int)).Value = MarcaArticleID;
+                cmd.Parameters.Add(new SqlParameter("@articulosreferencia", SqlDbType.NVarChar)).Value = Reference;
+                cmd.Parameters.Add(new SqlParameter("@costoanterior", SqlDbType.Decimal)).Value = CosteSinIva;
+                cmd.ExecuteNonQuery();
+            }
+        }
     }
 
 }

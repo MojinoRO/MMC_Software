@@ -585,7 +585,7 @@
                         <Button x:Name="btnEliminar" Style="{StaticResource BtnEliminar }"
                                 IsEnabled="{Binding BtnEliminar}"/>
                         <Button x:Name="btnGuardar" Style="{StaticResource BtnGuardar}"
-                                IsEnabled="{Binding BtnGuardar}"/>
+                                IsEnabled="{Binding BtnGuardar}" Command="{Binding SaveArticleBD}"/>
                         <Button x:Name="btnSalir" Style="{StaticResource BtnCerrar}"
                                 IsEnabled="{Binding BtnSalir}"/>
                     </StackPanel>

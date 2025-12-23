@@ -23,7 +23,7 @@ namespace MMC_Software.ViewModel
 {
     public class ArticulosViewModel : INotifyPropertyChanged
     {
-        public static readonly serviceTransactionCreationArticle SeviceArticuleCreation = new serviceTransactionCreationArticle();
+        public static readonly serviceTransactionCreationArticle ServiceArticleCreation = new serviceTransactionCreationArticle();
         public static readonly RepositorioOperacionesMatematicas RepoMate = new RepositorioOperacionesMatematicas();
         public static readonly RepositoryCreacionArticulos RepoCreacionArticulos = new RepositoryCreacionArticulos(
             ConfiguracionConexion.ObtenerCadenaConexion(ConexionEmpresaActual.BaseDeDatosSeleccionada));
@@ -46,6 +46,7 @@ namespace MMC_Software.ViewModel
             CalculatePriceSale = new RelayCommand(CalculatorPriceSale);
             CalculatePriceMinim = new RelayCommand(CalculatorPriceMinim);
             CreateNewArticle = new RelayCommand(GetCodeArticle);
+            SaveArticleBD = new RelayCommand(SaveArticle);
         }
 
         ///<summary>
@@ -57,6 +58,7 @@ namespace MMC_Software.ViewModel
         public ICommand CalculatePriceSale { get; }
         public ICommand CalculatePriceMinim {  get; }
         public ICommand CreateNewArticle { get; }
+        public ICommand SaveArticleBD { get; }
 
         /// <summary>
         ///   METODOS
@@ -80,7 +82,7 @@ namespace MMC_Software.ViewModel
             }
         }
 
-        public void SaveArticle()
+        public void SaveArticle(object obj)
         {
             bool Complete = ValidateCompleteDate();
             if(Complete == false)
@@ -90,16 +92,23 @@ namespace MMC_Software.ViewModel
             }
             else
             {
-                
+                bool Creado= ServiceArticleCreation.ServiceCreateArticle(this);
+                if(Creado == false)
+                {
+                    MessageBox.Show("Mal");
+                }
+                else
+                {
+                    MessageBox.Show("Bien");
+                }
             }
         }
         public void GetCodeArticle(object obj)
         {
             if(ArticulosID == 0)
             {
-                string CodigoNew = SeviceArticuleCreation.GenerateCodeArticle();
+                string CodigoNew = ServiceArticleCreation.GenerateCodeArticle();
                 CodigoArticulo = CodigoNew;
-                MessageBox.Show(CodigoNew);
             }
         }
         public void CalculatorPriceMinim(object obj)
@@ -349,6 +358,19 @@ namespace MMC_Software.ViewModel
             }
         }
 
+        private string _codebar;
+        public string Codebar
+        {
+            get => _codebar;
+            set
+            {
+                if(_codebar!= value)
+                {
+                    _codebar = value;
+                    OnPropertyChanged(nameof(Codebar));
+                }
+            }
+        }
         private DataRowView _categoriesselection;
         public DataRowView Categoriesselection
         {
