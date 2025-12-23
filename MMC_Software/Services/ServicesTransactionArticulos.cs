@@ -79,7 +79,7 @@ namespace MMC_Software.Services
                 {
                     trans.Rollback();
                     MessageBox.Show(
-                        "Error al crear el artículo:\n" + ex.Message,
+                        "Error al crear el artículo:\n" + ex.ToString(),
                         "Error",MessageBoxButton.OK,MessageBoxImage.Error
                     );
                 }

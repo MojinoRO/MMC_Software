@@ -148,6 +148,7 @@
                                             <TextBox x:Name="txtCodigo"
                                                    Style="{StaticResource TextBox}"
                                                    Text="{Binding CodigoArticulo, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
+                                                   IsEnabled="{Binding ActiveForm}"
                                                    FontWeight="SemiBold"/>
                                         </StackPanel>
 
@@ -161,7 +162,8 @@
                                             <TextBox x:Name="txtNombre"
                                                    Style="{StaticResource TextBox}"
                                                    CharacterCasing="Upper"
-                                                   Text="{Binding Namearticle, UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}"/>
+                                                   Text="{Binding Namearticle, UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}"
+                                                     IsEnabled="{Binding ActiveForm}"/>
                                         </StackPanel>
 
                                         <!-- Referencia -->
@@ -173,7 +175,8 @@
                                                      Margin="0,0,0,5"/>
                                             <TextBox x:Name="txtReferencia"
                                                    Style="{StaticResource TextBox}"
-                                                   Text="{Binding Referencia, UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}"/>
+                                                   Text="{Binding Referencia, UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}"
+                                                     IsEnabled="{Binding ActiveForm}"/>
                                         </StackPanel>
 
                                         <!-- Código de Barras -->
@@ -191,7 +194,8 @@
                                                 </Grid.ColumnDefinitions>
 
                                                 <TextBox x:Name="TxtBarras"
-                                                       Style="{StaticResource TextBox}"/>
+                                                       Style="{StaticResource TextBox}"
+                                                         IsEnabled="{Binding ActiveForm}"/>
 
                                                 <Button x:Name="BtnBarras"
                                                       Grid.Column="2"
@@ -258,7 +262,8 @@
                                                     DisplayMemberPath="InfoCategorias"
                                                     SelectedItem="{Binding Categoriesselection, Mode=TwoWay}"
                                                     SelectedValuePath="CategoriasID"
-                                                    Height="26"/>
+                                                    Height="26"
+                                                      IsEnabled="{Binding ActiveForm}"/>
                                         </StackPanel>
 
                                         <!-- Subcategoría -->
@@ -273,7 +278,8 @@
                                                     DisplayMemberPath="InfoSubCategoria"
                                                     SelectedValuePath="SubCategoriaID"
                                                     SelectedValue="{Binding SubCategoriesSelecctionID, Mode=TwoWay}"
-                                                    Height="26"/>
+                                                    Height="26"
+                                                      IsEnabled="{Binding ActiveForm}"/>
                                         </StackPanel>
 
                                         <!-- Marca -->
@@ -288,7 +294,8 @@
                                                     DisplayMemberPath="InfoMarca"
                                                     SelectedValuePath="MarcasID"
                                                     SelectedValue="{Binding MarcaSelecctionChanged, Mode=TwoWay}"
-                                                    Height="26"/>
+                                                    Height="26"
+                                                      IsEnabled="{Binding ActiveForm}"/>
                                         </StackPanel>
                                     </Grid>
                                 </StackPanel>
@@ -349,7 +356,8 @@
                                                      Margin="0,0,0,5"/>
                                             <TextBox x:Name="txtCostoSinIva"
                                                    Text="{Binding CostoSinIva, UpdateSourceTrigger=PropertyChanged,Mode=TwoWay ,ValidatesOnExceptions=True,NotifyOnValidationError=True}"
-                                                    Style="{StaticResource TextBox}">
+                                                    Style="{StaticResource TextBox}"
+                                                     IsEnabled="{Binding ActiveForm}">
                                                 <TextBox.InputBindings>
                                                     <KeyBinding Key="Enter" Command="{Binding CalCostPlusTax}"/>
                                                 </TextBox.InputBindings>
@@ -379,7 +387,8 @@
                                                      Margin="0,0,0,5"/>
                                             <TextBox x:Name="txtCostoConIva"
                                                    Text="{Binding CostoConIva, Mode=TwoWay , UpdateSourceTrigger=PropertyChanged}"
-                                                   Style="{StaticResource TextBox}">
+                                                   Style="{StaticResource TextBox}"
+                                                     IsEnabled="{Binding ActiveForm}">
                                                 <TextBox.InputBindings>
                                                     <KeyBinding Key="Enter" Command="{Binding CalCostMenTax}"/>
                                                 </TextBox.InputBindings>
@@ -395,7 +404,8 @@
                                                      Margin="0,0,0,5"/>
                                             <TextBox x:Name="txtIncremento"
                                                      Style="{StaticResource TextBox}"
-                                                     Text="{Binding Incremento , UpdateSourceTrigger=PropertyChanged , Mode=TwoWay}">
+                                                     Text="{Binding Incremento , UpdateSourceTrigger=PropertyChanged , Mode=TwoWay}"
+                                                     IsEnabled="{Binding ActiveForm}">
                                                 <TextBox.InputBindings>
                                                     <KeyBinding Key="Enter" Command="{Binding CalculatePriceSale}"></KeyBinding>
                                                 </TextBox.InputBindings>
@@ -411,7 +421,8 @@
                                                      Margin="0,0,0,5"/>
                                             <TextBox x:Name="txtMargen"
                                                      Style="{StaticResource TextBox}"
-                                                     Text="{Binding Margen ,UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}">
+                                                     Text="{Binding Margen ,UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
+                                                     IsEnabled="{Binding ActiveForm}">
                                                 <TextBox.InputBindings>
                                                     <KeyBinding Key="Enter" Command="{ Binding CalculatePriceMinim}" ></KeyBinding>
                                                 </TextBox.InputBindings>
@@ -428,7 +439,8 @@
                                             <TextBox x:Name="txtUtilidad"
                                                      Background="#ECF0F1"
                                                      Style="{StaticResource TextBox}"
-                                                     Text="{Binding Utilidad , UpdateSourceTrigger=PropertyChanged}"/>
+                                                     Text="{Binding Utilidad , UpdateSourceTrigger=PropertyChanged}"
+                                                     IsEnabled="{Binding ActiveForm}"/>
                                         </StackPanel>
                                     </Grid>
                                 </StackPanel>
@@ -474,7 +486,8 @@
                                              Background="#F0F9F4"
                                              BorderBrush="#2ECC71"
                                              BorderThickness="2"
-                                             Text="{Binding PrecioVenta}"/>
+                                             Text="{Binding PrecioVenta}"
+                                             IsEnabled="{Binding ActiveForm}"/>
 
                                     <Border Height="1" 
                                             Background="#E8EAED" 
@@ -493,7 +506,8 @@
                                                Height="32"
                                                FontWeight="SemiBold"
                                                Foreground="#E74C3C"
-                                              Text="{Binding PrecioMinimo}"/>
+                                              Text="{Binding PrecioMinimo}"
+                                             IsEnabled="{Binding ActiveForm}"/>
                                 </StackPanel>
                             </Border>
 

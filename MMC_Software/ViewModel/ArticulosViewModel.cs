@@ -108,6 +108,7 @@ namespace MMC_Software.ViewModel
         {
             if(ArticulosID == 0)
             {
+                ActiveForm = true;
                 string CodigoNew = ServiceArticleCreation.GenerateCodeArticle();
                 CodigoArticulo = CodigoNew;
             }
@@ -498,5 +499,19 @@ namespace MMC_Software.ViewModel
                 }
             }
         }
+
+        private bool _ActiveForm = false;
+        public bool ActiveForm
+        {
+            get => _ActiveForm;
+            set
+            {
+                if( _ActiveForm != value)
+                {
+                    _ActiveForm=value;
+                    OnPropertyChanged(nameof(ActiveForm));
+                }
+            }
+        }    
     }
 }

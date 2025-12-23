@@ -97,32 +97,78 @@ namespace MMC_Software.Repositorys
             decimal Incremento, decimal Margen, decimal Utility, decimal PriceSale, decimal PriceMinim)
         {
             string Query = @"INSERT INTO InveArticulos
-                            (CodigoArticulo, NombreArticulo, CostoArticuloSinIva, CostoArticuloMasIva,
-                            ArticulosVenta, ArticulosMargen, ArticulosIncremento,ArticulosUtilidad, ArticulosVentaMinima, CategoriasID,
-                            SubCategoriaID, ArticulosBarras , MarcasID, ArticulosReferencias, CostoAnterior,IvaArticulo)
-                            VALUES(@codigo,@nombrearticulo,@costosiniva,@costomasiva,@articuloventa,@articulosmargen,@articulosincremento,@articulosutilidad,
-                            @articulosventaminima, @categoriaid,@subcategoriaid,@articulosBarras,@marcasid,@articulosreferencia,@costoanterior,@ivaarticulo)";
+                        (CodigoArticulo,
+                        NombreArticulo,
+                        CostoArticuloSinIva,
+                        CostoArticuloMasIva,
+                        ArticulosVenta,
+                        ArticulosMargen,
+                        ArticulosIncremento,
+                        ArticulosUtilidad,
+                        ArticulosVentaMinima,
+                        CategoriasID,
+                        SubCategoriaID,
+                        ArticulosBarras,
+                        MarcasID,
+                        ArticulosReferencias,
+                        CostoAnterior,
+                        IvaArticulo)
+
+                        VALUES
+
+                        (@codigo,
+                        @nombre,
+                        @costosiniva,
+                        @costomasiva,
+                        @precioventa,
+                        @margen,
+                        @incremento,
+                        @utilidad,
+                        @ventaminima,
+                        @categoriaid,
+                        @subcategoriaid,
+                        @barras,
+                        @marcasid,
+                        @referencias,
+                        @costoanterior,
+                        @ivaarticulo)";
             using (SqlCommand cmd = new SqlCommand(Query, _Conn, _Trans))
             {
                 cmd.Parameters.Add(new SqlParameter("@codigo", SqlDbType.NVarChar)).Value = CodeArticle;
-                cmd.Parameters.Add(new SqlParameter("@nombrearticulo", SqlDbType.NVarChar)).Value = NameArticle;
+                cmd.Parameters.Add(new SqlParameter("@nombre", SqlDbType.NVarChar)).Value = NameArticle;
                 cmd.Parameters.Add(new SqlParameter("@costosiniva", SqlDbType.Decimal)).Value = CosteSinIva;
                 cmd.Parameters.Add(new SqlParameter("@costomasiva", SqlDbType.Decimal)).Value = CosteMasIva;
-                cmd.Parameters.Add(new SqlParameter("@articuloventa", SqlDbType.Decimal)).Value = PriceSale;
-                cmd.Parameters.Add(new SqlParameter("@articulosmargen", SqlDbType.Decimal)).Value = Margen;
-                cmd.Parameters.Add(new SqlParameter("@articulosincremento", SqlDbType.Decimal)).Value = Incremento;
-                cmd.Parameters.Add(new SqlParameter("@articulosutilidad", SqlDbType.Decimal)).Value = Utility;
-                cmd.Parameters.Add(new SqlParameter("@articulosventaminima", SqlDbType.Decimal)).Value = PriceMinim;
+                cmd.Parameters.Add(new SqlParameter("@precioventa", SqlDbType.Decimal)).Value = PriceSale;
+                cmd.Parameters.Add(new SqlParameter("@margen", SqlDbType.Decimal)).Value = Margen;
+                cmd.Parameters.Add(new SqlParameter("@incremento", SqlDbType.Decimal)).Value = Incremento;
+                cmd.Parameters.Add(new SqlParameter("@utilidad", SqlDbType.Decimal)).Value = Utility;
+                cmd.Parameters.Add(new SqlParameter("@ventaminima", SqlDbType.Decimal)).Value = PriceMinim;
                 cmd.Parameters.Add(new SqlParameter("@categoriaid", SqlDbType.Int)).Value = CategoryID;
                 cmd.Parameters.Add(new SqlParameter("@subcategoriaid", SqlDbType.Int)).Value = SubCategoriaID;
-                cmd.Parameters.Add(new SqlParameter("@articulosBarras", SqlDbType.NVarChar)).Value = CodeBarr;
+                cmd.Parameters.Add(new SqlParameter("@barras", SqlDbType.NVarChar)).Value = string.IsNullOrEmpty(CodeBarr)?(object) DBNull.Value : CodeBarr;
                 cmd.Parameters.Add(new SqlParameter("@marcasid", SqlDbType.Int)).Value = MarcaArticleID;
-                cmd.Parameters.Add(new SqlParameter("@articulosreferencia", SqlDbType.NVarChar)).Value = Reference;
+                cmd.Parameters.Add(new SqlParameter("@referencias", SqlDbType.NVarChar)).Value = Reference;
                 cmd.Parameters.Add(new SqlParameter("@costoanterior", SqlDbType.Decimal)).Value = CosteSinIva;
                 cmd.Parameters.Add(new SqlParameter("@ivaarticulo", SqlDbType.Decimal)).Value = TarifaIva;
                 cmd.ExecuteNonQuery();
             }
         }
-    }
 
+        public void ChangedArticle(int articuloID)
+        {
+            string query = @"SELECT 
+                            AR.ArticulosID, AR.NombreArticulo,AR.CostoArticuloSinIva,
+                            AR.CostoArticuloMasIva, AR.ArticulosVenta,AR.ArticulosMargen,AR.ArticulosIncremento,
+                            AR.ArticulosUtilidad, AR.ArticulosVentaMinima , CAT.CategoriasID,SCAT.SubCategoriaID,
+                            AR.ArticulosBarras,AR.MarcasID,AR.ArticulosReferencias,AR.CostoAnterior,AR.IvaArticulo
+                            FROM InveArticulos AR
+                            INNER JOIN ConfCategoriasInve CAT ON CAT.CategoriasID=AR.CategoriasID
+                            INNER JOIN ConfSubCategorias SCAT ON SCAT.SubCategoriaID=AR.SubCategoriaID
+                            INNER JOIN ConfMarcas MAR ON MAR.MarcasID=AR.MarcasID  WHERE AR.ArticulosID=@articuloid";
+            using (SqlCommand cmd = new SqlCommand(query, _Conn, _Trans))
+            {
+
+            }
+        }
+    }
 }
