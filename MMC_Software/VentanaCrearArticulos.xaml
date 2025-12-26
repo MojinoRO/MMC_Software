@@ -269,16 +269,16 @@
                                         <!-- Subcategoría -->
                                         <StackPanel Grid.Column="2">
                                             <TextBlock Text="Subcategoría"
-                                                     Foreground="#34495E"
-                                                     FontSize="11.5"
-                                                     FontWeight="Medium"
-                                                     Margin="0,0,0,5"/>
+                                                         Foreground="#34495E"
+                                                         FontSize="11.5"
+                                                         FontWeight="Medium"
+                                                         Margin="0,0,0,5"/>
                                             <ComboBox x:Name="cbSubCategoria"
-                                                    ItemsSource="{Binding SubCategories}"
-                                                    DisplayMemberPath="InfoSubCategoria"
-                                                    SelectedValuePath="SubCategoriaID"
-                                                    SelectedValue="{Binding SubCategoriesSelecctionID, Mode=TwoWay}"
-                                                    Height="26"
+                                                      ItemsSource="{Binding SubCategories}"
+                                                      DisplayMemberPath="InfoSubCategoria"
+                                                      SelectedValuePath="SubCategoriaID"
+                                                      SelectedItem="{Binding SubCategoriesSelection, Mode=TwoWay}"
+                                                      Height="26"
                                                       IsEnabled="{Binding ActiveForm}"/>
                                         </StackPanel>
 
@@ -595,7 +595,7 @@
                         <Button x:Name="btnCrear" Style="{StaticResource BtnCrear}" Command="{Binding CreateNewArticle}"
                                 IsEnabled="{Binding BtnCrear}"/>
                         <Button x:Name="btnEditar" Style="{StaticResource BtnModificar}"
-                                IsEnabled="{Binding BtnEditar}"/>
+                                IsEnabled="{Binding BtnEditar}" Command="{Binding EditingForms}"/>
                         <Button x:Name="btnEliminar" Style="{StaticResource BtnEliminar }"
                                 IsEnabled="{Binding BtnEliminar}"/>
                         <Button x:Name="btnGuardar" Style="{StaticResource BtnGuardar}"

@@ -1,4 +1,5 @@
-﻿using MMC_Software.Repositorys;
+﻿using MMC_Software.DTOs;
+using MMC_Software.Repositorys;
 using MMC_Software.ViewModel;
 using System;
 using System.Collections.Generic;
@@ -85,6 +86,27 @@ namespace MMC_Software.Services
                 }
             }
             return Creado;
+        }
+
+
+        public ArticulosDTO ServiceGetArticle(int ArticuloID)
+        {
+            using (SqlConnection conn = new SqlConnection(_ConexionSql))
+            {
+                conn.Open();
+                SqlTransaction trans = conn.BeginTransaction();
+                try
+                {
+                    RepositoryCreacionArticulos Repo = new RepositoryCreacionArticulos(trans);
+                    ArticulosDTO dto = Repo.ChangedArticle(ArticuloID);
+                    trans.Commit();
+                    return dto;
+                }catch
+                {
+                    trans.Rollback();
+                    throw;
+                }
+            }
         }
     }
 

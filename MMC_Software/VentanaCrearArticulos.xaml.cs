@@ -20,7 +20,7 @@ namespace MMC_Software
         {
             InitializeComponent();
             this.ArticulosID = ArticulosID;
-            var vm = new ArticulosViewModel();
+            var vm = new ArticulosViewModel(ArticulosID);
             vm.RequetsClose += () => this.Close();
             DataContext = vm;
         }

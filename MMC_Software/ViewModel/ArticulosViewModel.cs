@@ -1,4 +1,5 @@
-﻿using MMC_Software.Helpers;
+﻿using MMC_Software.DTOs;
+using MMC_Software.Helpers;
 using MMC_Software.Repositorys;
 using MMC_Software.Services;
 using System;
@@ -33,9 +34,20 @@ namespace MMC_Software.ViewModel
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
-        public ArticulosViewModel(int articulosID)
+        public ArticulosViewModel(int articulosID):this()
         {
             ArticulosID = articulosID;
+            LoadedCategories();
+            LoadedMarcas();
+            CalCostPlusTax = new RelayCommand(CalculatorCostPlusTax);
+            CalCostMenTax = new RelayCommand(CalculatorCostMeTax);
+            CalculatePriceSale = new RelayCommand(CalculatorPriceSale);
+            CalculatePriceMinim = new RelayCommand(CalculatorPriceMinim);
+            CreateNewArticle = new RelayCommand(GetCodeArticle);
+            SaveArticleBD = new RelayCommand(SaveArticle);
+            CloseWindowsCommand = new RelayCommand(_ => RequetsClose?.Invoke());
+            EditingForms = new RelayCommand(BtnEditing);
+            CargarArticulo();
         }
         public ArticulosViewModel()
         {
@@ -48,6 +60,7 @@ namespace MMC_Software.ViewModel
             CreateNewArticle = new RelayCommand(GetCodeArticle);
             SaveArticleBD = new RelayCommand(SaveArticle);
             CloseWindowsCommand = new RelayCommand(_ => RequetsClose?.Invoke());
+            EditingForms = new RelayCommand(BtnEditing);
         }
 
         ///<summary>
@@ -61,10 +74,63 @@ namespace MMC_Software.ViewModel
         public ICommand CreateNewArticle { get; }
         public ICommand SaveArticleBD { get; }
         public ICommand CloseWindowsCommand { get; }
+        public ICommand EditingForms {  get; }
         /// <summary>
         ///   METODOS
         /// </summary>
         /// 
+
+        public void CargarArticulo()
+        {
+            if (ArticulosID <= 0) return;
+
+            _Actualizando = true; // 🔒 BLOQUEO
+
+            ArticulosDTO dto = ServiceArticleCreation.ServiceGetArticle(ArticulosID);
+
+            CodigoArticulo = dto.CodigoArticulo;
+            Namearticle = dto.NombreArticulo;
+            Referencia = dto.Referencia;
+            Codebar = dto.CodigoBarras;
+
+            Categoriesselection = Categories.AsEnumerable()
+                .FirstOrDefault(r => r["CategoriasID"].ToString() == dto.CategoriasID.ToString())
+                ?.AsDataRowView();
+            LoadedSubCategories();
+
+            SubCategoriesSelecctionID = dto.SubCategoriaID;
+            LoadedSubCategories();
+            SeleccionarSubCategoria();
+
+            MarcaSelecctionChanged = dto.MarcasID;
+
+            CostoSinIva = dto.CostoSinIva;
+            CostoConIva = dto.CostoConIva;
+            IvaCategoria = dto.Iva;
+
+            Incremento = dto.Incremento;
+            Margen = dto.Margen;
+            Utilidad = dto.Utilidad;
+
+            PrecioVenta = dto.PrecioVenta;
+            PrecioMinimo = dto.PrecioMinimo;
+
+            _Actualizando = false; // 🔓
+        }
+
+        private void SeleccionarSubCategoria()
+        {
+            if (SubCategories == null || SubCategories.Rows.Count == 0) return;
+
+            SubCategoriesSelection = SubCategories.AsEnumerable()
+                .FirstOrDefault(r => Convert.ToInt32(r["SubCategoriaID"]) == SubCategoriesSelecctionID)
+                ?.AsDataRowView();
+        }
+
+        public void BtnEditing(object obj)
+        {
+            ActiveForm = true;
+        }
 
         public event Action RequetsClose;
         public bool ValidateCompleteDate()
@@ -86,21 +152,20 @@ namespace MMC_Software.ViewModel
         public void SaveArticle(object obj)
         {
             bool Complete = ValidateCompleteDate();
-            if(Complete == false)
+            if (Complete == false)
             {
                 MessageBox.Show("Revisa Datos de Articulos", "Mensaje", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
             else
             {
-                bool Creado= ServiceArticleCreation.ServiceCreateArticle(this);
-                if(Creado == false)
+                if (ArticulosID > 0)
                 {
-                    MessageBox.Show("Mal");
+                    MessageBox.Show("actualizar");
                 }
                 else
                 {
-                    MessageBox.Show("Bien");
+                    ServiceArticleCreation.ServiceCreateArticle(this);
                 }
             }
         }
@@ -142,10 +207,7 @@ namespace MMC_Software.ViewModel
 
         public void LoadedMarcas()
         {
-            if (ArticulosID == 0)
-            {
-                Marca = RepoCreacionArticulos.GetMarcas();
-            }
+            Marca = RepoCreacionArticulos.GetMarcas();
         }
 
         public void LoadedSubCategories()
@@ -389,6 +451,25 @@ namespace MMC_Software.ViewModel
                 }
             }
         }
+
+        private DataRowView _SubCategoriesSelection;
+        public DataRowView SubCategoriesSelection
+        {
+            get => _SubCategoriesSelection;
+            set
+            {
+                _SubCategoriesSelection = value;
+                OnPropertyChanged(nameof(SubCategoriesSelection));
+
+                if (_SubCategoriesSelection != null)
+                {
+                    SubCategoriesSelecctionID =
+                        Convert.ToInt32(_SubCategoriesSelection["SubCategoriaID"]);
+                }
+            }
+        }
+
+
         private int _categoriaSeleccionadaID;
         public int CategoriaSeleccionadaID
         {
@@ -398,10 +479,13 @@ namespace MMC_Software.ViewModel
                 _categoriaSeleccionadaID = value;
                 OnPropertyChanged(nameof(CategoriaSeleccionadaID));
 
-                //===>Cargo las subcategorias<===//
-                LoadedSubCategories();
+                if (!_Actualizando) // 👈 CLAVE
+                {
+                    LoadedSubCategories();
+                }
             }
         }
+
 
         private int _SubCategoriesSelecctionID;
         public int SubCategoriesSelecctionID
@@ -512,6 +596,17 @@ namespace MMC_Software.ViewModel
                     OnPropertyChanged(nameof(ActiveForm));
                 }
             }
-        }    
+        } 
+
     }
+    public static class DataRowExtensions
+    {
+        public static DataRowView AsDataRowView(this DataRow row)
+        {
+            return row?.Table.DefaultView
+                .Cast<DataRowView>()
+                .FirstOrDefault(drv => drv.Row == row);
+        }
+    }
+
 }

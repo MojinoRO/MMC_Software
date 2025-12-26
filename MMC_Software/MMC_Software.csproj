@@ -124,6 +124,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>DS_CierreCaja.xsd</DependentUpon>
     </Compile>
+    <Compile Include="DTOs\ArticuloDTO.cs" />
     <Compile Include="Repositorys\RepositoryArticulos.cs" />
     <Compile Include="Repositorys\RepositoryCreacionArticulos.cs" />
     <Compile Include="Services\CultureInfoHelper.cs" />

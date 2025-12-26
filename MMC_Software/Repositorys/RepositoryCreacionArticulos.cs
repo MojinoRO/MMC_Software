@@ -1,4 +1,5 @@
-﻿using System;
+﻿using MMC_Software.DTOs;
+using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
@@ -6,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using static MMC_Software.VentanaBuscarArticulos;
 
 namespace MMC_Software.Repositorys
 {
@@ -154,10 +156,10 @@ namespace MMC_Software.Repositorys
             }
         }
 
-        public void ChangedArticle(int articuloID)
+        public ArticulosDTO ChangedArticle(int articuloID)
         {
             string query = @"SELECT 
-                            AR.ArticulosID, AR.NombreArticulo,AR.CostoArticuloSinIva,
+                            AR.ArticulosID, AR.CodigoArticulo,AR.NombreArticulo,AR.CostoArticuloSinIva,
                             AR.CostoArticuloMasIva, AR.ArticulosVenta,AR.ArticulosMargen,AR.ArticulosIncremento,
                             AR.ArticulosUtilidad, AR.ArticulosVentaMinima , CAT.CategoriasID,SCAT.SubCategoriaID,
                             AR.ArticulosBarras,AR.MarcasID,AR.ArticulosReferencias,AR.CostoAnterior,AR.IvaArticulo
@@ -167,7 +169,30 @@ namespace MMC_Software.Repositorys
                             INNER JOIN ConfMarcas MAR ON MAR.MarcasID=AR.MarcasID  WHERE AR.ArticulosID=@articuloid";
             using (SqlCommand cmd = new SqlCommand(query, _Conn, _Trans))
             {
-
+                cmd.Parameters.Add(new SqlParameter("@articuloid",SqlDbType.Int)).Value= articuloID;
+                using (SqlDataReader dr = cmd.ExecuteReader())
+                {
+                    if (!dr.Read()) return null;
+                    return new ArticulosDTO
+                    {
+                        ArticulosID = articuloID,
+                        CodigoArticulo = dr["CodigoArticulo"].ToString(),
+                        NombreArticulo = dr["NombreArticulo"].ToString(),
+                        Referencia = dr["ArticulosReferencias"].ToString(),
+                        CodigoBarras = dr["ArticulosBarras"] as string,
+                        CategoriasID = (int)dr["CategoriasID"],
+                        SubCategoriaID = (int)dr["SubCategoriaID"],
+                        MarcasID = (int)dr["MarcasID"],
+                        CostoSinIva = (decimal)dr["CostoArticuloSinIva"],
+                        CostoConIva = (decimal)dr["CostoArticuloMasIva"],
+                        Iva = (decimal)dr["IvaArticulo"],
+                        Incremento = (decimal)dr["ArticulosIncremento"],
+                        Margen = (decimal)dr["ArticulosMargen"],
+                        Utilidad = (decimal)dr["ArticulosUtilidad"],
+                        PrecioVenta = (decimal)dr["ArticulosVenta"],
+                        PrecioMinimo = (decimal)dr["ArticulosVentaMinima"]
+                    };
+                }
             }
         }
     }
